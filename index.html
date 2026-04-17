@@ -233,6 +233,31 @@
         .review-sentence b { color: var(--accent); }
         .review-meta { font-size: 1.05em; line-height: 1.5; } /* Larger Meta text */
         .review-syns { color: #27ae60; font-style: italic; font-size: 0.95em; display: block; margin-top: 4px; } /* Italicized Synonyms */
+
+        /* CONFIGURATION PANEL */
+        #config-panel { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 500px; margin: 0 auto 20px auto; text-align: left; border: 2px solid var(--primary); }
+        .config-row { margin-bottom: 15px; display: flex; flex-direction: column; gap: 5px; }
+        .config-row label { font-weight: bold; color: var(--primary); }
+        .config-row select, .config-row input { padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 1em;}
+
+        /* READING MODE UI */
+        #quiz-reading-container { display: flex; flex-direction: column; align-items: center; margin-top: 20px; width: 100%; }
+        .reading-input-display { display: flex; flex-wrap: wrap; gap: 5px; min-height: 50px; padding: 10px; border: 2px dashed #aaa; border-radius: 8px; width: 100%; max-width: 400px; margin-bottom: 15px; justify-content: center; align-items: center; background: #fafafa;}
+        .reading-char-box { background: white; border: 1px solid var(--primary); font-size: 1.5em; padding: 5px 15px; border-radius: 4px; cursor: pointer; user-select: none; transition: 0.1s;}
+        .reading-char-box:hover { background: #fee; border-color: var(--accent); color: var(--accent); text-decoration: line-through; }
+        
+        .guess-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 400px; margin-bottom: 20px;}
+        .guess-btn { background: var(--primary); color: white; border: none; border-radius: 6px; font-size: 1.5em; width: 50px; height: 50px; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.2); user-select: none;}
+        .guess-btn:active { transform: scale(0.95); }
+        .guess-btn:hover { background: var(--accent); }
+        
+        .reading-validation { font-weight: bold; font-size: 1.2em; height: 30px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center;}
+        .wrong-mark { color: var(--accent); }
+        .reading-answer-text { color: var(--accent); font-weight: bold; letter-spacing: 2px; }
+
+        /* FEEDBACK PANEL MODIFIERS */
+        .feedback-panel.wrong { border-color: #e74c3c; }
+        .feedback-panel.wrong h2 { color: #e74c3c; }
     </style>
 </head>
 <body>
@@ -286,6 +311,34 @@
             </div>
         </div>
 
+        <div id="test-config-wrapper" style="display:none;">
+            <div id="config-panel">
+                <h2 style="margin-top:0; color:var(--primary);">Test Configuration</h2>
+                <div class="config-row">
+                    <label>Mode:</label>
+                    <select id="config-mode">
+                        <option value="writing">Writing (Canvas)</option>
+                        <option value="reading">Reading (Hiragana Input)</option>
+                    </select>
+                </div>
+                <details id="config-details" ontoggle="toggleDetailsDisplay()">
+                    <summary style="font-weight:bold; cursor:pointer; color:var(--accent); margin-bottom:10px;">Advanced Options</summary>
+                    <div class="config-row">
+                        <label>Number of Questions:</label>
+                        <input type="number" id="config-count" min="1" max="100" value="20">
+                    </div>
+                    <div class="config-row" style="flex-direction:row; align-items:center;">
+                        <input type="checkbox" id="config-random" checked style="width:auto; transform:scale(1.2); margin-right:10px;">
+                        <label for="config-random">Randomize Order</label>
+                    </div>
+                </details>
+                <div style="display:flex; gap:10px; margin-top:20px;">
+                    <button onclick="startConfiguredQuiz()" class="btn-success" style="flex:1;">Start Test</button>
+                    <button onclick="cancelConfig()" class="btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+
         <div id="quiz-area" style="display:none;">
             <div class="quiz-header" style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
                 <button onclick="exitQuiz()" class="btn-secondary">&larr; Quit</button>
@@ -309,6 +362,15 @@
                     </div>
                     <div id="quiz-message" style="margin-top: 10px; font-weight: bold; color: #e74c3c;"></div>
                     <button onclick="submitAnswer()" class="btn-success" style="margin-top: 20px;">Check Whole Word</button>
+                </div>
+
+                <div id="quiz-reading-container" style="display:none;">
+                    <div class="reading-input-display" id="reading-input-box">
+                        </div>
+                    <div class="reading-validation" id="reading-msg"></div>
+                    <div class="guess-grid" id="reading-guess-grid">
+                        </div>
+                    <button onclick="submitReadingAnswer()" class="btn-success">Submit Answer</button>
                 </div>
             </div>
         </div>
@@ -349,8 +411,15 @@
                 <canvas id="practice-canvas" width="300" height="300"></canvas>
             </div>
 
-            <div class="quiz-controls-bar" style="margin-top: 10px;">
-                <button onclick="clearPracticeCanvas()" class="btn-secondary">Clear Drawing</button>
+            <div class="quiz-controls-bar" id="writing-controls">
+                <button onclick="undoStroke()" class="btn-secondary">Undo Last Stroke</button>
+                <button onclick="clearQuizCanvas()" class="btn-secondary">Clear All</button>
+                <button onclick="showAnswer()" class="btn-warning">Show Answer (Trace)</button>
+            </div>
+            <div class="quiz-controls-bar" id="reading-controls" style="display:none;">
+                <button onclick="backspaceReading()" class="btn-secondary" title="Backspace">⌫ Backspace</button>
+                <button onclick="clearReadingInput()" class="btn-secondary">Clear All</button>
+                <button onclick="showAnswer()" class="btn-warning">Show Answer</button>
             </div>
 
             <div class="status-msg" id="status"></div>
@@ -402,6 +471,17 @@
         let kanjiDataMap = {}; 
         let fileList = [];     // Array of objects: { filename: "03042.svg", char: "あ" }
         let isBlindMode = false;
+
+        let currentQuizMode = 'writing'; 
+        let pendingQuizData = []; // Stores loaded questions before config
+        let pendingTestName = "";
+        let currentReadingInput = [];
+        const HIRAGANA_ORDER = "あぁいぃうぅえぇおぉかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもやゃゆゅよょらりるれろわをん";
+
+        // Helper to convert Katakana to Hiragana
+        function toHiragana(str) {
+            return str.replace(/[\u30A1-\u30F6]/g, match => String.fromCharCode(match.charCodeAt(0) - 0x60));
+        }
 
         // Gallery Scroll State
         let activeList = [];
@@ -567,23 +647,46 @@
                 const res = await fetch(filePath);
                 const data = await res.json();
                 
-                // If your JSON has multiple arrays, grab the first key dynamically.
-                // If it's just an array, use it directly.
                 const testArrayName = Object.keys(data)[0];
-                const questionsArray = Array.isArray(data) ? data : data[testArrayName];
+                pendingQuizData = Array.isArray(data) ? data : data[testArrayName];
+                pendingTestName = filePath.split('/').pop();
                 
                 document.getElementById('test-list').style.display = 'none';
-                document.getElementById('quiz-area').style.display = 'block';
+                document.getElementById('test-config-wrapper').style.display = 'block';
                 
-                // Use dynamic length instead of hardcoded 20
-                let questions = [...questionsArray].sort(() => Math.random() - 0.5);
-                currentQuiz = { questions, index: 0, wordCharIndex: 0, total: questions.length };
-                renderReviewSection(questions, filePath.split('/').pop());
-                
-                showQuestion();
+                // Reset config defaults
+                document.getElementById('config-count').value = Math.min(20, pendingQuizData.length);
+                document.getElementById('config-count').max = pendingQuizData.length;
             } catch (e) {
                 alert("Failed to load test file: " + filePath);
             }
+        }
+
+        function cancelConfig() {
+            document.getElementById('test-config-wrapper').style.display = 'none';
+            document.getElementById('test-list').style.display = 'block';
+        }
+
+        function toggleDetailsDisplay() {
+            // Un-require explicit count hiding per prompt logic, keeping it clean via details tag natively
+        }
+
+        function startConfiguredQuiz() {
+            currentQuizMode = document.getElementById('config-mode').value;
+            const count = parseInt(document.getElementById('config-count').value) || 20;
+            const randomize = document.getElementById('config-random').checked;
+            
+            document.getElementById('test-config-wrapper').style.display = 'none';
+            document.getElementById('quiz-area').style.display = 'block';
+            
+            let questions = [...pendingQuizData];
+            if (randomize) questions.sort(() => Math.random() - 0.5);
+            questions = questions.slice(0, count);
+            
+            currentQuiz = { questions, index: 0, wordCharIndex: 0, total: questions.length };
+            renderReviewSection(questions, pendingTestName);
+            
+            showQuestion();
         }
 
         function startQuiz(partKey) {
@@ -777,46 +880,158 @@
         function showQuestion() {
             const q = currentQuiz.questions[currentQuiz.index];
             const word = q.kanji_word;
-            const pronunciation = q.pronunciation; // e.g. "イマシメル" (5 chars)
+            const pronunciation = q.pronunciation; 
             
             wasMarkedWrong = false;
             isTracing = false;
             quizStrokes = [];
             
-            // UI Updates
             document.getElementById('quiz-progress').innerText = `Question ${currentQuiz.index + 1}/${currentQuiz.total}`;
-            document.getElementById('quiz-sentence').innerHTML = q.sentence.replace(word, `<span class="target-kana">${toKatakana(pronunciation)}</span>`);
             document.getElementById('quiz-message').innerText = "";
+            document.getElementById('reading-msg').innerHTML = "";
             document.getElementById('quiz-feedback').style.display = 'none';
             document.getElementById('quiz-area').style.display = 'block';
 
-            // Height based on Pronunciation length
-            // Check if word contains Hiragana (Okurigana)
-            const hasOkurigana = /[\u3040-\u309f]/.test(word);
-            // If it has okurigana, add 1 extra box for comfort, otherwise match word length
-            const boxCount = hasOkurigana ? word.length + 1 : word.length;
-            
-            const totalH = boxCount * 300;
-            const mainCanvas = document.getElementById('quiz-canvas');
-            const traceCanvas = document.getElementById('trace-canvas');
-            const wrapper = mainCanvas.parentElement;
+            if (currentQuizMode === 'writing') {
+                document.getElementById('quiz-writing-container').style.display = 'flex';
+                document.getElementById('writing-controls').style.display = 'flex';
+                document.getElementById('quiz-reading-container').style.display = 'none';
+                document.getElementById('reading-controls').style.display = 'none';
+                
+                document.getElementById('quiz-sentence').innerHTML = q.sentence.replace(word, `<span class="target-kana">${toKatakana(pronunciation)}</span>`);
 
-            [mainCanvas, traceCanvas].forEach(c => {
-                c.width = 300;
-                c.height = totalH;
-                c.style.height = totalH + "px";
+                const hasOkurigana = /[\u3040-\u309f]/.test(word);
+                const boxCount = hasOkurigana ? word.length + 1 : word.length;
+                const totalH = boxCount * 300;
+                
+                const mainCanvas = document.getElementById('quiz-canvas');
+                const traceCanvas = document.getElementById('trace-canvas');
+                const wrapper = mainCanvas.parentElement;
+
+                [mainCanvas, traceCanvas].forEach(c => {
+                    c.width = 300; c.height = totalH; c.style.height = totalH + "px";
+                });
+                wrapper.style.height = totalH + "px";
+                wrapper.style.background = `linear-gradient(#aaa 3px, transparent 3px) 0 0 / 100% 300px, #fff`;
+
+                initQuizDrawing();
+                loadWordSVGs(word);
+                clearQuizCanvas();
+            } else {
+                // READING MODE
+                document.getElementById('quiz-writing-container').style.display = 'none';
+                document.getElementById('writing-controls').style.display = 'none';
+                document.getElementById('quiz-reading-container').style.display = 'flex';
+                document.getElementById('reading-controls').style.display = 'flex';
+                
+                // Display sentence exactly as is, but underline/color the kanji word
+                document.getElementById('quiz-sentence').innerHTML = q.sentence.replace(word, `<span class="target-kana">${word}</span>`);
+                
+                setupReadingMode(q);
+            }
+        }
+
+        function setupReadingMode(q) {
+            currentReadingInput = [];
+            renderReadingInput();
+            
+            const targetHiragana = toHiragana(q.pronunciation);
+            const numButtons = targetHiragana.length * 2;
+            let charPool = new Set(targetHiragana.split(''));
+            
+            // Add alternate pronunciations from metadata
+            for (let char of q.kanji_word) {
+                let meta = getMeta(char);
+                if (meta) {
+                    if (meta.kun) {
+                        meta.kun.split(/[\s\.\-]/).forEach(reading => {
+                            reading.split('').forEach(c => { if(HIRAGANA_ORDER.includes(c)) charPool.add(c); });
+                        });
+                    }
+                    if (meta.on) {
+                        toHiragana(meta.on).split(/[\s\.\-]/).forEach(reading => {
+                            reading.split('').forEach(c => { if(HIRAGANA_ORDER.includes(c)) charPool.add(c); });
+                        });
+                    }
+                }
+            }
+
+            let poolArray = Array.from(charPool).filter(c => HIRAGANA_ORDER.includes(c));
+            
+            // Fill rest with random hiragana up to numButtons
+            while (poolArray.length < numButtons) {
+                const randomChar = HIRAGANA_ORDER[Math.floor(Math.random() * HIRAGANA_ORDER.length)];
+                if (!poolArray.includes(randomChar)) {
+                    poolArray.push(randomChar);
+                }
+            }
+            
+            // If we grabbed too many (from alternate readings), trim it down (keeping target characters safe)
+            if (poolArray.length > numButtons) {
+                const targetChars = targetHiragana.split('');
+                const others = poolArray.filter(c => !targetChars.includes(c));
+                poolArray = [...new Set(targetChars), ...others].slice(0, numButtons);
+            }
+
+            // Sort alphabetically (gojuon order)
+            poolArray.sort((a, b) => HIRAGANA_ORDER.indexOf(a) - HIRAGANA_ORDER.indexOf(b));
+
+            const grid = document.getElementById('reading-guess-grid');
+            grid.innerHTML = '';
+            poolArray.forEach(char => {
+                const btn = document.createElement('button');
+                btn.className = 'guess-btn';
+                btn.innerText = char;
+                btn.onclick = () => addReadingChar(char);
+                grid.appendChild(btn);
             });
-            wrapper.style.height = totalH + "px";
-            
-            // Visual Square Guides via CSS
-            wrapper.style.background = `
-                linear-gradient(#aaa 3px, transparent 3px) 0 0 / 100% 300px,
-                #fff
-            `;
+        }
 
-            initQuizDrawing();
-            loadWordSVGs(word);
-            clearQuizCanvas();
+        function addReadingChar(char) {
+            if(document.getElementById('reading-msg').innerText === 'Answer Revealed') return; // Locked if shown
+            currentReadingInput.push({ id: Date.now() + Math.random(), char });
+            renderReadingInput();
+        }
+
+        function removeReadingChar(id) {
+            currentReadingInput = currentReadingInput.filter(item => item.id !== id);
+            renderReadingInput();
+        }
+
+        function backspaceReading() {
+            if (currentReadingInput.length > 0) {
+                currentReadingInput.pop();
+                renderReadingInput();
+            }
+        }
+
+        function clearReadingInput() {
+            currentReadingInput = [];
+            renderReadingInput();
+        }
+
+        function renderReadingInput() {
+            const box = document.getElementById('reading-input-box');
+            box.innerHTML = '';
+            currentReadingInput.forEach(item => {
+                const span = document.createElement('span');
+                span.className = 'reading-char-box';
+                span.innerText = item.char;
+                span.onclick = () => removeReadingChar(item.id);
+                box.appendChild(span);
+            });
+        }
+
+        function submitReadingAnswer() {
+            const q = currentQuiz.questions[currentQuiz.index];
+            const targetHiragana = toHiragana(q.pronunciation);
+            const userInput = currentReadingInput.map(item => item.char).join('');
+            
+            if (userInput === targetHiragana) {
+                showFeedback();
+            } else {
+                document.getElementById('reading-msg').innerHTML = `<span class="wrong-mark">❌ Incorrect. Try editing your input.</span>`;
+            }
         }
 
         async function loadWordSVGs(word) {
@@ -993,36 +1208,59 @@
 
         function showAnswer() {
             wasMarkedWrong = true;
-            const tCtx = document.getElementById('trace-canvas').getContext('2d');
-            tCtx.clearRect(0, 0, CANV_W, document.getElementById('trace-canvas').height);
-            
-            currentWordData.forEach(data => {
-                tCtx.save();
-                tCtx.translate(0, data.yOffset);
-                
-                const quizScale = 300 / 109;
-                tCtx.scale(quizScale, quizScale); 
-                
-                data.paths.forEach((p, idx) => {
-                    // Draw Tracing Line (Faint Gray)
-                    tCtx.strokeStyle = "#888"; // Darker gray
-                    tCtx.lineWidth = 4;        // Scaled up, this will be thicker than the user's width of 5
-                    tCtx.stroke(new Path2D(p.getAttribute('d')));
-
-                    // Draw Stroke Numbers (Matches Gallery behavior)
-                    const textNode = data.numNodes[idx];
-                    if (textNode) {
-                        tCtx.fillStyle = "#666";
-                        tCtx.font = "4px Arial"; // Scaled down because of tCtx.scale
-                        const transform = textNode.getAttribute('transform');
-                        const match = /matrix\(1 0 0 1 ([\d\.]+) ([\d\.]+)\)/.exec(transform);
-                        if (match) {
-                            tCtx.fillText(textNode.textContent, parseFloat(match[1]), parseFloat(match[2]));
+            if (currentQuizMode === 'writing') {
+                // Existing tracing logic
+                const tCtx = document.getElementById('trace-canvas').getContext('2d');
+                tCtx.clearRect(0, 0, CANV_W, document.getElementById('trace-canvas').height);
+                currentWordData.forEach(data => {
+                    tCtx.save();
+                    tCtx.translate(0, data.yOffset);
+                    const quizScale = 300 / 109;
+                    tCtx.scale(quizScale, quizScale); 
+                    data.paths.forEach((p, idx) => {
+                        tCtx.strokeStyle = "#888"; 
+                        tCtx.lineWidth = 4;        
+                        tCtx.stroke(new Path2D(p.getAttribute('d')));
+                        const textNode = data.numNodes[idx];
+                        if (textNode) {
+                            tCtx.fillStyle = "#666";
+                            tCtx.font = "4px Arial"; 
+                            const transform = textNode.getAttribute('transform');
+                            const match = /matrix\(1 0 0 1 ([\d\.]+) ([\d\.]+)\)/.exec(transform);
+                            if (match) tCtx.fillText(textNode.textContent, parseFloat(match[1]), parseFloat(match[2]));
                         }
-                    }
+                    });
+                    tCtx.restore();
                 });
-                tCtx.restore();
-            });
+            } else {
+                // Reading mode answer display
+                const q = currentQuiz.questions[currentQuiz.index];
+                const box = document.getElementById('reading-input-box');
+                box.innerHTML = `<span class="reading-answer-text">${toHiragana(q.pronunciation)}</span>`;
+                document.getElementById('reading-msg').innerText = "Answer Revealed";
+            }
+        }
+
+        function showFeedback() {
+            document.getElementById('quiz-area').style.display = 'none';
+            
+            const fbPanel = document.getElementById('quiz-feedback');
+            const fbResult = document.getElementById('feedback-result');
+            
+            if (wasMarkedWrong) {
+                fbPanel.classList.add('wrong');
+                fbResult.innerText = "Needs Review";
+            } else {
+                fbPanel.classList.remove('wrong');
+                fbResult.innerText = "Correct!";
+            }
+            
+            fbPanel.style.display = 'block';
+            
+            const q = currentQuiz.questions[currentQuiz.index];
+            document.getElementById('fb-kanji').innerText = q.kanji_word;
+            document.getElementById('fb-meaning').innerText = q.meaning;
+            document.getElementById('fb-synonyms').innerText = q.english_synonyms.join(', ');
         }
 
         function skipQuestion() {
@@ -1219,17 +1457,6 @@
             } else {
                 showFeedback();
             }
-        }
-        
-        function showFeedback() {
-            // Hide the writing area and show the feedback card
-            document.getElementById('quiz-area').style.display = 'none';
-            document.getElementById('quiz-feedback').style.display = 'block';
-            
-            const q = currentQuiz.questions[currentQuiz.index];
-            document.getElementById('fb-kanji').innerText = q.kanji_word;
-            document.getElementById('fb-meaning').innerText = q.meaning;
-            document.getElementById('fb-synonyms').innerText = q.english_synonyms.join(', ');
         }
 
         function nextQuestion() {
