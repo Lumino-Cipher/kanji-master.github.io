@@ -213,52 +213,40 @@
             --user-stroke: #2c3e50;
         }
 
-        /* Dark Mode Overrides - Influenced by Theme */
-        :root[data-mode="dark"][data-theme="classic"] {
-            --bg: #1a1a2e; --card: #16213e; --text: #e94560; --sub-text: #95a5a6; --border: #0f3460; --search-bg: #0f3460; --primary: #e94560; --accent: #0f3460; --user-stroke: #e94560;
-        }
-        :root[data-mode="dark"][data-theme="sakura"] {
-            --bg: #2d1b22; --card: #3d262d; --text: #ffb7c5; --sub-text: #d0104c; --border: #5e3643; --search-bg: #5e3643; --primary: #ffb7c5; --accent: #d0104c; --user-stroke: #ffb7c5;
-        }
-        :root[data-mode="dark"][data-theme="cobalt"] {
-            --bg: #00122e; --card: #001f4d; --text: #00d2ff; --sub-text: #0047ab; --border: #003366; --search-bg: #003366; --primary: #00d2ff; --accent: #0047ab; --user-stroke: #00d2ff;
-        }
-        :root[data-mode="dark"][data-theme="forest"] {
-            --bg: #1b261a; --card: #253323; --text: #a8e063; --sub-text: #2d5a27; --border: #354a32; --search-bg: #354a32; --primary: #a8e063; --accent: #2d5a27; --user-stroke: #a8e063;
+        /* THEMES & COLORS */
+        :root {
+            --bg: #f4f4f9; --card: #fff; --text: #333; --border: #ddd; --sub-text: #666;
+            --search-bg: #fff; --user-stroke: #2c3e50;
         }
 
-        /* Apply variables to components */
-        body { background: var(--bg); color: var(--text); }
-        .kanji-card, .review-item, .quiz-card { background: var(--card); border: 1px solid var(--border); color: var(--text); }
-        input[type="text"], #search-bar { background: var(--search-bg); color: var(--text); border: 1px solid var(--border); }
-        .sub-text, .review-meta { color: var(--sub-text); }
+        /* Color Schemes (Apply to both Light and Dark) */
+        :root[data-theme="classic"] { --primary: #2c3e50; --accent: #e74c3c; }
+        :root[data-theme="sakura"] { --primary: #d0104c; --accent: #ffb7c5; }
+        :root[data-theme="cobalt"] { --primary: #0047ab; --accent: #00d2ff; }
+        :root[data-theme="forest"] { --primary: #2d5a27; --accent: #a8e063; }
 
-        /* Accordion Styling */
-        details { background: var(--card); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 10px; padding: 10px; }
-        summary { font-weight: bold; cursor: pointer; color: var(--primary); }
-        details[open] summary { border-bottom: 1px solid var(--border); margin-bottom: 10px; padding-bottom: 5px; }
+        /* Dark Mode Overrides */
+        :root[data-mode="dark"] { --bg: #1a1a2e; --card: #16213e; --border: #0f3460; --search-bg: #0f3460; }
+        :root[data-mode="dark"][data-theme="classic"] { --text: #e94560; --sub-text: #95a5a6; --user-stroke: #e94560; }
+        :root[data-mode="dark"][data-theme="sakura"] { --text: #ffb7c5; --sub-text: #d0104c; --user-stroke: #ffb7c5; }
+        :root[data-mode="dark"][data-theme="cobalt"] { --text: #00d2ff; --sub-text: #0047ab; --user-stroke: #00d2ff; }
+        :root[data-mode="dark"][data-theme="forest"] { --text: #a8e063; --sub-text: #2d5a27; --user-stroke: #a8e063; }
 
-        /* THEME SELECTOR UI */
-        .theme-controls { 
-            display: flex; gap: 10px; justify-content: center; margin-bottom: 15px; 
-        }
-        .theme-btn { padding: 5px 10px; font-size: 0.8em; border: 1px solid var(--border); border-radius: 20px; background: var(--card); color: var(--text); cursor: pointer;}
-
-        /* REVIEW SECTION STYLES */
+        /* REVIEW SECTION STYLES (Slightly Larger) */
         .review-dropdown { margin-top: 30px; border-top: 2px solid var(--border); padding-top: 20px; }
         .review-item { 
             display: flex; align-items: center; background: var(--card); 
-            padding: 15px; margin-bottom: 10px; border-radius: 8px; border-left: 5px solid var(--primary);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px; margin-bottom: 12px; border-radius: 8px; border-left: 6px solid var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        .review-kanji-side { flex: 0 0 120px; text-align: center; }
-        .review-kanji-side ruby { font-size: 2.5em; font-weight: bold; }
-        .review-kanji-side rt { font-size: 0.4em; color: var(--sub-text); }
+        .review-kanji-side { flex: 0 0 130px; text-align: center; }
+        .review-kanji-side ruby { font-size: 2.8em; font-weight: bold; } /* Larger Kanji */
+        .review-kanji-side rt { font-size: 0.45em; color: var(--sub-text); }
         .review-details-side { flex: 1; padding-left: 20px; text-align: left; }
-        .review-sentence { font-size: 1.1em; margin: 0 0 5px 0; color: var(--text); }
+        .review-sentence { font-size: 1.25em; margin: 0 0 8px 0; color: var(--text); } /* Larger Sentence */
         .review-sentence b { color: var(--accent); }
-        .review-meta { font-size: 0.85em; }
-        .review-syns { color: #27ae60; font-style: italic; }
+        .review-meta { font-size: 1.05em; line-height: 1.5; } /* Larger Meta text */
+        .review-syns { color: #27ae60; font-style: italic; font-size: 0.95em; display: block; margin-top: 4px; } /* Italicized Synonyms */
     </style>
 </head>
 <body>
@@ -454,7 +442,7 @@
                 await Promise.all([loadDictionary(), fetchFileList(), loadTests()]);
                 checkCoverage();
                 sortGallery(); 
-                renderTestList(); // Initialize the practice tab
+                renderDirectory(); // Initialize the practice tab
                 document.getElementById('loading').style.display = 'none';
             } catch (err) {
                 document.getElementById('loading').innerHTML = `Error: ${err.message}`;
@@ -512,41 +500,66 @@
             }
         }
 
-        async function renderDirectory(path) {
-            const explorer = document.getElementById('explorer');
-            explorer.innerHTML = '<p>Loading tests...</p>';
+        function renderDirectory() {
+            const folderGrid = document.getElementById('folder-grid');
+            const fileGrid = document.getElementById('file-grid');
+            const dirNav = document.getElementById('dir-nav');
+            const reviewList = document.getElementById('review-list');
             
-            // Clear existing reviews when switching directories
-            document.getElementById('review-list').innerHTML = '';
+            if (!folderGrid || !fileGrid || !dirNav) return;
+
+            const currentFolder = currentFolderPaths[currentFolderPaths.length - 1];
+            
+            // Clear current view and reviews
+            folderGrid.innerHTML = '';
+            fileGrid.innerHTML = '';
+            reviewList.innerHTML = '';
             document.getElementById('review-section').style.display = 'block';
 
-            const items = await fetchDirectory(path);
-            explorer.innerHTML = '';
+            // 1. Render Navigation Breadcrumbs (e.g., Root / Folder Name)
+            dirNav.innerHTML = '';
+            currentFolderPaths.forEach((folder, idx) => {
+                const span = document.createElement('span');
+                span.innerText = folder.name || "Tests";
+                span.style.cursor = 'pointer';
+                span.onclick = () => navigateUpTo(idx);
+                dirNav.appendChild(span);
+                if (idx < currentFolderPaths.length - 1) {
+                    dirNav.appendChild(document.createTextNode(' / '));
+                }
+            });
 
-            items.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'explorer-item';
-                div.innerHTML = `<span>${item.type === 'dir' ? '📁' : '📝'} ${item.name}</span>`;
-                
-                div.onclick = () => {
-                    if (item.type === 'dir') {
-                        renderDirectory(item.path);
-                    } else {
-                        fetchAndStartQuiz(item.path);
-                    }
-                };
-                explorer.appendChild(div);
+            // 2. Render Folders and Files into their respective grids
+            const children = currentFolder.children || [];
+            children.forEach(item => {
+                if (item.type === 'folder') {
+                    const div = document.createElement('div');
+                    div.className = 'folder-card';
+                    div.innerHTML = `📁 ${item.name}`;
+                    div.onclick = () => openFolder(item.name);
+                    folderGrid.appendChild(div);
+                } else {
+                    const div = document.createElement('div');
+                    div.className = 'file-card';
+                    div.innerHTML = `📝 ${item.name}`;
+                    div.onclick = () => fetchAndStartQuiz(item.path);
+                    fileGrid.appendChild(div);
 
-                // AUTO-LOAD REVIEW DATA for all tests in this directory
-                if (item.type === 'file' && item.name.endsWith('.json')) {
+                    // Auto-load review data for the "Review & Reference" section
                     fetch(item.path)
-                        .then(response => response.json())
+                        .then(res => res.json())
                         .then(data => {
-                            // Pass the filename as the test title
-                            renderReviewSection(data, item.name.replace('.json', ''));
+                            const questions = Array.isArray(data) ? data : data[Object.keys(data)[0]];
+                            renderReviewSection(questions, item.name.replace('.json', ''));
                         });
                 }
             });
+
+            // 3. Hide sections if they are empty
+            document.getElementById('folder-section').style.display = 
+                children.some(c => c.type === 'folder') ? 'block' : 'none';
+            document.getElementById('file-section').style.display = 
+                children.some(c => c.type === 'file') ? 'block' : 'none';
         }
 
         function openFolder(folderName) {
@@ -867,13 +880,13 @@
                 
                 item.innerHTML = `
                     <div class="review-kanji-side">
-                        <ruby style="font-size:2em;">${q.kanji_word}<rt style="color:var(--sub-text)">${q.pronunciation}</rt></ruby>
+                        <ruby>${q.kanji_word}<rt>${q.pronunciation}</rt></ruby>
                     </div>
                     <div class="review-details-side">
                         <p class="review-sentence">${highlightedSentence}</p>
                         <div class="review-meta">
-                            <span style="color:var(--primary)">${q.pronunciation}</span> | <span>${q.meaning}</span><br>
-                            <span style="color: #27ae60; font-size:0.8em;">${q.english_synonyms.join(', ')}</span>
+                            <span style="color:var(--primary); font-weight:bold;">${q.pronunciation}</span> | <span>${q.meaning}</span>
+                            <span class="review-syns">${q.english_synonyms.join(', ')}</span>
                         </div>
                     </div>
                 `;
