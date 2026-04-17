@@ -1,0 +1,142 @@
+[
+    {
+      "kanji_word": "普遍",
+      "sentence": "普遍的な価値を有する。",
+      "pronunciation": "ふへん",
+      "meaning": "例外なくすべてに当てはまること。",
+      "english_synonyms": ["universal", "omnipresent"]
+    },
+    {
+      "kanji_word": "親密",
+      "sentence": "両国は親密な関係にある。",
+      "pronunciation": "しんみつ",
+      "meaning": "仲が非常に良く、深い関係にあること。",
+      "english_synonyms": ["intimate", "close"]
+    },
+    {
+      "kanji_word": "主観",
+      "sentence": "なるべく主観を入れないように考える。",
+      "pronunciation": "しゅかん",
+      "meaning": "自分ひとりの考えや見方。",
+      "english_synonyms": ["subjectivity", "personal view"]
+    },
+    {
+      "kanji_word": "変遷",
+      "sentence": "都市の変遷を記録する。",
+      "pronunciation": "へんせん",
+      "meaning": "時の流れとともに移り変わること。",
+      "english_synonyms": ["transition", "vicissitude"]
+    },
+    {
+      "kanji_word": "勤勉",
+      "sentence": "勤勉な学生だ。",
+      "pronunciation": "きんべん",
+      "meaning": "仕事や勉強に一生懸命励むこと。",
+      "english_synonyms": ["diligent", "industrious"]
+    },
+    {
+      "kanji_word": "特殊",
+      "sentence": "特殊な能力を発揮する。",
+      "pronunciation": "とくしゅ",
+      "meaning": "普通とは違って、限られた範囲にだけ当てはまること。",
+      "english_synonyms": ["special", "unique"]
+    },
+    {
+      "kanji_word": "拒絶",
+      "sentence": "相手の要求を拒絶する。",
+      "pronunciation": "きょぜつ",
+      "meaning": "断ること。受け入れないこと。",
+      "english_synonyms": ["refusal", "rejection"]
+    },
+    {
+      "kanji_word": "繁栄",
+      "sentence": "子孫の繁栄を願う。",
+      "pronunciation": "はんえい",
+      "meaning": "豊かに栄えること。",
+      "english_synonyms": ["prosperity", "flourishing"]
+    },
+    {
+      "kanji_word": "驚嘆",
+      "sentence": "驚嘆の念を覚える。",
+      "pronunciation": "きょうたん",
+      "meaning": "ひどく感心し、驚くこと。",
+      "english_synonyms": ["admiration", "wonder"]
+    },
+    {
+      "kanji_word": "突如",
+      "sentence": "突如として犬が吠え出した。",
+      "pronunciation": "とつじょ",
+      "meaning": "出し抜けに。急に。",
+      "english_synonyms": ["suddenly", "abruptly"]
+    },
+    {
+      "kanji_word": "慎重",
+      "sentence": "慎重に運転する。",
+      "pronunciation": "しんちょう",
+      "meaning": "注意深く、落ち着いて物事を行う様子。",
+      "english_synonyms": ["careful", "cautious"]
+    },
+    {
+      "kanji_word": "創造",
+      "sentence": "芸術作品を協力して創造する。",
+      "pronunciation": "そうぞう",
+      "meaning": "新しいものを初めて作り出すこと。",
+      "english_synonyms": ["creation", "invention"]
+    },
+    {
+      "kanji_word": "複雑",
+      "sentence": "複雑な問題を解決する。",
+      "pronunciation": "ふくざつ",
+      "meaning": "要素が入り組んでいて、単純ではないこと。",
+      "english_synonyms": ["complex", "complicated"]
+    },
+    {
+      "kanji_word": "素直",
+      "sentence": "思いを素直に伝える。",
+      "pronunciation": "すなお",
+      "meaning": "ありのままで、飾りのない様子。",
+      "english_synonyms": ["honest", "docile"]
+    },
+    {
+      "kanji_word": "衰退",
+      "sentence": "農業が衰退するのを防ぐ。",
+      "pronunciation": "すいたい",
+      "meaning": "勢いが衰えて弱まること。",
+      "english_synonyms": ["decline", "decay"]
+    },
+    {
+      "kanji_word": "高尚",
+      "sentence": "高尚な趣味について語る。",
+      "pronunciation": "こうしょう",
+      "meaning": "学問や品格が高く、上品なこと。",
+      "english_synonyms": ["noble", "refined"]
+    },
+    {
+      "kanji_word": "模倣",
+      "sentence": "名作とされる作品を模倣する。",
+      "pronunciation": "もほう",
+      "meaning": "すでにあるものをまねること。",
+      "english_synonyms": ["imitation", "copy"]
+    },
+    {
+      "kanji_word": "逆説",
+      "sentence": "急がば回れとは、...逆説を表す。",
+      "pronunciation": "ぎゃくせつ",
+      "meaning": "一見矛盾しているが、実は真理を突いている説。",
+      "english_synonyms": ["paradox", "contradiction"]
+    },
+    {
+      "kanji_word": "恣意",
+      "sentence": "恣意的な言動を避けるようにする。",
+      "pronunciation": "しい",
+      "meaning": "論理的な必然性がなく、自分の思うままにする様子。",
+      "english_synonyms": ["arbitrary", "selfish"]
+    },
+    {
+      "kanji_word": "捨象",
+      "sentence": "情報を捨象して検討する。",
+      "pronunciation": "しゃしょう",
+      "meaning": "ある要素を抜き出す際、他の要素を捨て去ること。",
+      "english_synonyms": ["abstraction", "omission"]
+    }
+]

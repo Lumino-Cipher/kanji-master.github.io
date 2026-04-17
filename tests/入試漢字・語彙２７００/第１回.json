@@ -1,0 +1,142 @@
+[
+    {
+      "kanji_word": "焦点",
+      "sentence": "議論の焦点を絞る。",
+      "pronunciation": "しょうてん",
+      "meaning": "物事の最も重要な点や、注意が集中する部分。",
+      "english_synonyms": ["focus", "centerpiece"]
+    },
+    {
+      "kanji_word": "分析",
+      "sentence": "データを分析して傾向を見つける。",
+      "pronunciation": "ぶんせき",
+      "meaning": "複雑な事柄を一つ一つの要素に分け、その構成や性質を明らかにすること。",
+      "english_synonyms": ["analysis", "examination"]
+    },
+    {
+      "kanji_word": "権威",
+      "sentence": "権威ある教授と会う。",
+      "pronunciation": "けんい",
+      "meaning": "ある分野において知識や技術が優れていると公認されている力。",
+      "english_synonyms": ["authority", "influence"]
+    },
+    {
+      "kanji_word": "添削",
+      "sentence": "小論文を添削してもらう。",
+      "pronunciation": "てんさく",
+      "meaning": "他人の書いた文章などを、書き直したり削ったりして直すこと。",
+      "english_synonyms": ["correction", "editing"]
+    },
+    {
+      "kanji_word": "触発",
+      "sentence": "映画に触発されて創作を始める。",
+      "pronunciation": "しょくはつ",
+      "meaning": "何らかの刺激を受けて、行動や意欲が引き起こされること。",
+      "english_synonyms": ["inspiration", "stimulation"]
+    },
+    {
+      "kanji_word": "去就",
+      "sentence": "自身の去就について悩む。",
+      "pronunciation": "きょしゅう",
+      "meaning": "その職にとどまるか、辞めるかという身の振り方。",
+      "english_synonyms": ["course of action", "attitude"]
+    },
+    {
+      "kanji_word": "駆使",
+      "sentence": "さまざまな技術を駆使してきた。",
+      "pronunciation": "くし",
+      "meaning": "自由自在に使いこなすこと。",
+      "english_synonyms": ["freely use", "mastery"]
+    },
+    {
+      "kanji_word": "交渉",
+      "sentence": "計画の延期を交渉する。",
+      "pronunciation": "こうしょう",
+      "meaning": "ある事を実現するために、相手と話し合うこと。",
+      "english_synonyms": ["negotiation", "bargaining"]
+    },
+    {
+      "kanji_word": "負債",
+      "sentence": "会社の負債が資産を上まわる。",
+      "pronunciation": "ふさい",
+      "meaning": "他人から借りた金銭。借金。",
+      "english_synonyms": ["debt", "liability"]
+    },
+    {
+      "kanji_word": "推奨",
+      "sentence": "寄附を推奨する。",
+      "pronunciation": "すいしょう",
+      "meaning": "良いものとして、人に勧めること。",
+      "english_synonyms": ["recommendation", "promotion"]
+    },
+    {
+      "kanji_word": "恩恵",
+      "sentence": "自然の恩恵にあずかる。",
+      "pronunciation": "おんけい",
+      "meaning": "恵み。自然や他人から受ける、ありがたい幸せ。",
+      "english_synonyms": ["benefit", "blessing"]
+    },
+    {
+      "kanji_word": "衝突",
+      "sentence": "自動車が電柱に衝突する。",
+      "pronunciation": "しょうとつ",
+      "meaning": "突き当たること。また、意見が対立すること。",
+      "english_synonyms": ["collision", "clash"]
+    },
+    {
+      "kanji_word": "介護",
+      "sentence": "介護施設で働く。",
+      "pronunciation": "かいご",
+      "meaning": "病人や高齢者などの日常生活を助けること。",
+      "english_synonyms": ["nursing care", "caregiving"]
+    },
+    {
+      "kanji_word": "深刻",
+      "sentence": "深刻な水不足に悩まされる。",
+      "pronunciation": "しんこく",
+      "meaning": "事態が非常に重く、差し迫っている様子。",
+      "english_synonyms": ["serious", "grave"]
+    },
+    {
+      "kanji_word": "徐行",
+      "sentence": "徐行運転を心がける。",
+      "pronunciation": "じょこう",
+      "meaning": "車などがすぐ止まれるような、ゆっくりした速さで進むこと。",
+      "english_synonyms": ["slow speed", "crawling"]
+    },
+    {
+      "kanji_word": "前提",
+      "sentence": "あの人の参加を前提に計画を進める。",
+      "pronunciation": "ぜんてい",
+      "meaning": "ある事柄が成立するための、前置きとなる条件。",
+      "english_synonyms": ["premise", "assumption"]
+    },
+    {
+      "kanji_word": "顕著",
+      "sentence": "人口の減少が顕著になる。",
+      "pronunciation": "けんちょ",
+      "meaning": "目立ってはっきりしている様子。",
+      "english_synonyms": ["remarkable", "notable"]
+    },
+    {
+      "kanji_word": "所以",
+      "sentence": "名所と親しまれる所以がわかる。",
+      "pronunciation": "ゆえん",
+      "meaning": "理由。わけ。根拠。",
+      "english_synonyms": ["reason", "origin"]
+    },
+    {
+      "kanji_word": "培う",
+      "sentence": "さまざまな経験を積み自信を培う。",
+      "pronunciation": "つちかう",
+      "meaning": "（才能や性質などを）長い時間をかけて養い育てる。",
+      "english_synonyms": ["cultivate", "foster"]
+    },
+    {
+      "kanji_word": "戒める",
+      "sentence": "油断しないように戒める。",
+      "pronunciation": "いましめる",
+      "meaning": "間違いをしないように注意を与える。警告する。",
+      "english_synonyms": ["admonish", "warn"]
+    }
+]

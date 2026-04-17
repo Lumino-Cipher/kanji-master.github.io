@@ -1,0 +1,16 @@
+{
+  "name": "Root",
+  "children": [
+    {
+      "name": "入試漢字・語彙２７００",
+      "type": "folder",
+      "children": [
+        { "name": "第１回", "type": "file", "path": "tests/入試漢字・語彙２７００/第１回.json" },
+        { "name": "第２回", "type": "file", "path": "tests/入試漢字・語彙２７００/第２回.json" },
+        { "name": "第３回", "type": "file", "path": "tests/入試漢字・語彙２７００/第３回.json" },
+        { "name": "第４回", "type": "file", "path": "tests/入試漢字・語彙２７００/第４回.json" },
+        { "name": "第５回", "type": "file", "path": "tests/入試漢字・語彙２７００/第５回.json" }
+      ]
+    }
+  ]
+}

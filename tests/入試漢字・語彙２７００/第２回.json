@@ -1,0 +1,142 @@
+[
+    {
+      "kanji_word": "我慢",
+      "sentence": "泣くのを我慢する。",
+      "pronunciation": "がまん",
+      "meaning": "つらいことや欲求をこらえること。",
+      "english_synonyms": ["patience", "endurance"]
+    },
+    {
+      "kanji_word": "輪郭",
+      "sentence": "事件の輪郭が浮かび上がる。",
+      "pronunciation": "りんかく",
+      "meaning": "物の外側を形づくっている線。また、事柄の概略。",
+      "english_synonyms": ["outline", "contour"]
+    },
+    {
+      "kanji_word": "素養",
+      "sentence": "語学の素養がある。",
+      "pronunciation": "そよう",
+      "meaning": "普段の練習や学習によって身につけた知識や教養。",
+      "english_synonyms": ["grounding", "attainment"]
+    },
+    {
+      "kanji_word": "工面",
+      "sentence": "家賃を工面する。",
+      "pronunciation": "くめん",
+      "meaning": "何とか工夫して、必要な金銭などをそろえること。",
+      "english_synonyms": ["fundraising", "managing"]
+    },
+    {
+      "kanji_word": "稚拙",
+      "sentence": "稚拙な判断だったと反省する。",
+      "pronunciation": "ちせつ",
+      "meaning": "子供っぽくて、技術などが未熟なこと。",
+      "english_synonyms": ["childish", "clumsy"]
+    },
+    {
+      "kanji_word": "枚挙",
+      "sentence": "失敗した例は枚挙にいとまがない。",
+      "pronunciation": "まいきょ",
+      "meaning": "一つ一つ数え上げること。",
+      "english_synonyms": ["enumeration", "counting"]
+    },
+    {
+      "kanji_word": "崇高",
+      "sentence": "崇高な精神の持ち主である。",
+      "pronunciation": "すうこう",
+      "meaning": "気高く、尊い様子。",
+      "english_synonyms": ["sublime", "noble"]
+    },
+    {
+      "kanji_word": "後悔",
+      "sentence": "軽率なおこないを後悔する。",
+      "pronunciation": "こうかい",
+      "meaning": "してしまったことを後であれこれ悔やむこと。",
+      "english_synonyms": ["regret", "remorse"]
+    },
+    {
+      "kanji_word": "生涯",
+      "sentence": "自分の生涯を振り返る。",
+      "pronunciation": "しょうがい",
+      "meaning": "一生の間。生きている期間。",
+      "english_synonyms": ["lifetime", "career"]
+    },
+    {
+      "kanji_word": "旺盛",
+      "sentence": "意欲が旺盛で行動力がある。",
+      "pronunciation": "おうせい",
+      "meaning": "活動する力が非常に盛んな様子。",
+      "english_synonyms": ["energetic", "vigorous"]
+    },
+    {
+      "kanji_word": "余地",
+      "sentence": "疑いの余地は少ない。",
+      "pronunciation": "よち",
+      "meaning": "余っている場所。また、物事を行う余裕や可能性。",
+      "english_synonyms": ["room", "scope"]
+    },
+    {
+      "kanji_word": "機嫌",
+      "sentence": "雨で外出できずに機嫌が悪い。",
+      "pronunciation": "きげん",
+      "meaning": "気分。気持ちの良し悪し。",
+      "english_synonyms": ["mood", "temper"]
+    },
+    {
+      "kanji_word": "証拠",
+      "sentence": "ショウコを集める。",
+      "pronunciation": "しょうこ",
+      "meaning": "事実を明らかにするためのよりどころ。",
+      "english_synonyms": ["evidence", "proof"]
+    },
+    {
+      "kanji_word": "異端",
+      "sentence": "イタンの者と見なす。",
+      "pronunciation": "いたん",
+      "meaning": "正統から外れていること。また、その仲間。",
+      "english_synonyms": ["heresy", "unorthodox"]
+    },
+    {
+      "kanji_word": "確執",
+      "sentence": "長年のカクシツがある。",
+      "pronunciation": "かくしつ",
+      "meaning": "互いに自分の意見を主張して譲らないこと。不和。",
+      "english_synonyms": ["feud", "discord"]
+    },
+    {
+      "kanji_word": "吐露",
+      "sentence": "今までつらかったことを吐露する。",
+      "pronunciation": "とろ",
+      "meaning": "心の中を包み隠さず打ち明けること。",
+      "english_synonyms": ["disclosure", "confession"]
+    },
+    {
+      "kanji_word": "太古",
+      "sentence": "太古の昔から変わらない。",
+      "pronunciation": "たいこ",
+      "meaning": "非常に遠い昔。大昔。",
+      "english_synonyms": ["ancient times", "antiquity"]
+    },
+    {
+      "kanji_word": "耽る",
+      "sentence": "思考に耽る。",
+      "pronunciation": "ふける",
+      "meaning": "一つのことに熱中する。夢中になる。",
+      "english_synonyms": ["indulge", "be absorbed"]
+    },
+    {
+      "kanji_word": "呟く",
+      "sentence": "空を見上げて呟く。",
+      "pronunciation": "つぶやく",
+      "meaning": "小声で独り言を言う。",
+      "english_synonyms": ["mutter", "murmur"]
+    },
+    {
+      "kanji_word": "無垢",
+      "sentence": "赤子のように純真無垢である。",
+      "pronunciation": "むく",
+      "meaning": "けがれがなく、純真なこと。",
+      "english_synonyms": ["purity", "innocence"]
+    }
+]

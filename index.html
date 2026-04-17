@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanji Master</title>
+    <style>
+        :root { --bg: #f4f4f9; --card: #fff; --primary: #2c3e50; --accent: #e74c3c; --text: #333; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); padding: 20px; margin: 0; }
+        
+        /* HEADER & TOOLBAR */
+        header { text-align: center; margin-bottom: 30px; }
+        h1 { margin: 0 0 10px 0; color: var(--primary); }
+        
+        .toolbar { 
+            display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; 
+            background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            max-width: 900px; margin: 0 auto;
+        }
+        
+        input[type="text"] { padding: 10px; border: 1px solid #ddd; border-radius: 4px; width: 200px; }
+        select { padding: 10px; border: 1px solid #ddd; border-radius: 4px; background: white; }
+        button { padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #34495e; }
+
+        /* GALLERY */
+        #gallery { 
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+            gap: 20px; padding: 20px 0; max-width: 1200px; margin: 0 auto;
+        }
+        
+        .kanji-card { 
+            background: var(--card); border-radius: 8px; padding: 15px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; 
+            transition: transform 0.2s; display: flex; flex-direction: column; align-items: center;
+        }
+        .kanji-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        
+        /* HOVER ANIMATION */
+        .kanji-card:hover path {
+            animation: drawStroke linear forwards;
+            stroke-dasharray: var(--len);
+            stroke-dashoffset: var(--len);
+        }
+        @keyframes drawStroke {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .svg-preview { width: 100px; height: 100px; margin-bottom: 10px; }
+        .svg-preview svg { width: 100%; height: 100%; }
+        
+        /* CARD METADATA */
+        .meta-block { width: 100%; font-size: 0.85em; text-align: left; border-top: 1px solid #eee; padding-top: 8px;}
+        .meaning { font-weight: bold; color: var(--primary); display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 5px; }
+        .readings { color: #666; font-size: 0.8em; line-height: 1.4em; }
+        .stats { display: flex; justify-content: space-between; margin-top: 8px; color: #999; font-size: 0.75em; }
+
+        /* MODAL */
+        #modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; align-items: center; justify-content: center; }
+        #modal.active { display: flex; }
+        
+        .practice-area { background: white; padding: 20px; border-radius: 12px; position: relative; width: 340px; text-align: center; }
+        
+        .canvas-wrapper {
+            position: relative;
+            background: #fff;
+            border: 2px solid #333;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+        }
+        
+        /* LAYERS */
+        #practice-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transition: opacity 0.3s; pointer-events: none;}
+        #practice-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; touch-action: none; cursor: crosshair;}
+        
+        /* BLIND MODE TOGGLE */
+        .mode-toggle { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px; font-size: 0.9em; }
+        .switch { position: relative; display: inline-block; width: 40px; height: 22px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--accent); }
+        input:checked + .slider:before { transform: translateX(18px); }
+
+        .status-msg { font-weight: bold; color: var(--primary); font-size: 1.1em; height: 24px; }
+        .close-btn { position: absolute; top: 10px; right: 15px; font-size: 28px; cursor: pointer; color: #888; }
+        
+        #loading { text-align: center; font-size: 1.2em; color: #666; margin-top: 50px; }
+        #scroll-sentinel { height: 20px; margin: 20px 0; }
+
+        /* TABS */
+        .tabs { display: flex; justify-content: center; gap: 5px; margin-bottom: 20px; }
+        .tab-btn { background: #ddd; color: #555; border-radius: 4px 4px 0 0; }
+        .tab-btn.active { background: var(--primary); color: white; }
+
+        /* QUIZ UI */
+        .test-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+        .test-part-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; cursor: pointer; transition: 0.2s; }
+        .test-part-card:hover { transform: scale(1.05); border: 2px solid var(--accent); }
+        
+        .quiz-card { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
+        .sentence-display { font-size: 1.5em; margin-bottom: 20px; color: #444; line-height: 1.6; }
+        .target-kana { color: var(--accent); font-weight: bold; font-size: 1.2em; text-decoration: underline; }
+        
+        .feedback-panel { background: #fff; padding: 25px; border-radius: 12px; border: 3px solid #27ae60; margin-top: 20px; text-align: center; }
+        .feedback-kanji { font-size: 4em; margin-bottom: 10px; }
+        .next-btn { background: #27ae60; color: white; font-size: 1.1em; padding: 10px 40px; margin-top: 15px; }
+        /* Long Vertical Writing Area */
+        #quiz-writing-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .kanji-writing-section {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 2px solid #eee;
+            width: 340px;
+        }
+
+        .kanji-writing-section.completed {
+            border-color: #27ae60;
+            background-color: #f0fff4;
+        }
+
+        .writing-canvas {
+            background: #fafafa;
+            border: 1px solid #ddd;
+            cursor: crosshair;
+            touch-action: none;
+            display: block;
+            margin: 10px auto;
+        }
+
+        .writing-status {
+            font-weight: bold;
+            height: 20px;
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+
+        .kanji-label {
+            font-size: 0.8em;
+            color: #888;
+            margin-bottom: 5px;
+        }
+
+        #quiz-canvas {
+            display: block;
+            cursor: crosshair;
+            touch-action: none;
+            z-index: 2;
+            position: relative;
+        }
+
+        #trace-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.2; /* Ghostly tracing layer */
+        }
+
+        .quiz-controls-bar {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary { background: #95a5a6; color: white; padding: 8px 15px; border-radius: 4px; }
+        .btn-warning { background: #f39c12; color: white; padding: 8px 15px; border-radius: 4px; }
+        .btn-danger { background: #e74c3c; color: white; padding: 8px 15px; border-radius: 4px; }
+        .btn-success { background: #27ae60; color: white; padding: 12px 25px; border-radius: 4px; font-weight: bold; }
+
+
+        /* FOLDER & FILE UI */
+        .directory-nav { margin-bottom: 20px; font-weight: bold; color: var(--primary); cursor: pointer; }
+        .directory-nav span:hover { text-decoration: underline; }
+        
+        .folder-section { margin-bottom: 30px; }
+        .folder-section h3 { color: #2980b9; border-bottom: 2px solid #2980b9; padding-bottom: 5px; }
+        .folder-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+        .folder-card { background: #ebf5fb; padding: 20px; border-radius: 8px; border: 2px solid #a9cce3; text-align: center; cursor: pointer; transition: 0.2s; font-weight: bold; color: #154360;}
+        .folder-card:hover { transform: translateY(-3px); box-shadow: 0 4px 10px rgba(41, 128, 185, 0.2); }
+
+        .file-section h3 { color: #8e44ad; border-bottom: 2px solid #8e44ad; padding-bottom: 5px; }
+        .file-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+        .file-card { background: #f4ecf8; padding: 20px; border-radius: 8px; border: 2px solid #c39bd3; text-align: center; cursor: pointer; transition: 0.2s; color: #4a235a;}
+        .file-card:hover { transform: translateY(-3px); box-shadow: 0 4px 10px rgba(142, 68, 173, 0.2); }
+
+
+        /* THEMES */
+        :root {
+            /* Light Mode (Classic/Static) */
+            --bg: #f4f4f9;
+            --card: #ffffff;
+            --text: #333333;
+            --sub-text: #666666;
+            --border: #dddddd;
+            --search-bg: #ffffff;
+            --primary: #2c3e50;
+            --accent: #e74c3c;
+            --user-stroke: #2c3e50;
+        }
+
+        /* Dark Mode Overrides - Influenced by Theme */
+        :root[data-mode="dark"][data-theme="classic"] {
+            --bg: #1a1a2e; --card: #16213e; --text: #e94560; --sub-text: #95a5a6; --border: #0f3460; --search-bg: #0f3460; --primary: #e94560; --accent: #0f3460; --user-stroke: #e94560;
+        }
+        :root[data-mode="dark"][data-theme="sakura"] {
+            --bg: #2d1b22; --card: #3d262d; --text: #ffb7c5; --sub-text: #d0104c; --border: #5e3643; --search-bg: #5e3643; --primary: #ffb7c5; --accent: #d0104c; --user-stroke: #ffb7c5;
+        }
+        :root[data-mode="dark"][data-theme="cobalt"] {
+            --bg: #00122e; --card: #001f4d; --text: #00d2ff; --sub-text: #0047ab; --border: #003366; --search-bg: #003366; --primary: #00d2ff; --accent: #0047ab; --user-stroke: #00d2ff;
+        }
+        :root[data-mode="dark"][data-theme="forest"] {
+            --bg: #1b261a; --card: #253323; --text: #a8e063; --sub-text: #2d5a27; --border: #354a32; --search-bg: #354a32; --primary: #a8e063; --accent: #2d5a27; --user-stroke: #a8e063;
+        }
+
+        /* Apply variables to components */
+        body { background: var(--bg); color: var(--text); }
+        .kanji-card, .review-item, .quiz-card { background: var(--card); border: 1px solid var(--border); color: var(--text); }
+        input[type="text"], #search-bar { background: var(--search-bg); color: var(--text); border: 1px solid var(--border); }
+        .sub-text, .review-meta { color: var(--sub-text); }
+
+        /* Accordion Styling */
+        details { background: var(--card); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 10px; padding: 10px; }
+        summary { font-weight: bold; cursor: pointer; color: var(--primary); }
+        details[open] summary { border-bottom: 1px solid var(--border); margin-bottom: 10px; padding-bottom: 5px; }
+
+        /* THEME SELECTOR UI */
+        .theme-controls { 
+            display: flex; gap: 10px; justify-content: center; margin-bottom: 15px; 
+        }
+        .theme-btn { padding: 5px 10px; font-size: 0.8em; border: 1px solid var(--border); border-radius: 20px; background: var(--card); color: var(--text); cursor: pointer;}
+
+        /* REVIEW SECTION STYLES */
+        .review-dropdown { margin-top: 30px; border-top: 2px solid var(--border); padding-top: 20px; }
+        .review-item { 
+            display: flex; align-items: center; background: var(--card); 
+            padding: 15px; margin-bottom: 10px; border-radius: 8px; border-left: 5px solid var(--primary);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .review-kanji-side { flex: 0 0 120px; text-align: center; }
+        .review-kanji-side ruby { font-size: 2.5em; font-weight: bold; }
+        .review-kanji-side rt { font-size: 0.4em; color: var(--sub-text); }
+        .review-details-side { flex: 1; padding-left: 20px; text-align: left; }
+        .review-sentence { font-size: 1.1em; margin: 0 0 5px 0; color: var(--text); }
+        .review-sentence b { color: var(--accent); }
+        .review-meta { font-size: 0.85em; }
+        .review-syns { color: #27ae60; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="theme-controls">
+            <button class="theme-btn" onclick="toggleMode()">🌙 Toggle Dark</button>
+            <select onchange="setTheme(this.value)" class="theme-btn">
+                <option value="classic">Classic</option>
+                <option value="sakura">Sakura</option>
+                <option value="cobalt">Cobalt</option>
+                <option value="forest">Forest</option>
+            </select>
+        </div>
+        <h1>Kanji Master</h1>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('gallery')">Kanji Gallery</button>
+            <button class="tab-btn" onclick="switchTab('practice')">Practice Tests</button>
+        </div>
+
+        <div class="toolbar" id="gallery-toolbar">
+            <input type="text" id="searchInput" placeholder="Search (Eng, Kana, Kanji)..." oninput="filterGallery()">
+            <select id="sortSelect" onchange="sortGallery()">
+                <option value="freq-asc">Frequency (Common First)</option>
+                <option value="freq-desc">Frequency (Rare First)</option>
+                <option value="grade">Grade Level</option>
+                <option value="strokes">Stroke Count</option>
+            </select>
+            <span style="font-size:0.8em; color:#888; align-self:center;" id="count-display">0 loaded</span>
+        </div>
+    </header>
+
+    <div id="gallery-view">
+        <div id="loading">Loading Dictionary...</div>
+        <div id="gallery"></div>
+        <div id="scroll-sentinel"></div>
+    </div>
+
+    <div id="practice-view" style="display:none; max-width:900px; margin: 0 auto; padding: 20px;">
+        <div id="test-list">
+            <div class="directory-nav" id="dir-nav"></div>
+            
+            <div class="folder-section" id="folder-section">
+                <h3>Test Groups</h3>
+                <div class="folder-grid" id="folder-grid"></div>
+            </div>
+            
+            <div class="file-section" id="file-section">
+                <h3>Available Tests</h3>
+                <div class="file-grid" id="file-grid"></div>
+            </div>
+        </div>
+
+        <div id="quiz-area" style="display:none;">
+            <div class="quiz-header" style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+                <button onclick="exitQuiz()" class="btn-secondary">&larr; Quit</button>
+                <div id="quiz-progress" style="font-weight: bold;">Question 1/20</div>
+                <button onclick="skipQuestion()" class="btn-danger">Skip (Mark Wrong)</button>
+            </div>
+            
+            <div class="quiz-card">
+                <div id="quiz-sentence" class="sentence-display"></div>
+                
+                <div class="quiz-controls-bar">
+                    <button onclick="undoStroke()" class="btn-secondary">Undo Last Stroke</button>
+                    <button onclick="clearQuizCanvas()" class="btn-secondary">Clear All</button>
+                    <button onclick="showAnswer()" class="btn-warning">Show Answer (Trace)</button>
+                </div>
+
+                <div id="quiz-writing-container">
+                    <div class="canvas-wrapper">
+                        <canvas id="trace-canvas"></canvas>
+                        <canvas id="quiz-canvas"></canvas>
+                    </div>
+                    <div id="quiz-message" style="margin-top: 10px; font-weight: bold; color: #e74c3c;"></div>
+                    <button onclick="submitAnswer()" class="btn-success" style="margin-top: 20px;">Check Whole Word</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="quiz-feedback" class="feedback-panel" style="display:none;">
+            <h2 id="feedback-result">Correct!</h2>
+            <div class="feedback-content">
+                <div class="feedback-kanji" id="fb-kanji"></div>
+                <div class="feedback-info">
+                    <p><strong>Meaning:</strong> <span id="fb-meaning"></span></p>
+                    <p><strong>Synonyms:</strong> <span id="fb-synonyms"></span></p>
+                </div>
+            </div>
+            <button onclick="nextQuestion()" class="next-btn">Next Question &rarr;</button>
+        </div>
+        <div id="review-section" class="review-dropdown" style="display:none;">
+            <h3>Review & Reference</h3>
+            <div id="review-list"></div>
+        </div>
+    </div>
+
+    <div id="modal">
+        <div class="practice-area">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Practice</h2>
+            
+            <div class="mode-toggle">
+                <span>Guide Mode</span>
+                <label class="switch">
+                    <input type="checkbox" id="blindModeToggle" onchange="toggleBlindMode()">
+                    <span class="slider"></span>
+                </label>
+                <span style="font-weight:bold; color:var(--accent)">Blind Mode</span>
+            </div>
+
+            <div class="canvas-wrapper">
+                <div id="practice-svg"></div> 
+                <canvas id="practice-canvas" width="300" height="300"></canvas>
+            </div>
+
+            <div class="quiz-controls-bar" style="margin-top: 10px;">
+                <button onclick="clearPracticeCanvas()" class="btn-secondary">Clear Drawing</button>
+            </div>
+
+            <div class="status-msg" id="status"></div>
+            <p style="color:#aaa; font-size:0.8em; margin:5px 0 0 0;">
+                <span id="hint-text">Trace the gray lines.</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function toggleMode() {
+            const root = document.documentElement;
+            const current = root.getAttribute('data-mode') || 'light';
+            root.setAttribute('data-mode', current === 'light' ? 'dark' : 'light');
+        }
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            
+            // Update stroke color based on theme variables
+            // We grab the color from the CSS variable we just set
+            setTimeout(() => {
+                const computedStyle = getComputedStyle(document.documentElement);
+                const newStrokeColor = computedStyle.getPropertyValue('--user-stroke').trim();
+                if (newStrokeColor) {
+                    userStrokeColor = newStrokeColor; 
+                }
+            }, 50); // Small timeout to allow CSS to apply
+        }
+        // Initialize defaults
+        document.documentElement.setAttribute('data-mode', 'light');
+        document.documentElement.setAttribute('data-theme', 'classic');
+
+        let kanjiTests = {}; 
+        let currentQuiz = {
+            questions: [],
+            index: 0,
+            wordCharIndex: 0, // For words with multiple kanji
+            targetWord: null
+        };
+        let charToSvgMap = {}; // Reverse lookup: "亜" -> "03042.svg"
+
+        const DIR_KANJI = "kanjivg-all/"; // [UPDATED] Folder containing SVGs
+        const FILE_DICT = "Kanji/kanjidic2.xml"; // [UPDATED] Path to dictionary
+        const FILE_MAP = "kanji.json"; // [NEW] Path to the mapping file
+        const SCALE = 300 / 109;
+
+        // Global State
+        // Keys will be the CHARACTER (e.g., "亜") not the hex
+        let kanjiDataMap = {}; 
+        let fileList = [];     // Array of objects: { filename: "03042.svg", char: "あ" }
+        let isBlindMode = false;
+
+        // Gallery Scroll State
+        let activeList = [];
+        let currentOffset = 0;
+        // [FIX]: Increased batch size to 100
+        const BATCH_SIZE = 100;
+        let isLoadingMore = false;
+
+        // Practice Engine State
+        let pCtx, strokePaths = [], currentStrokeIdx = 0, userPoints = [];
+        let isDrawing = false;
+        let canvas; 
+        let canvasSnapshot;
+
+        let practiceExpectedPaths = [];
+        let practiceResampledStrokes = [];
+
+        // --- 1. INITIALIZATION & DATA PARSING ---
+        
+        async function init() {
+            canvas = document.getElementById('practice-canvas');
+            try {
+                // [UPDATED] Added loadTests
+                await Promise.all([loadDictionary(), fetchFileList(), loadTests()]);
+                checkCoverage();
+                sortGallery(); 
+                renderTestList(); // Initialize the practice tab
+                document.getElementById('loading').style.display = 'none';
+            } catch (err) {
+                document.getElementById('loading').innerHTML = `Error: ${err.message}`;
+            }
+        }
+
+        function checkCoverage() {
+            const xmlChars = new Set(Object.keys(kanjiDataMap));
+            const svgChars = new Set(fileList.map(f => f.char));
+
+            const xmlButNoSvg = [...xmlChars].filter(c => !svgChars.has(c));
+            const svgButNoXml = [...svgChars].filter(c => !xmlChars.has(c));
+
+            console.group("Metadata Coverage Report");
+            console.log(`Kanji in XML without SVG: ${xmlButNoSvg.length}`);
+            // This happens often because KanjiVG uses specific variants in filenames
+            // while Dictionary uses standard chars.
+            
+            console.log(`Kanji in SVG without Metadata (XML): ${svgButNoXml.length}`);
+            console.log(svgButNoXml);
+            console.groupEnd();
+        }
+
+        async function fetchFileList() {
+            const response = await fetch(FILE_MAP);
+            const data = await response.json();
+            fileList = Object.entries(data).map(([filename, char]) => {
+                charToSvgMap[char] = filename; // Create reverse map
+                return { filename, char };
+            });
+            document.getElementById('count-display').innerText = `${fileList.length} kanji`;
+        }
+
+        function switchTab(tab) {
+            const isGallery = tab === 'gallery';
+            document.getElementById('gallery-view').style.display = isGallery ? 'block' : 'none';
+            document.getElementById('gallery-toolbar').style.display = isGallery ? 'flex' : 'none';
+            document.getElementById('practice-view').style.display = isGallery ? 'none' : 'block';
+            
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        let testDirectory = {};
+        let currentFolderPaths = []; // Keeps track of where we are in the tree
+
+        async function loadTests() {
+            try {
+                const res = await fetch('tests-index.json');
+                testDirectory = await res.json();
+                currentFolderPaths = [testDirectory]; 
+                renderDirectory();
+            } catch (e) {
+                console.error("Could not load tests-index.json", e);
+            }
+        }
+
+        async function renderDirectory(path) {
+            const explorer = document.getElementById('explorer');
+            explorer.innerHTML = '<p>Loading tests...</p>';
+            
+            // Clear existing reviews when switching directories
+            document.getElementById('review-list').innerHTML = '';
+            document.getElementById('review-section').style.display = 'block';
+
+            const items = await fetchDirectory(path);
+            explorer.innerHTML = '';
+
+            items.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'explorer-item';
+                div.innerHTML = `<span>${item.type === 'dir' ? '📁' : '📝'} ${item.name}</span>`;
+                
+                div.onclick = () => {
+                    if (item.type === 'dir') {
+                        renderDirectory(item.path);
+                    } else {
+                        fetchAndStartQuiz(item.path);
+                    }
+                };
+                explorer.appendChild(div);
+
+                // AUTO-LOAD REVIEW DATA for all tests in this directory
+                if (item.type === 'file' && item.name.endsWith('.json')) {
+                    fetch(item.path)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Pass the filename as the test title
+                            renderReviewSection(data, item.name.replace('.json', ''));
+                        });
+                }
+            });
+        }
+
+        function openFolder(folderName) {
+            const currentFolder = currentFolderPaths[currentFolderPaths.length - 1];
+            const target = currentFolder.children.find(c => c.name === folderName && c.type === 'folder');
+            if (target) {
+                currentFolderPaths.push(target);
+                renderDirectory();
+            }
+        }
+
+        function navigateUpTo(index) {
+            currentFolderPaths = currentFolderPaths.slice(0, index + 1);
+            renderDirectory();
+        }
+
+        async function fetchAndStartQuiz(filePath) {
+            try {
+                const res = await fetch(filePath);
+                const data = await res.json();
+                
+                // If your JSON has multiple arrays, grab the first key dynamically.
+                // If it's just an array, use it directly.
+                const testArrayName = Object.keys(data)[0];
+                const questionsArray = Array.isArray(data) ? data : data[testArrayName];
+                
+                document.getElementById('test-list').style.display = 'none';
+                document.getElementById('quiz-area').style.display = 'block';
+                
+                // Use dynamic length instead of hardcoded 20
+                let questions = [...questionsArray].sort(() => Math.random() - 0.5);
+                currentQuiz = { questions, index: 0, wordCharIndex: 0, total: questions.length };
+                renderReviewSection(questions, filePath.split('/').pop());
+                
+                showQuestion();
+            } catch (e) {
+                alert("Failed to load test file: " + filePath);
+            }
+        }
+
+        function startQuiz(partKey) {
+            document.getElementById('test-list').style.display = 'none';
+            document.getElementById('quiz-area').style.display = 'block';
+            
+            // Shuffle and pick 20 random questions from the selected part
+            let questions = [...kanjiTests[partKey]].sort(() => Math.random() - 0.5).slice(0, 20);
+            currentQuiz = { questions, index: 0, wordCharIndex: 0 };
+            showQuestion();
+        }
+
+        function compareStroke(userPoints, targetPath) {
+            const targetLen = targetPath.getTotalLength();
+            
+            let userLen = 0;
+            for(let i=1; i<userPoints.length; i++) {
+                const dx = userPoints[i].x - userPoints[i-1].x;
+                const dy = userPoints[i].y - userPoints[i-1].y;
+                userLen += Math.sqrt(dx*dx + dy*dy);
+            }
+
+            // Length check
+            const minRatio = targetLen < 40 ? 0.3 : 0.35; 
+            if (userLen < targetLen * minRatio) return false;
+
+            // Point sampling check
+            const samples = 12; 
+            const strictRadius = 50; 
+            let hitCount = 0;
+            let lastIdx = 0;
+
+            for(let i=0; i<=samples; i++) {
+                const pt = targetPath.getPointAtLength((i/samples) * targetLen);
+                const targetX = pt.x * SCALE;
+                const targetY = pt.y * SCALE;
+
+                let found = false;
+                for(let j=lastIdx; j<userPoints.length; j++) {
+                    const dx = userPoints[j].x - targetX;
+                    const dy = userPoints[j].y - targetY;
+                    if(Math.sqrt(dx*dx + dy*dy) < strictRadius) {
+                        found = true;
+                        lastIdx = j; 
+                        break;
+                    }
+                }
+                if(found) hitCount++;
+            }
+
+            return hitCount >= samples * 0.5;
+        }
+
+        function toKatakana(hiragana) {
+            return hiragana.replace(/[\u3041-\u3096]/g, s => String.fromCharCode(s.charCodeAt(0) + 0x60));
+        }
+
+        let activeSessions = []; // Holds the state for each kanji in the current word
+
+        class WritingSession {
+            constructor(char, filename, container, index) {
+                this.char = char;
+                this.filename = filename;
+                this.index = index;
+                this.currentStrokeIdx = 0;
+                this.strokePaths = [];
+                this.isCompleted = false;
+
+                // Create HTML elements
+                const section = document.createElement('div');
+                section.className = 'kanji-writing-section';
+                section.innerHTML = `
+                    <div class="kanji-label">Character ${index + 1}</div>
+                    <canvas class="writing-canvas" width="300" height="300"></canvas>
+                    <div class="writing-status">Draw the first stroke...</div>
+                `;
+                container.appendChild(section);
+
+                this.canvas = section.querySelector('canvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.statusEl = section.querySelector('.writing-status');
+                this.sectionEl = section;
+
+                this.initDrawing();
+                this.loadKanjiData();
+            }
+
+            async loadKanjiData() {
+                try {
+                    const res = await fetch(DIR_KANJI + this.filename);
+                    const rawSvg = await res.text();
+                    const svgText = prepareSvg(rawSvg);
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(svgText, "image/svg+xml");
+                    
+                    // Extract paths
+                    const paths = Array.from(doc.querySelectorAll('path'));
+                    this.strokePaths = paths.map(p => {
+                        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                        path.setAttribute("d", p.getAttribute("d"));
+                        return path;
+                    });
+                } catch (e) {
+                    this.statusEl.innerText = "Error loading strokes";
+                    this.statusEl.style.color = "red";
+                }
+            }
+
+            initDrawing() {
+                let drawing = false;
+                let points = [];
+
+                const start = (e) => {
+                    if (this.isCompleted) return;
+                    drawing = true;
+                    points = [];
+                    const pos = this.getPos(e);
+                    points.push(pos);
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(pos.x, pos.y);
+                    this.ctx.lineWidth = 4;
+                    this.ctx.lineCap = "round";
+                    this.ctx.strokeStyle = "#2c3e50";
+                };
+
+                const move = (e) => {
+                    if (!drawing) return;
+                    const pos = this.getPos(e);
+                    points.push(pos);
+                    this.ctx.lineTo(pos.x, pos.y);
+                    this.ctx.stroke();
+                };
+
+                const end = () => {
+                    if (!drawing) return;
+                    drawing = false;
+                    this.validateStroke(points);
+                };
+
+                this.canvas.addEventListener('mousedown', start);
+                this.canvas.addEventListener('mousemove', move);
+                this.canvas.addEventListener('mouseup', end);
+                this.canvas.addEventListener('touchstart', (e) => { e.preventDefault(); start(e.touches[0]); });
+                this.canvas.addEventListener('touchmove', (e) => { e.preventDefault(); move(e.touches[0]); });
+                this.canvas.addEventListener('touchend', end);
+            }
+
+            getPos(e) {
+                const rect = this.canvas.getBoundingClientRect();
+                return { x: (e.clientX - rect.left) * (300 / rect.width), y: (e.clientY - rect.top) * (300 / rect.height) };
+            }
+
+            validateStroke(userPoints) {
+                if (this.currentStrokeIdx >= this.strokePaths.length) return;
+
+                const targetPath = this.strokePaths[this.currentStrokeIdx];
+                const success = compareStroke(userPoints, targetPath); // Uses your existing compareStroke
+
+                if (success) {
+                    this.currentStrokeIdx++;
+                    this.statusEl.innerText = "Correct!";
+                    this.statusEl.style.color = "#27ae60";
+                    
+                    if (this.currentStrokeIdx >= this.strokePaths.length) {
+                        this.isCompleted = true;
+                        this.sectionEl.classList.add('completed');
+                        this.statusEl.innerText = "Character Complete";
+                        checkIfWordFinished(); // Global check
+                    } else {
+                        setTimeout(() => {
+                            if (!this.isCompleted) this.statusEl.innerText = "Next stroke...";
+                        }, 500);
+                    }
+                } else {
+                    // Flash red on error
+                    this.ctx.clearRect(0,0,300,300);
+                    this.statusEl.innerText = "Try again";
+                    this.statusEl.style.color = "#e74c3c";
+                }
+            }
+        }
+
+        let quizStrokes = []; // Stores all user strokes as arrays of points
+        let currentWordData = []; // Stores SVG paths for each kanji in the word
+        let isTracing = false;
+        let wasMarkedWrong = false;
+
+        const CANV_W = 300;
+        const SEG_H = 300; // Changed from 340 to match Gallery's 300x300
+
+        function showQuestion() {
+            const q = currentQuiz.questions[currentQuiz.index];
+            const word = q.kanji_word;
+            const pronunciation = q.pronunciation; // e.g. "イマシメル" (5 chars)
+            
+            wasMarkedWrong = false;
+            isTracing = false;
+            quizStrokes = [];
+            
+            // UI Updates
+            document.getElementById('quiz-progress').innerText = `Question ${currentQuiz.index + 1}/${currentQuiz.total}`;
+            document.getElementById('quiz-sentence').innerHTML = q.sentence.replace(word, `<span class="target-kana">${toKatakana(pronunciation)}</span>`);
+            document.getElementById('quiz-message').innerText = "";
+            document.getElementById('quiz-feedback').style.display = 'none';
+            document.getElementById('quiz-area').style.display = 'block';
+
+            // Height based on Pronunciation length
+            // Check if word contains Hiragana (Okurigana)
+            const hasOkurigana = /[\u3040-\u309f]/.test(word);
+            // If it has okurigana, add 1 extra box for comfort, otherwise match word length
+            const boxCount = hasOkurigana ? word.length + 1 : word.length;
+            
+            const totalH = boxCount * 300;
+            const mainCanvas = document.getElementById('quiz-canvas');
+            const traceCanvas = document.getElementById('trace-canvas');
+            const wrapper = mainCanvas.parentElement;
+
+            [mainCanvas, traceCanvas].forEach(c => {
+                c.width = 300;
+                c.height = totalH;
+                c.style.height = totalH + "px";
+            });
+            wrapper.style.height = totalH + "px";
+            
+            // Visual Square Guides via CSS
+            wrapper.style.background = `
+                linear-gradient(#aaa 3px, transparent 3px) 0 0 / 100% 300px,
+                #fff
+            `;
+
+            initQuizDrawing();
+            loadWordSVGs(word);
+            clearQuizCanvas();
+        }
+
+        async function loadWordSVGs(word) {
+            currentWordData = [];
+            for (let i = 0; i < word.length; i++) {
+                const char = word[i];
+                const filename = charToSvgMap[char];
+                if (!filename) continue;
+
+                const res = await fetch(DIR_KANJI + filename);
+                const text = await res.text();
+                const doc = new DOMParser().parseFromString(prepareSvg(text), "image/svg+xml");
+                
+                const paths = Array.from(doc.querySelectorAll('path'));
+                // Capture number labels for stroke order
+                const numNodes = Array.from(doc.querySelectorAll('text')); 
+                
+                currentWordData.push({ 
+                    char, 
+                    paths, 
+                    numNodes,
+                    yOffset: i * 300, 
+                    currentStrokeIdx: 0,
+                    expectedPathsData: paths.map(p => extractPathData(p)),
+                    resampledStrokes: [] 
+                });
+            }
+        }
+
+        function renderReviewSection(questions, testName) {
+            const list = document.getElementById('review-list');
+            
+            // Create a dropdown (details) for this specific test
+            const testDropdown = document.createElement('details');
+            testDropdown.className = 'test-review-group';
+            
+            const summary = document.createElement('summary');
+            summary.innerText = `Test: ${testName}`;
+            testDropdown.appendChild(summary);
+
+            const contentWrapper = document.createElement('div');
+
+            questions.forEach(q => {
+                const item = document.createElement('div');
+                item.className = 'review-item';
+                const highlightedSentence = q.sentence.replace(q.kanji_word, `<b style="color:var(--primary)">${q.kanji_word}</b>`);
+                
+                item.innerHTML = `
+                    <div class="review-kanji-side">
+                        <ruby style="font-size:2em;">${q.kanji_word}<rt style="color:var(--sub-text)">${q.pronunciation}</rt></ruby>
+                    </div>
+                    <div class="review-details-side">
+                        <p class="review-sentence">${highlightedSentence}</p>
+                        <div class="review-meta">
+                            <span style="color:var(--primary)">${q.pronunciation}</span> | <span>${q.meaning}</span><br>
+                            <span style="color: #27ae60; font-size:0.8em;">${q.english_synonyms.join(', ')}</span>
+                        </div>
+                    </div>
+                `;
+                contentWrapper.appendChild(item);
+            });
+
+            testDropdown.appendChild(contentWrapper);
+            list.appendChild(testDropdown);
+        }
+
+        function initQuizDrawing() {
+            const cvs = document.getElementById('quiz-canvas');
+            const ctx = cvs.getContext('2d');
+            let drawing = false;
+            let currentPoints = [];
+
+            const getPos = (e) => {
+                const rect = cvs.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return {
+                    x: (clientX - rect.left) * (cvs.width / rect.width),
+                    y: (clientY - rect.top) * (cvs.height / rect.height)
+                };
+            };
+
+            const start = (e) => { e.preventDefault(); drawing = true; currentPoints = [getPos(e)]; };
+            const move = (e) => {
+                if (!drawing) return;
+                const pos = getPos(e);
+                currentPoints.push(pos);
+                
+                ctx.lineWidth = 5;
+                ctx.lineCap = "round";
+                ctx.strokeStyle = "#2c3e50";
+                ctx.beginPath();
+                ctx.moveTo(currentPoints[currentPoints.length-2].x, currentPoints[currentPoints.length-2].y);
+                ctx.lineTo(pos.x, pos.y);
+                ctx.stroke();
+            };
+            const end = () => { 
+                if (!drawing) return;
+                drawing = false; 
+
+                const avgY = currentPoints.reduce((s, p) => s + p.y, 0) / currentPoints.length;
+                const charIdx = Math.floor(avgY / 300);
+                const data = currentWordData[charIdx];
+
+                if (data && data.currentStrokeIdx < data.paths.length) {
+                    const targetPath = data.paths[data.currentStrokeIdx];
+                    const adjPoints = currentPoints.map(p => ({ x: p.x, y: p.y - data.yOffset }));
+
+                    const expectedData = data.expectedPathsData[data.currentStrokeIdx];
+                    const prevExpectedData = data.currentStrokeIdx > 0 ? data.expectedPathsData[data.currentStrokeIdx - 1] : null;
+                    const prevUserStroke = data.currentStrokeIdx > 0 ? data.resampledStrokes[data.currentStrokeIdx - 1] : null;
+                    
+                    const result = evaluateStroke(adjPoints, expectedData, prevExpectedData, prevUserStroke);
+
+                    if (result.valid) {
+                        data.resampledStrokes.push(result.resampled);
+                        // REMOVED: Drawing the "Perfect" SVG stroke on top
+                        data.currentStrokeIdx++;
+                        quizStrokes.push({ points: currentPoints, color: "#2c3e50" });
+                    } else {
+                        // UPDATED: Keep the messy line, just add to strokes so user can see it
+                        quizStrokes.push({ points: currentPoints, color: "#2c3e50" });
+                        document.getElementById('quiz-message').innerText = result.msg;
+                    }
+                } else {
+                    // If they write in a box that has no Kanji data (excess boxes)
+                    quizStrokes.push({ points: currentPoints, color: "#2c3e50" });
+                }
+            };
+
+            cvs.onmousedown = start; cvs.onmousemove = move; window.onmouseup = end;
+            cvs.ontouchstart = start; cvs.ontouchmove = move; cvs.ontouchend = end;
+        }
+
+        function redrawQuiz() {
+            const cvs = document.getElementById('quiz-canvas');
+            const ctx = cvs.getContext('2d');
+            ctx.clearRect(0, 0, cvs.width, cvs.height);
+            ctx.lineWidth = 5;
+            ctx.lineCap = "round";
+            ctx.strokeStyle = "#2c3e50";
+
+            quizStrokes.forEach(stroke => {
+                ctx.strokeStyle = stroke.color || "#2c3e50"; // Use the stroke's color
+                ctx.beginPath();
+                ctx.moveTo(stroke.points[0].x, stroke.points[0].y);
+                stroke.points.forEach(p => ctx.lineTo(p.x, p.y));
+                ctx.stroke();
+            });
+        }
+
+        function undoStroke() { 
+            if(quizStrokes.length === 0) return;
+            quizStrokes.pop(); 
+            // Backtrack the active character's state logic
+            for (let i = currentWordData.length - 1; i >= 0; i--) {
+                if (currentWordData[i].currentStrokeIdx > 0) {
+                    currentWordData[i].currentStrokeIdx--;
+                    currentWordData[i].resampledStrokes.pop();
+                    break;
+                }
+            }
+            redrawQuiz(); 
+        }
+
+        function clearQuizCanvas() { 
+            quizStrokes = []; 
+            currentWordData.forEach(data => {
+                data.currentStrokeIdx = 0;
+                data.resampledStrokes = [];
+            });
+            redrawQuiz(); 
+        }
+
+        function showAnswer() {
+            wasMarkedWrong = true;
+            const tCtx = document.getElementById('trace-canvas').getContext('2d');
+            tCtx.clearRect(0, 0, CANV_W, document.getElementById('trace-canvas').height);
+            
+            currentWordData.forEach(data => {
+                tCtx.save();
+                tCtx.translate(0, data.yOffset);
+                
+                const quizScale = 300 / 109;
+                tCtx.scale(quizScale, quizScale); 
+                
+                data.paths.forEach((p, idx) => {
+                    // Draw Tracing Line (Faint Gray)
+                    tCtx.strokeStyle = "#888"; // Darker gray
+                    tCtx.lineWidth = 4;        // Scaled up, this will be thicker than the user's width of 5
+                    tCtx.stroke(new Path2D(p.getAttribute('d')));
+
+                    // Draw Stroke Numbers (Matches Gallery behavior)
+                    const textNode = data.numNodes[idx];
+                    if (textNode) {
+                        tCtx.fillStyle = "#666";
+                        tCtx.font = "4px Arial"; // Scaled down because of tCtx.scale
+                        const transform = textNode.getAttribute('transform');
+                        const match = /matrix\(1 0 0 1 ([\d\.]+) ([\d\.]+)\)/.exec(transform);
+                        if (match) {
+                            tCtx.fillText(textNode.textContent, parseFloat(match[1]), parseFloat(match[2]));
+                        }
+                    }
+                });
+                tCtx.restore();
+            });
+        }
+
+        function skipQuestion() {
+            wasMarkedWrong = true;
+            showFeedback(); 
+        }
+
+        function submitAnswer() {
+            const q = currentQuiz.questions[currentQuiz.index];
+            const targetWord = q.kanji_word; 
+            
+            const boxesWithStrokes = new Set();
+            quizStrokes.forEach(s => {
+                const centerY = s.points.reduce((sum, p) => sum + p.y, 0) / s.points.length;
+                boxesWithStrokes.add(Math.floor(centerY / 300));
+            });
+
+            if (boxesWithStrokes.size > targetWord.length) {
+                document.getElementById('quiz-message').innerText = "Wrong! You used too many boxes.";
+                return;
+            }
+
+            let allCorrect = true;
+            currentWordData.forEach((data, charIdx) => {
+                const charStrokes = quizStrokes.filter(s => {
+                    const centerY = s.points.reduce((sum, p) => sum + p.y, 0) / s.points.length;
+                    return Math.floor(centerY / 300) === charIdx;
+                });
+
+                if (charStrokes.length !== data.paths.length) {
+                    allCorrect = false;
+                } else {
+                    let charResampledStrokes = [];
+                    const isCharOk = charStrokes.every((s, i) => {
+                        const adjPoints = s.points.map(p => ({ x: p.x, y: p.y - data.yOffset }));
+                        const result = evaluateStroke(adjPoints, data.expectedPathsData[i], 
+                            i > 0 ? data.expectedPathsData[i-1] : null, 
+                            i > 0 ? charResampledStrokes[i-1] : null);
+                        
+                        if (result.valid) {
+                            charResampledStrokes.push(result.resampled);
+                            return true;
+                        } else {
+                            s.color = "#e74c3c"; // Turn the wrong stroke red
+                            return false;
+                        }
+                    });
+                    if (!isCharOk) allCorrect = false;
+                }
+            });
+
+            if (allCorrect) {
+                showFeedback();
+            } else {
+                redrawQuiz(); // Redraw immediately to show the red lines
+                document.getElementById('quiz-message').innerText = "Not quite right yet. Check stroke order and box placement!";
+            }
+        }
+
+        // --- NEW STROKE MATH ENGINE ---
+        function resample(points, num) {
+            if (points.length === 0) return [];
+            if (points.length === 1) return Array(num).fill(points[0]);
+            let totalLen = 0;
+            let dists = [0];
+            for (let i = 1; i < points.length; i++) {
+                let dx = points[i].x - points[i-1].x;
+                let dy = points[i].y - points[i-1].y;
+                totalLen += Math.sqrt(dx*dx + dy*dy);
+                dists.push(totalLen);
+            }
+            let res = [points[0]];
+            let step = totalLen / (num - 1);
+            let currDist = step;
+            let idx = 1;
+            for (let i = 1; i < num - 1; i++) {
+                while (idx < points.length && dists[idx] < currDist) { idx++; }
+                if (idx >= points.length) { res.push(points[points.length-1]); continue; }
+                let p0 = points[idx-1];
+                let p1 = points[idx];
+                let segmentLen = dists[idx] - dists[idx-1];
+                let ratio = segmentLen === 0 ? 0 : (currDist - dists[idx-1]) / segmentLen;
+                res.push({
+                    x: p0.x + (p1.x - p0.x) * ratio,
+                    y: p0.y + (p1.y - p0.y) * ratio
+                });
+                currDist += step;
+            }
+            res.push(points[points.length-1]);
+            return res;
+        }
+
+        function extractPathData(pathElement) {
+            const len = pathElement.getTotalLength();
+            const pts = [];
+            const numSamples = 10; 
+            for(let i = 0; i < numSamples; i++) {
+                const p = pathElement.getPointAtLength(len * i / (numSamples - 1));
+                pts.push({ x: p.x * SCALE, y: p.y * SCALE }); 
+            }
+            
+            // Linearity: ratio of end-to-end distance vs total length
+            // Lowered to 0.90 to be less strict about "perfect" lines
+            const startEndDist = Math.hypot(pts[numSamples-1].x - pts[0].x, pts[numSamples-1].y - pts[0].y);
+            const isLine = (startEndDist / (len * SCALE)) > 0.90; 
+
+            return { points: pts, length: len * SCALE, isLine: isLine };
+        }
+
+        function evaluateStroke(userPoints, expectedPath, prevExpectedPath, prevUserStroke) {
+            const numSamples = 10; 
+            const resampledUser = resample(userPoints, numSamples);
+
+            let userLen = 0;
+            for(let i = 1; i < resampledUser.length; i++) {
+                userLen += Math.hypot(resampledUser[i].x - resampledUser[i-1].x, resampledUser[i].y - resampledUser[i-1].y);
+            }
+            if (userLen < 5) return { valid: false, msg: "Stroke too short." };
+
+            // A. LINEARITY CHECK (The "の" Fix)
+            const userStartEndDist = Math.hypot(resampledUser[numSamples-1].x - resampledUser[0].x, resampledUser[numSamples-1].y - resampledUser[0].y);
+            const userIsLine = (userStartEndDist / userLen) > 0.90;
+
+            // Fail if target is curved but user drew a straight line
+            if (!expectedPath.isLine && userIsLine) {
+                return { valid: false, msg: "This stroke should be curved." };
+            }
+
+            // B. RELATIVE POSITION (Loosened from 50 to 70)
+            if (prevExpectedPath && prevUserStroke) {
+                const userRelX = resampledUser[0].x - prevUserStroke[0].x;
+                const userRelY = resampledUser[0].y - prevUserStroke[0].y;
+                const expRelX = expectedPath.points[0].x - prevExpectedPath.points[0].x;
+                const expRelY = expectedPath.points[0].y - prevExpectedPath.points[0].y;
+                const dist = Math.hypot(userRelX - expRelX, userRelY - expRelY);
+                if (dist > 70) return { valid: false, msg: "Incorrect placement." };
+            }
+
+            // C. DIRECTION 
+            // Measure the initial trajectory (1/3rd into the stroke) instead of start-to-end.
+            // This prevents random angle swings on looping strokes where the start and end points overlap.
+            const dirIdx = Math.floor(numSamples / 3); 
+            const userAngle = Math.atan2(resampledUser[dirIdx].y - resampledUser[0].y, resampledUser[dirIdx].x - resampledUser[0].x);
+            const expAngle = Math.atan2(expectedPath.points[dirIdx].y - expectedPath.points[0].y, expectedPath.points[dirIdx].x - expectedPath.points[0].x);
+            let angleDiff = Math.abs(userAngle - expAngle);
+            while (angleDiff > Math.PI) angleDiff -= 2 * Math.PI;
+            if (Math.abs(angleDiff) > 1.2) return { valid: false, msg: "Wrong direction." };
+
+            // D. SHAPE ERROR
+            const transUser = resampledUser.map(p => ({ x: p.x - resampledUser[0].x, y: p.y - resampledUser[0].y }));
+            const transExp = expectedPath.points.map(p => ({ x: p.x - expectedPath.points[0].x, y: p.y - expectedPath.points[0].y }));
+            const scale = userLen / expectedPath.length;
+
+            let shapeError = 0;
+            for(let i = 1; i < numSamples; i++) {
+                shapeError += Math.hypot(transUser[i].x - (transExp[i].x * scale), transUser[i].y - (transExp[i].y * scale));
+            }
+            shapeError /= (numSamples - 1); 
+
+            // Dynamic Tolerance (Adjusted for complex shapes)
+            // Lines get 60, Curves get 70 so looping strokes aren't punished for tiny squiggles
+            const tolerance = expectedPath.isLine ? 60 : 70;
+            if (shapeError > tolerance) return { valid: false, msg: "Incorrect shape." };
+
+            return { valid: true, resampled: resampledUser };
+        }
+
+        function checkIfWordFinished() {
+            const allDone = activeSessions.every(s => s.isCompleted);
+            if (allDone) {
+                setTimeout(showFeedback, 800);
+            }
+        }
+
+        function openQuizDrawing() {
+            const char = currentQuiz.targetWord[currentQuiz.wordCharIndex];
+            const filename = charToSvgMap[char];
+            
+            if (!filename) {
+                alert(`SVG for "${char}" not found! Skipping to next character.`);
+                finishQuizChar();
+                return;
+            }
+            openPractice(filename, char);
+        }
+
+        // MODIFY YOUR EXISTING closeModal() or Success logic:
+        // Inside your finishStroke logic, when a character is completed:
+        function onKanjiDrawingComplete() {
+            currentQuiz.wordCharIndex++;
+            if (currentQuiz.wordCharIndex < currentQuiz.targetWord.length) {
+                document.getElementById('word-progress').innerText = `Completed ${currentQuiz.wordCharIndex} of ${currentQuiz.targetWord.length} chars.`;
+                setTimeout(() => openQuizDrawing(), 1000); // Auto-open next char in word
+            } else {
+                showFeedback();
+            }
+        }
+        
+        function showFeedback() {
+            // Hide the writing area and show the feedback card
+            document.getElementById('quiz-area').style.display = 'none';
+            document.getElementById('quiz-feedback').style.display = 'block';
+            
+            const q = currentQuiz.questions[currentQuiz.index];
+            document.getElementById('fb-kanji').innerText = q.kanji_word;
+            document.getElementById('fb-meaning').innerText = q.meaning;
+            document.getElementById('fb-synonyms').innerText = q.english_synonyms.join(', ');
+        }
+
+        function nextQuestion() {
+            currentQuiz.index++;
+            if (currentQuiz.index < currentQuiz.questions.length) {
+                // Show the quiz area again for the next question
+                document.getElementById('quiz-area').style.display = 'block';
+                showQuestion();
+            } else {
+                alert("Quiz Complete!");
+                exitQuiz();
+            }
+        }
+
+        function exitQuiz() {
+            document.getElementById('test-list').style.display = 'grid';
+            document.getElementById('quiz-area').style.display = 'none';
+            document.getElementById('quiz-feedback').style.display = 'none';
+        }
+
+        async function loadDictionary() {
+            const response = await fetch(FILE_DICT);
+            if (!response.ok) throw new Error("Dictionary not found at " + FILE_DICT);
+            const text = await response.text();
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(text, "text/xml");
+            const characters = xmlDoc.getElementsByTagName('character');
+
+            for (let charEl of characters) {
+                // Get literal character as key
+                const literal = charEl.querySelector('literal').textContent;
+
+                const freqEl = charEl.querySelector('freq');
+                const freq = freqEl ? parseInt(freqEl.textContent) : 99999;
+
+                const gradeEl = charEl.querySelector('grade');
+                const grade = gradeEl ? parseInt(gradeEl.textContent) : 99;
+
+                const strokeEl = charEl.querySelector('stroke_count');
+                const strokes = strokeEl ? parseInt(strokeEl.textContent) : 0;
+
+                const radicalEl = charEl.querySelector('radical rad_value[rad_type="classical"]');
+                const radical = radicalEl ? radicalEl.textContent : null;
+
+                const meanings = Array.from(charEl.querySelectorAll('meaning'))
+                    .filter(m => !m.hasAttribute('m_lang'))
+                    .map(m => m.textContent).slice(0, 2).join(", ");
+
+                const on = Array.from(charEl.querySelectorAll('reading[r_type="ja_on"]'))
+                    .map(r => r.textContent).join(" ");
+                const kun = Array.from(charEl.querySelectorAll('reading[r_type="ja_kun"]'))
+                    .map(r => r.textContent).join(" ");
+
+                kanjiDataMap[literal] = { freq, grade, strokes, meanings, on, kun, radical };
+            }
+        }
+
+        // --- 2. SORTING, FILTERING & INFINITE SCROLL ---
+
+        function getMeta(char) {
+            // [FIX]: Basic lookup
+            let meta = kanjiDataMap[char];
+            
+            // If missing, we return a default object. 
+            // The "missing metadata" issue is usually due to mismatched chars (Variant vs Standard).
+            // Without a massive mapping table, we assume default to allow the app to run.
+            if (!meta) {
+                return { freq: 99999, grade: 99, strokes: 0, meanings: "?", on:"", kun:"", radical: "?" };
+            }
+            return meta;
+        }
+
+        function sortGallery() {
+            const criteria = document.getElementById('sortSelect').value;
+            
+            fileList.sort((a, b) => {
+                const metaA = getMeta(a.char);
+                const metaB = getMeta(b.char);
+
+                // [FIX]: Ensure stable sort for equal frequencies (using char code as tiebreaker)
+                if (criteria === 'freq-asc') {
+                    if (metaA.freq !== metaB.freq) return metaA.freq - metaB.freq;
+                    return a.char.localeCompare(b.char);
+                }
+                if (criteria === 'freq-desc') {
+                    if (metaA.freq !== metaB.freq) return metaB.freq - metaA.freq;
+                    return a.char.localeCompare(b.char);
+                } 
+                if (criteria === 'grade') return metaA.grade - metaB.grade;
+                if (criteria === 'strokes') return metaA.strokes - metaB.strokes;
+            });
+            
+            startRender(fileList);
+        }
+
+        function filterGallery() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = fileList.filter(item => {
+                const meta = getMeta(item.char);
+                const searchStr = `${item.char} ${meta.meanings} ${meta.on} ${meta.kun}`.toLowerCase();
+                return searchStr.includes(query);
+            });
+            startRender(filtered);
+        }
+
+        function startRender(list) {
+            activeList = list;
+            currentOffset = 0;
+            document.getElementById('gallery').innerHTML = '';
+            
+            // [FIX]: Load initial batch matches the updated BATCH_SIZE concept
+            const initialLoad = Math.min(BATCH_SIZE, activeList.length);
+            renderBatch(0, initialLoad);
+            currentOffset = initialLoad;
+        }
+
+        window.onscroll = function() {
+            if (isLoadingMore) return;
+            const sentinel = document.getElementById('scroll-sentinel');
+            const rect = sentinel.getBoundingClientRect();
+            if (rect.top <= window.innerHeight + 200) {
+                if (currentOffset < activeList.length) {
+                    loadMore();
+                }
+            }
+        };
+
+        function loadMore() {
+            isLoadingMore = true;
+            const nextBatch = Math.min(currentOffset + BATCH_SIZE, activeList.length);
+            renderBatch(currentOffset, nextBatch).then(() => {
+                currentOffset = nextBatch;
+                isLoadingMore = false;
+            });
+        }
+
+        function prepareSvg(svgText) {
+            // 1. Strip headers (DOCTYPE, XML declaration) to prevent rendering "]> "
+            const svgStart = svgText.indexOf('<svg');
+            let cleanSvg = svgText;
+            if (svgStart > -1) {
+                cleanSvg = svgText.substring(svgStart);
+            }
+            
+            // 2. Namespace Injection Fix
+            if (!cleanSvg.includes('xmlns:kvg')) {
+                cleanSvg = cleanSvg.replace('<svg', '<svg xmlns:kvg="http://kanjivg.tagaini.net" ');
+            }
+            return cleanSvg;
+        }
+
+        async function renderBatch(start, end) {
+            const gallery = document.getElementById('gallery');
+            const batch = activeList.slice(start, end);
+            const parser = new DOMParser();
+
+            for (const item of batch) {
+                try {
+                    const res = await fetch(DIR_KANJI + item.filename);
+                    
+                    // CHECK 1: Did the file actually load?
+                    if (!res.ok) {
+                        console.warn(`Missing SVG: ${item.filename} (Status: ${res.status})`);
+                        continue; // Skip this card if the SVG is missing
+                    }
+
+                    let rawSvg = await res.text();
+                    
+                    // CHECK 2: Is this actually an SVG? 
+                    // (Prevents parsing HTML error pages as XML)
+                    if (!rawSvg.includes('<svg')) {
+                        console.warn(`Invalid SVG content for: ${item.filename}`);
+                        continue;
+                    }
+
+                    let svgText = prepareSvg(rawSvg);
+                    const doc = parser.parseFromString(svgText, "image/svg+xml");
+                    
+                    // CHECK 3: Did XML parsing succeed?
+                    if (doc.querySelector('parsererror')) {
+                        console.error(`XML Parse Error for ${item.filename}`);
+                        continue;
+                    }
+
+                    const svgEl = doc.documentElement;
+                    svgEl.setAttribute('width', '100%');
+                    svgEl.setAttribute('height', '100%');
+
+                    // 1. EXTRACT REAL CHAR from SVG
+                    const kvgEl = svgEl.querySelector('[kvg\\:element]');
+                    let realChar = kvgEl ? kvgEl.getAttribute('kvg:element') : item.char;
+
+                    // [FIX]: Metadata Fallback Strategy
+                    // If the filename char (item.char) has no metadata, but the SVG says it's "令" (realChar),
+                    // we try to fetch metadata for "令". 
+                    // This fixes the "7000+ missing" issue where filename is a variant but dictionary is standard.
+                    let meta = getMeta(item.char);
+                    if (meta.freq === 99999 && realChar && realChar !== item.char) {
+                        const variantMeta = getMeta(realChar);
+                        if (variantMeta.freq !== 99999) {
+                            meta = variantMeta;
+                        }
+                    }
+
+                    // 2. MARK RADICALS RED [FIX]
+                    // Use robust selector for namespaced attribute and ensure style priority
+                    const radGroup = svgEl.querySelector('[kvg\\:radical]');
+                    if (radGroup) {
+                        const radPaths = radGroup.querySelectorAll('path');
+                        radPaths.forEach(p => {
+                            p.style.setProperty("stroke", "var(--accent)", "important");
+                        });
+                    }
+
+                    // Radical Fallback from SVG if missing in XML
+                    let displayRadical = meta.radical;
+                    if (!displayRadical || displayRadical === "?") {
+                        const radMatch = rawSvg.match(/kvg:radical="([^"]+)"/);
+                        if (radMatch) displayRadical = `(${radMatch[1]})`;
+                    }
+
+                    const card = document.createElement('div');
+                    card.className = 'kanji-card';
+                    card.innerHTML = `
+                        <div class="svg-preview"></div>
+                        <div class="meta-block">
+                            <span class="meaning">${meta.meanings}</span>
+                            <div class="readings">
+                                <span style="color:#333;">${meta.on}</span><br>
+                                <span>${meta.kun}</span>
+                            </div>
+                            <div class="stats">
+                                <span>Freq: ${meta.freq===99999?'-':meta.freq}</span>
+                                <span>Rad: ${displayRadical||'-'}</span>
+                                <span>S: ${meta.strokes}</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Append modified SVG element safely
+                    card.querySelector('.svg-preview').appendChild(svgEl);
+                    
+                    // 3. SETUP ANIMATION
+                    const paths = svgEl.querySelectorAll('path');
+                    let delay = 0;
+                    const speedMultiplier = 0.005; // Adjust this to make the whole animation faster/slower
+                    
+                    paths.forEach(p => {
+                        const len = p.getTotalLength();
+                        const strokeDuration = len * speedMultiplier;
+                        
+                        p.style.setProperty('--len', len);
+                        p.style.animationDuration = strokeDuration + 's';
+                        p.style.animationDelay = delay + 's';
+                        
+                        delay += strokeDuration; // Next stroke waits exactly for this one to finish
+                    });
+                    
+                    card.onclick = () => openPractice(svgText, meta);
+                    gallery.appendChild(card);
+                } catch(e) { console.warn("Err render", item.filename); }
+            }
+        }
+
+        // --- 4. PRACTICE ENGINE ---
+
+        function openPractice(svgString, meta) {
+            const modal = document.getElementById('modal');
+            const svgContainer = document.getElementById('practice-svg');
+            pCtx = canvas.getContext('2d');
+            
+            const parser = new DOMParser();
+            
+            // Check for namespace error one last time
+            let finalSvgStr = svgString;
+            if(!finalSvgStr.includes('xmlns:kvg')) {
+                 finalSvgStr = finalSvgStr.replace('<svg', '<svg xmlns:kvg="http://kanjivg.tagaini.net" ');
+            }
+
+            const doc = parser.parseFromString(finalSvgStr, "image/svg+xml");
+            const errorNode = doc.querySelector('parsererror');
+            if (errorNode) {
+                updateStatus("Error loading Kanji stroke data", "red");
+                modal.classList.add('active');
+                return;
+            }
+
+            const svgEl = doc.documentElement;
+
+            // Force the SVG to scale correctly to our 300x300 canvas
+            svgEl.setAttribute("width", "300");
+            svgEl.setAttribute("height", "300");
+            svgEl.setAttribute("viewBox", "0 0 109 109"); 
+            svgContainer.innerHTML = '';
+            svgContainer.appendChild(svgEl);
+            
+            strokePaths = Array.from(svgEl.querySelectorAll('path'));
+            strokePaths.forEach(p => {
+                if (p.closest('[kvg\\:radical]')) {
+                    p.style.stroke = "#e74c3c"; // Red
+                } else {
+                    p.style.stroke = "#e0e0e0"; // Gray
+                }
+                p.style.strokeWidth = "5"; 
+                p.style.fill = "none";
+            });
+
+            document.getElementById('blindModeToggle').checked = false;
+            
+            // Initialize without toggling twice
+            isBlindMode = false;
+            document.getElementById('hint-text').innerText = "Trace the gray lines.";
+            document.getElementById('practice-svg').style.opacity = "1";
+            
+            pCtx.clearRect(0, 0, canvas.width, canvas.height);
+            currentStrokeIdx = 0;
+            practiceExpectedPaths = strokePaths.map(p => extractPathData(p));
+            practiceResampledStrokes = [];
+            updateStatus("Start writing...");
+            modal.classList.add('active');
+        }
+
+        function toggleBlindMode() {
+            isBlindMode = document.getElementById('blindModeToggle').checked;
+            const svgContainer = document.getElementById('practice-svg');
+            const hint = document.getElementById('hint-text');
+
+            if (isBlindMode) {
+                svgContainer.style.opacity = "0"; 
+                hint.innerText = "Write from memory. Strokes will appear if correct.";
+            } else {
+                svgContainer.style.opacity = "1"; 
+                hint.innerText = "Trace the gray lines.";
+            }
+
+            // RESET PROGRESS
+            currentStrokeIdx = 0;
+            pCtx.clearRect(0, 0, canvas.width, canvas.height);
+            userPoints = [];
+            updateStatus("Start writing...");
+            
+            strokePaths.forEach(p => {
+                if (p.closest('[kvg\\:radical]')) {
+                    p.style.stroke = "#e74c3c";
+                } else {
+                    p.style.stroke = "#e0e0e0";
+                }
+            });
+        }
+
+        function closeModal() { document.getElementById('modal').classList.remove('active'); }
+        function updateStatus(msg, color="var(--primary)") {
+            const el = document.getElementById('status');
+            el.innerText = msg;
+            el.style.color = color;
+        }
+
+        // --- 5. DRAWING & STRICT VALIDATION ---
+
+        function getXY(e) {
+            const r = canvas.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return { x: clientX - r.left, y: clientY - r.top };
+        }
+
+        function start(e) {
+            if(currentStrokeIdx >= strokePaths.length) return;
+            isDrawing = true;
+            userPoints = [];
+            const {x, y} = getXY(e);
+            userPoints.push({x, y});
+            
+            canvasSnapshot = pCtx.getImageData(0, 0, canvas.width, canvas.height);
+
+            pCtx.beginPath();
+            pCtx.moveTo(x, y);
+            pCtx.lineWidth = 10;
+            pCtx.lineCap = "round";
+            pCtx.strokeStyle = "#333";
+        }
+
+        function move(e) {
+            if(!isDrawing) return;
+            if(e.cancelable) e.preventDefault();
+            const {x, y} = getXY(e);
+            userPoints.push({x, y});
+            pCtx.lineTo(x, y);
+            pCtx.stroke();
+        }
+
+        function end() {
+            if(!isDrawing) return;
+            isDrawing = false;
+            validateStroke();
+        }
+
+        function validateStroke() {
+            if (strokePaths.length === 0) return;
+            
+            const expectedPath = practiceExpectedPaths[currentStrokeIdx];
+            const prevExpectedPath = currentStrokeIdx > 0 ? practiceExpectedPaths[currentStrokeIdx - 1] : null;
+            const prevUserStroke = currentStrokeIdx > 0 ? practiceResampledStrokes[currentStrokeIdx - 1] : null;
+
+            const result = evaluateStroke(userPoints, expectedPath, prevExpectedPath, prevUserStroke);
+
+            if (result.valid) {
+                practiceResampledStrokes.push(result.resampled);
+                passStroke(strokePaths[currentStrokeIdx]);
+            } else {
+                failStroke(result.msg);
+            }
+        }
+
+        // --- UPDATED GALLERY FUNCTIONS ---
+
+        function passStroke(targetPath) {
+            // REMOVED: pCtx.putImageData(canvasSnapshot) - We keep the user's line
+            // REMOVED: targetPath.style.stroke = "#000" - We don't need to draw the SVG on top
+            
+            currentStrokeIdx++;
+            
+            if (currentStrokeIdx >= strokePaths.length) {
+                updateStatus("Character Complete!", "#27ae60");
+            } else {
+                updateStatus("Correct! Next stroke...");
+            }
+        }
+
+        function failStroke(reason) {
+            // REMOVED: Auto-erasing via putImageData or clearRect
+            updateStatus(reason || "Try again", "#e74c3c");
+        }
+
+        function clearPracticeCanvas() {
+            // Clear the visual canvas
+            pCtx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Reset the engine state
+            currentStrokeIdx = 0;
+            practiceResampledStrokes = [];
+            
+            // Reset SVG path colors if they were changed
+            strokePaths.forEach(p => {
+                p.style.stroke = p.closest('[kvg\\:radical]') ? "#e74c3c" : "#e0e0e0";
+            });
+            
+            updateStatus("Start writing...");
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const cvs = document.getElementById('practice-canvas');
+            cvs.addEventListener('mousedown', start);
+            cvs.addEventListener('touchstart', start, {passive: false});
+            cvs.addEventListener('mousemove', move);
+            cvs.addEventListener('touchmove', move, {passive: false});
+            cvs.addEventListener('mouseup', end);
+            cvs.addEventListener('touchend', end);
+            init();
+        });
+
+    </script>
+</body>
+</html>

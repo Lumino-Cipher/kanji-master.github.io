@@ -1,0 +1,142 @@
+[
+    {
+      "kanji_word": "根拠",
+      "sentence": "根拠を示して考えを伝える。",
+      "pronunciation": "こんきょ",
+      "meaning": "物事が成立するための土台。理由。",
+      "english_synonyms": ["basis", "grounds"]
+    },
+    {
+      "kanji_word": "衝撃",
+      "sentence": "事件に衝撃を受ける。",
+      "pronunciation": "しょうげき",
+      "meaning": "強い力による突き当たり。または心に受ける強い刺激。",
+      "english_synonyms": ["shock", "impact"]
+    },
+    {
+      "kanji_word": "散見",
+      "sentence": "その現象は文学作品に散見される。",
+      "pronunciation": "さんけん",
+      "meaning": "あちこちにちらほら見えること。",
+      "english_synonyms": ["found here and there", "scattered"]
+    },
+    {
+      "kanji_word": "検索",
+      "sentence": "求人情報を検索する。",
+      "pronunciation": "けんさく",
+      "meaning": "データや書物の中から必要な事項を探し出すこと。",
+      "english_synonyms": ["search", "retrieval"]
+    },
+    {
+      "kanji_word": "至難",
+      "sentence": "登頂に成功するのは至難のわざである。",
+      "pronunciation": "しなん",
+      "meaning": "この上なく難しいこと。",
+      "english_synonyms": ["extremely difficult", "hardest"]
+    },
+    {
+      "kanji_word": "賢明",
+      "sentence": "中止にしたのは賢明な判断である。",
+      "pronunciation": "けんめい",
+      "meaning": "賢くて、物事の判断が適切なこと。",
+      "english_synonyms": ["wise", "prudent"]
+    },
+    {
+      "kanji_word": "脚光",
+      "sentence": "この問題はメディアの脚光を浴びている。",
+      "pronunciation": "きゃっこう",
+      "meaning": "舞台の照明。転じて、世間の注目。",
+      "english_synonyms": ["limelight", "spotlight"]
+    },
+    {
+      "kanji_word": "厳密",
+      "sentence": "厳密に言えば両者には違いがある。",
+      "pronunciation": "げんみつ",
+      "meaning": "細かい点まで厳しく、正確にする様子。",
+      "english_synonyms": ["strict", "precise"]
+    },
+    {
+      "kanji_word": "誘発",
+      "sentence": "ストレスが病気を誘発した。",
+      "pronunciation": "ゆうはつ",
+      "meaning": "あることが原因となって、別のことを引き起こすこと。",
+      "english_synonyms": ["induce", "trigger"]
+    },
+    {
+      "kanji_word": "交錯",
+      "sentence": "あらゆる要素が交錯する。",
+      "pronunciation": "こうさく",
+      "meaning": "いくつものものが、複雑にまじり合うこと。",
+      "english_synonyms": ["intermingle", "mixture"]
+    },
+    {
+      "kanji_word": "隔てる",
+      "sentence": "国と国を隔てる山脈がある。",
+      "pronunciation": "へだてる",
+      "meaning": "間に距離や時間を置いて、離れさせる。",
+      "english_synonyms": ["separate", "isolate"]
+    },
+    {
+      "kanji_word": "懐疑",
+      "sentence": "あらゆる存在を懐疑する。",
+      "pronunciation": "かいぎ",
+      "meaning": "物事の意味や真実を疑うこと。",
+      "english_synonyms": ["skepticism", "doubt"]
+    },
+    {
+      "kanji_word": "襲われる",
+      "sentence": "緊張と不安に襲われる。",
+      "pronunciation": "おそわれる",
+      "meaning": "不意に攻められる。また、強い感情が急に湧き起こる。",
+      "english_synonyms": ["attacked", "overwhelmed"]
+    },
+    {
+      "kanji_word": "欠如",
+      "sentence": "専門知識が欠如している。",
+      "pronunciation": "けつじょ",
+      "meaning": "必要なものが欠けていること。",
+      "english_synonyms": ["lack", "deficiency"]
+    },
+    {
+      "kanji_word": "派遣",
+      "sentence": "海外に派遣される。",
+      "pronunciation": "はけん",
+      "meaning": "任務を与えて、特定の人を送り出すこと。",
+      "english_synonyms": ["dispatch", "deployment"]
+    },
+    {
+      "kanji_word": "措置",
+      "sentence": "一時的な措置をとる。",
+      "pronunciation": "そち",
+      "meaning": "事態を収めるために取り計らうこと。処置。",
+      "english_synonyms": ["measure", "step"]
+    },
+    {
+      "kanji_word": "唱える",
+      "sentence": "提案に異議を唱える。",
+      "pronunciation": "となえる",
+      "meaning": "声に出して言う。また、意見を主張する。",
+      "english_synonyms": ["advocate", "proclaim"]
+    },
+    {
+      "kanji_word": "破綻",
+      "sentence": "経営が破綻する。",
+      "pronunciation": "はたん",
+      "meaning": "物事が行き詰まり、壊れてしまうこと。",
+      "english_synonyms": ["failure", "collapse"]
+    },
+    {
+      "kanji_word": "蔓延",
+      "sentence": "都市部に犯罪が蔓延している。",
+      "pronunciation": "まんえん",
+      "meaning": "病気や悪習などが、はびこり広がること。",
+      "english_synonyms": ["spread", "epidemic"]
+    },
+    {
+      "kanji_word": "畢竟",
+      "sentence": "畢竟、彼は自分の過ちを認めた。",
+      "pronunciation": "ひっきょう",
+      "meaning": "結局のところ。つまり。",
+      "english_synonyms": ["after all", "eventually"]
+    }
+]

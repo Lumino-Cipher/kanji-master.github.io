@@ -1,0 +1,142 @@
+[
+    {
+      "kanji_word": "中傷",
+      "sentence": "中傷をした者に謝罪を求める。",
+      "pronunciation": "ちゅうしょう",
+      "meaning": "根拠のないことを言い、他人の名誉を傷つけること。",
+      "english_synonyms": ["slander", "libel"]
+    },
+    {
+      "kanji_word": "奔放",
+      "sentence": "自由奔放に暮らす。",
+      "pronunciation": "ほんぼう",
+      "meaning": "常識にとらわれず、思いのままに振る舞うこと。",
+      "english_synonyms": ["uninhibited", "wild"]
+    },
+    {
+      "kanji_word": "興趣",
+      "sentence": "興趣をそぐことを言う。",
+      "pronunciation": "きょうしゅ",
+      "meaning": "おもしろみ。味わい。",
+      "english_synonyms": ["interest", "amusement"]
+    },
+    {
+      "kanji_word": "勇敢",
+      "sentence": "勇敢な行いを賞賛される。",
+      "pronunciation": "ゆうかん",
+      "meaning": "勇気があり、物事を恐れない様子。",
+      "english_synonyms": ["brave", "courageous"]
+    },
+    {
+      "kanji_word": "卑下",
+      "sentence": "過度に卑下する。",
+      "pronunciation": "ひげ",
+      "meaning": "自分を低く評価して、へりくだること。",
+      "english_synonyms": ["self-deprecation", "humility"]
+    },
+    {
+      "kanji_word": "帰途",
+      "sentence": "仕事を終えてようやく帰途につく。",
+      "pronunciation": "きと",
+      "meaning": "帰る途中の道。",
+      "english_synonyms": ["return journey", "way home"]
+    },
+    {
+      "kanji_word": "悠久",
+      "sentence": "悠久の歴史が感じられる。",
+      "pronunciation": "ゆうきゅう",
+      "meaning": "果てしなく長く続くこと。",
+      "english_synonyms": ["eternal", "perpetual"]
+    },
+    {
+      "kanji_word": "威嚇",
+      "sentence": "動物が敵を威嚇する。",
+      "pronunciation": "いかく",
+      "meaning": "力を見せつけて相手を脅かすこと。",
+      "english_synonyms": ["threat", "intimidation"]
+    },
+    {
+      "kanji_word": "拍手",
+      "sentence": "見事な演奏に観衆が拍手を送る。",
+      "pronunciation": "はくしゅ",
+      "meaning": "手を打ち鳴らして、賞賛や喜びを表すこと。",
+      "english_synonyms": ["applause", "clapping"]
+    },
+    {
+      "kanji_word": "林立",
+      "sentence": "工場の煙突が林立する。",
+      "pronunciation": "りんりつ",
+      "meaning": "林のように多くのものが並び立つこと。",
+      "english_synonyms": ["standing in rows", "cluster"]
+    },
+    {
+      "kanji_word": "余裕",
+      "sentence": "時間に余裕がある。",
+      "pronunciation": "よゆう",
+      "meaning": "ゆったりとしていて、余りがあること。",
+      "english_synonyms": ["leeway", "margin"]
+    },
+    {
+      "kanji_word": "常軌",
+      "sentence": "常軌を逸した行動に出る。",
+      "pronunciation": "じょうき",
+      "meaning": "普通のやり方。社会的な常識。",
+      "english_synonyms": ["common track", "norm"]
+    },
+    {
+      "kanji_word": "成就",
+      "sentence": "学業成就を祈る。",
+      "pronunciation": "じょうじゅ",
+      "meaning": "願いや計画が、その通りに成し遂げられること。",
+      "english_synonyms": ["fulfillment", "completion"]
+    },
+    {
+      "kanji_word": "儀式",
+      "sentence": "儀式の進行を見守る。",
+      "pronunciation": "ぎしき",
+      "meaning": "決まった形式で行われる行事。",
+      "english_synonyms": ["ritual", "ceremony"]
+    },
+    {
+      "kanji_word": "覇権",
+      "sentence": "その国は覇権を握っていた。",
+      "pronunciation": "はけん",
+      "meaning": "他を制して支配する力。",
+      "english_synonyms": ["hegemony", "supremacy"]
+    },
+    {
+      "kanji_word": "慰め",
+      "sentence": "励ましの言葉に慰められる。",
+      "pronunciation": "なぐさめ",
+      "meaning": "悲しみや苦しみを和らげてくれるもの。",
+      "english_synonyms": ["comfort", "consolation"]
+    },
+    {
+      "kanji_word": "佳境",
+      "sentence": "話がいよいよ佳境に入る。",
+      "pronunciation": "かきょう",
+      "meaning": "物語などの最も興味深い場面。",
+      "english_synonyms": ["climax", "peak"]
+    },
+    {
+      "kanji_word": "寡聞",
+      "sentence": "その作品は寡聞にして存じません。",
+      "pronunciation": "かぶん",
+      "meaning": "見聞が狭く、知識が少ないこと（謙遜して言う）。",
+      "english_synonyms": ["limited knowledge", "ill-informed"]
+    },
+    {
+      "kanji_word": "塩梅",
+      "sentence": "いい塩梅に事が進んだ。",
+      "pronunciation": "あんばい",
+      "meaning": "物事の具合。加減。",
+      "english_synonyms": ["condition", "seasoning"]
+    },
+    {
+      "kanji_word": "憚る",
+      "sentence": "人目を憚ることなく大声で泣いた。",
+      "pronunciation": "はばかる",
+      "meaning": "遠慮する。気兼ねする。",
+      "english_synonyms": ["hesitate", "be afraid of"]
+    }
+]

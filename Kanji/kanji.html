@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanjidic2 Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #555;
+        }
+        #gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            padding: 20px;
+            justify-content: center;
+        }
+        .kanji-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .kanji-card:hover {
+            transform: scale(1.05);
+        }
+        .kanji-literal {
+            font-size: 3em;
+            font-weight: bold;
+            line-height: 1;
+        }
+        .kanji-freq {
+            font-size: 0.8em;
+            color: #777;
+            margin-top: 5px;
+        }
+        .tooltip {
+            visibility: hidden;
+            background-color: rgba(0, 0, 0, 0.85);
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            width: max-content;
+            max-width: 300px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .kanji-card:hover .tooltip {
+            visibility: visible;
+        }
+        .tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            font-size: 1.2em;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Kanjidic2 Gallery</h1>
+<div id="gallery"></div>
+<div id="loading" class="loading">Loading...</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const gallery = document.getElementById('gallery');
+        const loadingElement = document.getElementById('loading');
+        let kanjiData = [];
+        let currentIndex = 0;
+        const loadInitialCount = 100;
+        const loadMoreCount = 300;
+
+        fetch('kanjidic2.xml')
+            .then(response => response.text())
+            .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+            .then(data => {
+                const characters = data.getElementsByTagName('character');
+                kanjiData = Array.from(characters).map(character => {
+                    const literal = character.getElementsByTagName('literal')[0].textContent;
+                    const freqElement = character.getElementsByTagName('freq')[0];
+                    const freq = freqElement ? parseInt(freqElement.textContent, 10) : Infinity;
+                    
+                    const meanings = Array.from(character.getElementsByTagName('meaning')).filter(m => !m.getAttribute('m_lang'));
+                    const readings = Array.from(character.getElementsByTagName('reading')).filter(r => r.getAttribute('r_type') === 'ja_on' || r.getAttribute('r_type') === 'ja_kun');
+                    
+                    const tooltipContent = `
+                        <div class="tooltip-content">
+                            <strong>Literal:</strong> ${literal}<br>
+                            <strong>Frequency:</strong> ${freq !== Infinity ? freq : 'N/A'}<br>
+                            <strong>Meanings:</strong> ${meanings.map(m => m.textContent).join(', ')}<br>
+                            <strong>Readings:</strong> ${readings.map(r => r.textContent).join(', ')}
+                        </div>
+                    `;
+
+                    return {
+                        literal,
+                        freq,
+                        tooltipContent
+                    };
+                }).sort((a, b) => a.freq - b.freq);
+
+                loadingElement.style.display = 'none';
+                loadKanji(loadInitialCount);
+
+                window.addEventListener('scroll', () => {
+                    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
+                        loadKanji(loadMoreCount);
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching or parsing XML:', error);
+                loadingElement.textContent = 'Failed to load Kanji data.';
+            });
+
+        function loadKanji(count) {
+            if (currentIndex >= kanjiData.length) {
+                return;
+            }
+
+            const fragment = document.createDocumentFragment();
+            const end = Math.min(currentIndex + count, kanjiData.length);
+
+            for (let i = currentIndex; i < end; i++) {
+                const kanji = kanjiData[i];
+                const card = document.createElement('div');
+                card.classList.add('kanji-card');
+
+                const literalSpan = document.createElement('span');
+                literalSpan.classList.add('kanji-literal');
+                literalSpan.textContent = kanji.literal;
+
+                const freqSpan = document.createElement('span');
+                freqSpan.classList.add('kanji-freq');
+                freqSpan.textContent = `Freq: ${kanji.freq !== Infinity ? kanji.freq : 'N/A'}`;
+                
+                const tooltipDiv = document.createElement('div');
+                tooltipDiv.classList.add('tooltip');
+                tooltipDiv.innerHTML = kanji.tooltipContent;
+
+                card.appendChild(literalSpan);
+                card.appendChild(freqSpan);
+                card.appendChild(tooltipDiv);
+                fragment.appendChild(card);
+            }
+
+            gallery.appendChild(fragment);
+            currentIndex = end;
+
+            if (currentIndex >= kanjiData.length) {
+                loadingElement.textContent = 'All kanji loaded.';
+            } else {
+                loadingElement.textContent = 'Loading more kanji...';
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
