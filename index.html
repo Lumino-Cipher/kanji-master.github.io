@@ -198,21 +198,6 @@
         .file-card { background: #f4ecf8; padding: 20px; border-radius: 8px; border: 2px solid #c39bd3; text-align: center; cursor: pointer; transition: 0.2s; color: #4a235a;}
         .file-card:hover { transform: translateY(-3px); box-shadow: 0 4px 10px rgba(142, 68, 173, 0.2); }
 
-
-        /* THEMES */
-        :root {
-            /* Light Mode (Classic/Static) */
-            --bg: #f4f4f9;
-            --card: #ffffff;
-            --text: #333333;
-            --sub-text: #666666;
-            --border: #dddddd;
-            --search-bg: #ffffff;
-            --primary: #2c3e50;
-            --accent: #e74c3c;
-            --user-stroke: #2c3e50;
-        }
-
         /* THEMES & COLORS */
         :root {
             --bg: #f4f4f9; --card: #fff; --text: #333; --border: #ddd; --sub-text: #666;
@@ -442,7 +427,7 @@
                 await Promise.all([loadDictionary(), fetchFileList(), loadTests()]);
                 checkCoverage();
                 sortGallery(); 
-                renderDirectory(); // Initialize the practice tab
+                renderDirectory();
                 document.getElementById('loading').style.display = 'none';
             } catch (err) {
                 document.getElementById('loading').innerHTML = `Error: ${err.message}`;
