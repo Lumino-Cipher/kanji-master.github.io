@@ -1,0 +1,471 @@
+[
+  {
+    "kanji_word": "韻律",
+    "sentence": "詩の韻律を整える。",
+    "pronunciation": "いんりつ",
+    "meaning": "詩の音の響きやリズム、強弱のきまり。",
+    "english_synonyms": ["rhythm", "meter"]
+  },
+  {
+    "kanji_word": "浦風",
+    "sentence": "浜に穏やかな浦風が吹いている。",
+    "pronunciation": "うらかぜ",
+    "meaning": "入り江や海岸から吹く風。",
+    "english_synonyms": ["sea breeze"]
+  },
+  {
+    "kanji_word": "逸脱",
+    "sentence": "討論が本筋から逸脱した。",
+    "pronunciation": "いつだつ",
+    "meaning": "本筋や決められた範囲から外れること。",
+    "english_synonyms": ["deviation", "departure"]
+  },
+  {
+    "kanji_word": "姻族",
+    "sentence": "お盆に姻族一同が集まる。",
+    "pronunciation": "いんぞく",
+    "meaning": "婚姻によって親族関係となった人。配偶者の親族など。",
+    "english_synonyms": ["relatives by marriage", "in-laws"]
+  },
+  {
+    "kanji_word": "一尉",
+    "sentence": "陸上自衛隊の一尉に昇進した。",
+    "pronunciation": "いちい",
+    "meaning": "自衛隊などの階級の一つで、大尉に相当する。",
+    "english_synonyms": ["First Lieutenant", "Captain"]
+  },
+  {
+    "kanji_word": "流行",
+    "sentence": "悪疫の流行をくいとめる。",
+    "pronunciation": "りゅうこう",
+    "meaning": "病気などが広まること。また、世間で一時的にもてはやされること。",
+    "english_synonyms": ["epidemic", "outbreak", "fashion"]
+  },
+  {
+    "kanji_word": "亜流",
+    "sentence": "ピカソの亜流に属する画家だ。",
+    "pronunciation": "ありゅう",
+    "meaning": "一流の人をまねるだけで、独創性のないこと。またその人。",
+    "english_synonyms": ["poor imitation", "epigone"]
+  },
+  {
+    "kanji_word": "拝謁",
+    "sentence": "宮殿に上がり国王に拝謁する。",
+    "pronunciation": "はいえつ",
+    "meaning": "高貴な人に会うことの謙譲語。",
+    "english_synonyms": ["audience", "royal reception"]
+  },
+  {
+    "kanji_word": "散逸",
+    "sentence": "貴重な資料が散逸してしまった。",
+    "pronunciation": "さんいつ",
+    "meaning": "まとまっていたものが、あちこちに分かれてなくなってしまうこと。",
+    "english_synonyms": ["scattering", "loss", "dispersion"]
+  },
+  {
+    "kanji_word": "畝",
+    "sentence": "畑を耕して畝を作る。",
+    "pronunciation": "うね",
+    "meaning": "作物を植えるために、土を細長く盛り上げたところ。",
+    "english_synonyms": ["ridge", "furrow"]
+  },
+  {
+    "kanji_word": "称賛",
+    "sentence": "勇気ある決断は称賛に値する。",
+    "pronunciation": "しょうさん",
+    "meaning": "ほめたたえること。",
+    "english_synonyms": ["praise", "admiration"]
+  },
+  {
+    "kanji_word": "横殴り",
+    "sentence": "横殴りの雨でびしょぬれになる。",
+    "pronunciation": "よこなぐり",
+    "meaning": "雨や風が横から激しく吹きつける様子。",
+    "english_synonyms": ["driving rain", "slanting"]
+  },
+  {
+    "kanji_word": "服従",
+    "sentence": "卑劣な脅しには服従しない。",
+    "pronunciation": "ふくじゅう",
+    "meaning": "他人の命令や意思に、逆らわずに従うこと。",
+    "english_synonyms": ["obedience", "submission"]
+  },
+  {
+    "kanji_word": "励む",
+    "sentence": "試験に備えて勉強に励む。",
+    "pronunciation": "はげむ",
+    "meaning": "一生懸命に努力すること。",
+    "english_synonyms": ["strive", "endeavor"]
+  },
+  {
+    "kanji_word": "炎",
+    "sentence": "ろうそくの炎を見つめる。",
+    "pronunciation": "ほの お",
+    "meaning": "火が燃えて立ち上がる火の気。",
+    "english_synonyms": ["flame", "blaze"]
+  },
+  {
+    "kanji_word": "一区画",
+    "sentence": "字は市町村の一区画の名だ。",
+    "pronunciation": "いっくかく",
+    "meaning": "土地などの一つ一つの仕切り。",
+    "english_synonyms": ["section", "block", "lot"]
+  },
+  {
+    "kanji_word": "欺く",
+    "sentence": "良心を欺くことはできない。",
+    "pronunciation": "あざむく",
+    "meaning": "だます。また、それ以上の美しさである（…をあざむく美貌）。",
+    "english_synonyms": ["deceive", "betray"]
+  },
+  {
+    "kanji_word": "太刀打ち",
+    "sentence": "私の力では太刀打ちできない。",
+    "pronunciation": "たちうち",
+    "meaning": "（多くは「できない」を伴い）互角に渡り合うこと。",
+    "english_synonyms": ["compete", "match", "contend"]
+  },
+  {
+    "kanji_word": "興味",
+    "sentence": "北欧の文化に興味を持つ。",
+    "pronunciation": "きょうみ",
+    "meaning": "面白いと感じること。関心があること。",
+    "english_synonyms": ["interest", "curiosity"]
+  },
+  {
+    "kanji_word": "時雨",
+    "sentence": "外は時雨模様だった。",
+    "pronunciation": "しぐれ",
+    "meaning": "秋から冬にかけて、ぱらぱらと降ったりやんだりする雨。",
+    "english_synonyms": ["drizzle", "passing shower"]
+  },
+  {
+    "kanji_word": "答申",
+    "sentence": "諮問委員会が大臣に答申した。",
+    "pronunciation": "とうしん",
+    "meaning": "行政機関などの問いに対し、調査した意見を報告すること。",
+    "english_synonyms": ["report", "official response"]
+  },
+  {
+    "kanji_word": "諮る",
+    "sentence": "事業計画を会議に諮る。",
+    "pronunciation": "はかる",
+    "meaning": "他人の意見を聞く。会議にかけて相談する。",
+    "english_synonyms": ["consult", "deliberate"]
+  },
+  {
+    "kanji_word": "一見",
+    "sentence": "一見鈍重に見える動物だ。",
+    "pronunciation": "いっけん",
+    "meaning": "ちょっと見たところ。また、一度見ること。",
+    "english_synonyms": ["at a glance", "at first sight"]
+  },
+  {
+    "kanji_word": "鈍く",
+    "sentence": "疲れて体の動きが鈍くなった。",
+    "pronunciation": "にぶく",
+    "meaning": "動きが遅い。または感覚が鋭くないこと。",
+    "english_synonyms": ["slowly", "dully", "sluggishly"]
+  },
+  {
+    "kanji_word": "依",
+    "sentence": "依頼心を捨てて自立する。",
+    "pronunciation": "イ",
+    "meaning": "「依頼心」とは他人の助けをあてにする心のこと。",
+    "english_synonyms": ["spirit of dependence", "reliance"]
+  },
+  {
+    "kanji_word": "尉",
+    "sentence": "自衛隊の尉官になる。",
+    "pronunciation": "イ",
+    "meaning": "「尉官」とは自衛隊や軍隊の階級で、佐官の下、曹の上にあたる地位。",
+    "english_synonyms": ["commissioned officer", "lieutenant class"]
+  },
+  {
+    "kanji_word": "緯",
+    "sentence": "出来事の経緯を述べる。",
+    "pronunciation": "イ",
+    "meaning": "「経緯」とは物事のいきさつ、細かい事情のこと。",
+    "english_synonyms": ["details", "circumstances", "background"]
+  },
+  {
+    "kanji_word": "姻",
+    "sentence": "婚姻は男女の合意に基づく。",
+    "pronunciation": "イン",
+    "meaning": "「婚姻」とは結婚すること、夫婦になること。",
+    "english_synonyms": ["marriage", "matrimony"]
+  },
+  {
+    "kanji_word": "韻",
+    "sentence": "詩歌などを韻文という。",
+    "pronunciation": "イン",
+    "meaning": "「韻文」とはリズムを整え、韻をふんだ文章のこと。",
+    "english_synonyms": ["verse", "poetry"]
+  },
+  {
+    "kanji_word": "隠",
+    "sentence": "心豊かに隠居生活を送る。",
+    "pronunciation": "イン",
+    "meaning": "「隠居」とは勤めなどをやめ、家督を譲ってのんびり暮らすこと。",
+    "english_synonyms": ["retirement", "seclusion"]
+  },
+  {
+    "kanji_word": "役",
+    "sentence": "使役の意味の助動詞を覚える。",
+    "pronunciation": "エキ",
+    "meaning": "「使役」とは人を働かせること。またはある動作をさせること。",
+    "english_synonyms": ["causative", "employment", "service"]
+  },
+  {
+    "kanji_word": "易",
+    "sentence": "アジア諸国と交易する。",
+    "pronunciation": "エキ",
+    "meaning": "「交易」とは国や地方をこえて物を売買すること。",
+    "english_synonyms": ["trade", "commerce"]
+  },
+  {
+    "kanji_word": "疫",
+    "sentence": "空港での防疫体制を整える。",
+    "pronunciation": "エキ",
+    "meaning": "「防疫」とは伝染病の発生や侵入、流行を防ぐこと。",
+    "english_synonyms": ["epidemic prevention", "quarantine"]
+  },
+  {
+    "kanji_word": "警戒",
+    "sentence": "find antonym for 油断: 警戒",
+    "pronunciation": "けいかい",
+    "meaning": "「油断」は注意を怠ること。「警戒」は危険に備えて注意し、用心すること。",
+    "english_synonyms": ["vigilance", "precaution"]
+  },
+  {
+    "kanji_word": "軽薄",
+    "sentence": "find antonym for 重厚: 軽薄",
+    "pronunciation": "けいはく",
+    "meaning": "「重厚」は重みがあって落ち着いていること。「軽薄」は言葉や態度が軽々しく、誠実さがないこと。",
+    "english_synonyms": ["frivolous", "flippant"]
+  },
+  {
+    "kanji_word": "侵害",
+    "sentence": "find antonym for 擁護: 侵害",
+    "pronunciation": "しんがい",
+    "meaning": "「擁護」は守り助けること。「侵害」は他人の権利や利益をおかし、そこなうこと。",
+    "english_synonyms": ["infringement", "violation"]
+  },
+  {
+    "kanji_word": "異端",
+    "sentence": "find antonym for 正統: 異端",
+    "pronunciation": "いたん",
+    "meaning": "「正統」は正しいとされる系統。「異端」は主流から外れた学説や宗教のこと。",
+    "english_synonyms": ["heresy", "unorthodox"]
+  },
+  {
+    "kanji_word": "凡才",
+    "sentence": "find antonym for 逸材: 凡才",
+    "pronunciation": "ぼんさい",
+    "meaning": "「逸材」は並外れて優れた才能。「凡才」は平凡な、ありふれた才能のこと。",
+    "english_synonyms": ["ordinary talent", "mediocrity"]
+  },
+  {
+    "kanji_word": "近隣",
+    "sentence": "find synonym for 周辺: 近隣",
+    "pronunciation": "きんりん",
+    "meaning": "「周辺」も「近隣」も、ある場所の近くの地域のこと。",
+    "english_synonyms": ["neighborhood", "vicinity"]
+  },
+  {
+    "kanji_word": "嘆願",
+    "sentence": "find synonym for 哀訴: 嘆願",
+    "pronunciation": "たんがん",
+    "meaning": "「哀訴」は悲しんで訴えること。「嘆願」は事情を説明して熱心に願い求めること。",
+    "english_synonyms": ["entreaty", "appeal", "petition"]
+  },
+  {
+    "kanji_word": "潤沢",
+    "sentence": "find synonym for 豊富: 潤沢",
+    "pronunciation": "じゅんたく",
+    "meaning": "「豊富」も「潤沢」も、物がたっぷりあって、ゆとりのある様子。",
+    "english_synonyms": ["abundant", "plentiful"]
+  },
+  {
+    "kanji_word": "憂慮",
+    "sentence": "find synonym for 心配: 憂慮",
+    "pronunciation": "ゆうりょ",
+    "meaning": "「心配」も「憂慮」も、先行きを不安に思い、思い悩むこと。",
+    "english_synonyms": ["anxiety", "concern"]
+  },
+  {
+    "kanji_word": "介抱",
+    "sentence": "find synonym for 看護: 介抱",
+    "pronunciation": "かいほう",
+    "meaning": "「看護」は病人の世話をすること。「介抱」はけが人や酔った人などの世話をすること。",
+    "english_synonyms": ["nursing", "tending", "care"]
+  },
+  {
+    "kanji_word": "亜熱帯",
+    "sentence": "亜熱帯地方の植物を調べる。",
+    "pronunciation": "あねったい",
+    "meaning": "熱帯に近いが、熱帯ほどは気温が高くない地域。",
+    "english_synonyms": ["subtropics"]
+  },
+  {
+    "kanji_word": "婚姻",
+    "sentence": "婚姻届を役所に提出する。",
+    "pronunciation": "こんいん",
+    "meaning": "夫婦となる手続き。またはその関係。",
+    "english_synonyms": ["marriage"]
+  },
+  {
+    "kanji_word": "中尉",
+    "sentence": "元海軍中尉が書いた自伝だ。",
+    "pronunciation": "ちゅうい",
+    "meaning": "軍隊の階級で、大尉と少尉の間の位。",
+    "english_synonyms": ["First Lieutenant"]
+  },
+  {
+    "kanji_word": "客員",
+    "sentence": "客員を踏んだ詩を読む。",
+    "pronunciation": "きゃくいん",
+    "meaning": "組織の正規のメンバーではないが、特別に迎えられた人。※ここでは「脚韻」の誤りの可能性あり、文脈により判断。",
+    "english_synonyms": ["guest member", "visiting member"]
+  },
+  {
+    "kanji_word": "免疫",
+    "sentence": "予防接種で免疫をつける。",
+    "pronunciation": "めんえき",
+    "meaning": "病気に対する抵抗力を体に作ること。",
+    "english_synonyms": ["immunity"]
+  },
+  {
+    "kanji_word": "畝",
+    "sentence": "畝のある生地で服を作る。",
+    "pronunciation": "うね",
+    "meaning": "布地の表面にある盛り上がった線状の筋。",
+    "english_synonyms": ["ridge", "rib"]
+  },
+  {
+    "kanji_word": "逸話",
+    "sentence": "彼女には多くの逸話がある。",
+    "pronunciation": "いつわ",
+    "meaning": "あまり知られていない興味深いエピソード。",
+    "english_synonyms": ["anecdote"]
+  },
+  {
+    "kanji_word": "浦里",
+    "sentence": "浦里の祭りで豊漁を願う。",
+    "pronunciation": "うらざと",
+    "meaning": "海辺にある村。",
+    "english_synonyms": ["seaside village"]
+  },
+  {
+    "kanji_word": "扱う",
+    "sentence": "商品を大切に扱う。",
+    "pronunciation": "あつかう",
+    "meaning": "物を取り扱ったり、操作したりすること。",
+    "english_synonyms": ["handle", "treat"]
+  },
+  {
+    "kanji_word": "猛威",
+    "sentence": "大型の台風が猛威を振るう。",
+    "pronunciation": "もうい",
+    "meaning": "すさまじい勢い。はげしい力。",
+    "english_synonyms": ["fury", "rampage"]
+  },
+  {
+    "kanji_word": "悦",
+    "sentence": "計画が軌道に乗り悦に入る。",
+    "pronunciation": "えつ",
+    "meaning": "「悦に入る」は、物事がうまくいって満足し、喜ぶこと。",
+    "english_synonyms": ["joy", "pleasure", "relish"]
+  },
+  {
+    "kanji_word": "煙突",
+    "sentence": "工場の煙突が林立している。",
+    "pronunciation": "えんとつ",
+    "meaning": "煙を外に出すための筒状の設備。",
+    "english_synonyms": ["chimney", "smokestack"]
+  },
+  {
+    "kanji_word": "声援",
+    "sentence": "母校の選手に声援を送る。",
+    "pronunciation": "せいえん",
+    "meaning": "声を出して応援すること。",
+    "english_synonyms": ["cheering", "support"]
+  },
+  {
+    "kanji_word": "縁談",
+    "sentence": "娘の縁談がまとまる。",
+    "pronunciation": "えんだん",
+    "meaning": "結婚の話。",
+    "english_synonyms": ["marriage proposal", "matchmaking"]
+  },
+  {
+    "kanji_word": "祝宴",
+    "sentence": "優勝の祝宴を催した。",
+    "pronunciation": "しゅくえん",
+    "meaning": "お祝いのための宴会。パーティ。",
+    "english_synonyms": ["banquet", "celebration feast"]
+  },
+  {
+    "kanji_word": "液晶",
+    "sentence": "液晶画面のテレビを買う。",
+    "pronunciation": "えきしょう",
+    "meaning": "液体と結晶の中間の性質を持つ物質。表示パネルに使われる。",
+    "english_synonyms": ["liquid crystal", "LCD"]
+  },
+  {
+    "kanji_word": "閲覧",
+    "sentence": "登記簿を閲覧する。",
+    "pronunciation": "えつらん",
+    "meaning": "書物や書類などを調べたり読んだりすること。",
+    "english_synonyms": ["inspection", "browsing"]
+  },
+  {
+    "kanji_word": "恩恵",
+    "sentence": "平和の恩恵をこうむる。",
+    "pronunciation": "おんけい",
+    "meaning": "恵み。ありがたい幸せ。",
+    "english_synonyms": ["benefit", "blessing"]
+  },
+  {
+    "kanji_word": "謁見",
+    "sentence": "国王に謁見する。",
+    "pronunciation": "えっけん",
+    "meaning": "貴人に会うこと。",
+    "english_synonyms": ["audience"]
+  },
+  {
+    "kanji_word": "越権",
+    "sentence": "越権行為は許されない。",
+    "pronunciation": "えっけん",
+    "meaning": "自分の権限を越えて物事を行うこと。",
+    "english_synonyms": ["exceeding one's authority"]
+  },
+  {
+    "kanji_word": "依然",
+    "sentence": "依然として状況は変わらない。",
+    "pronunciation": "いぜん",
+    "meaning": "もとのままである様子。相変わらず。",
+    "english_synonyms": ["still", "as ever"]
+  },
+  {
+    "kanji_word": "以前",
+    "sentence": "彼には以前会ったことがある。",
+    "pronunciation": "いぜん",
+    "meaning": "あるときよりも前の時。前。",
+    "english_synonyms": ["before", "previously"]
+  },
+  {
+    "kanji_word": "射た",
+    "sentence": "矢は見事に的を射た。",
+    "pronunciation": "いた",
+    "meaning": "矢を飛ばして的に当てること。",
+    "english_synonyms": ["shot (an arrow)", "hit"]
+  },
+  {
+    "kanji_word": "鋳る",
+    "sentence": "青銅でつり鐘を鋳る。",
+    "pronunciation": "いる",
+    "meaning": "溶かした金属を型に流し込んで物を作る。",
+    "english_synonyms": ["cast", "mold"]
+  }
+]

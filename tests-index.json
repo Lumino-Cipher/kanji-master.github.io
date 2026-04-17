@@ -11,6 +11,13 @@
         { "name": "第４回", "type": "file", "path": "tests/入試漢字・語彙２７００/第４回.json" },
         { "name": "第５回", "type": "file", "path": "tests/入試漢字・語彙２７００/第５回.json" }
       ]
+    },
+    {
+      "name": "漢検・漢字学習・ステップ・準２級",
+      "type": "folder",
+      "children": [
+        { "name": "ステップ１", "type": "folder", "children": [{"name": "ステップ１", "type": "file", "path": "tests/漢検・漢字学習・ステップ・準２級/ステップ１/ステップ１.json"}] }
+      ]
     }
   ]
 }
