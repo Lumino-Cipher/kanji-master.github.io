@@ -1,0 +1,465 @@
+[
+  {
+    "ステップ１": {
+      "type": "reading",
+      "problems": [
+        {
+          "kanji_word": "寡少",
+          "sentence": "寡少な戦力で立ち向かう。",
+          "pronunciation": "かしょう",
+          "meaning": "極めて少ないこと。",
+          "english_synonyms": ["few", "scant", "sparse"]
+        },
+        {
+          "kanji_word": "革靴",
+          "sentence": "足に合う革靴を履く。",
+          "pronunciation": "かわぐつ",
+          "meaning": "なめし革で作った靴。",
+          "english_synonyms": ["leather shoes"]
+        },
+        {
+          "kanji_word": "老翁",
+          "sentence": "老翁から昔話を聞いた。",
+          "pronunciation": "ろうおう",
+          "meaning": "年をとった男性。おじいさん。",
+          "english_synonyms": ["old man", "elder"]
+        },
+        {
+          "kanji_word": "渦潮",
+          "sentence": "遊覧船から渦潮を見物した。",
+          "pronunciation": "うずしお",
+          "meaning": "激しい潮流によってできる、渦を巻いた潮。",
+          "english_synonyms": ["whirlpool", "eddy"]
+        },
+        {
+          "kanji_word": "災禍",
+          "sentence": "噴火の災禍に見舞われる。",
+          "pronunciation": "さいか",
+          "meaning": "天災や事故などによる、不幸な出来事。",
+          "english_synonyms": ["calamity", "disaster"]
+        },
+        {
+          "kanji_word": "凹面鏡",
+          "sentence": "凹面鏡は光を集める性質を持つ。",
+          "pronunciation": "おうめんきょう",
+          "meaning": "中央部がくぼんだ鏡。光を反射させて焦点を結ぶ。",
+          "english_synonyms": ["concave mirror"]
+        },
+        {
+          "kanji_word": "虞",
+          "sentence": "関東地方に大雨の虞がある。",
+          "pronunciation": "おそれ",
+          "meaning": "悪いことが起こるかもしれないという心配。",
+          "english_synonyms": ["fear", "risk", "danger"]
+        },
+        {
+          "kanji_word": "出稼ぎ",
+          "sentence": "冬の間は都会へ出稼ぎに行く。",
+          "pronunciation": "でかせぎ",
+          "meaning": "一定期間、故郷を離れて別の場所で働くこと。",
+          "english_synonyms": ["working away from home"]
+        },
+        {
+          "kanji_word": "禍根",
+          "sentence": "将来に禍根を残さない。",
+          "pronunciation": "かこん",
+          "meaning": "災いのもと。不快な事態が後々まで残る原因。",
+          "english_synonyms": ["root of evil", "source of trouble"]
+        },
+        {
+          "kanji_word": "製靴業",
+          "sentence": "親の代から製靴業を営んでいる。",
+          "pronunciation": "せいかぎょう",
+          "meaning": "靴を製造する事業。",
+          "english_synonyms": ["shoemaking industry"]
+        },
+        {
+          "kanji_word": "寡占化",
+          "sentence": "市場の寡占化が進む。",
+          "pronunciation": "かせんか",
+          "meaning": "少数の企業が市場を支配している状態になること。",
+          "english_synonyms": ["oligopolization"]
+        },
+        {
+          "kanji_word": "稼働",
+          "sentence": "工場は二十四時間稼働している。",
+          "pronunciation": "かどう",
+          "meaning": "機械や設備が働くこと。",
+          "english_synonyms": ["operation", "working"]
+        },
+        {
+          "kanji_word": "渦中",
+          "sentence": "渦中の人が取材に答える。",
+          "pronunciation": "かちゅう",
+          "meaning": "物事の混乱している真っ最中。",
+          "english_synonyms": ["in the midst of", "vortex"]
+        },
+        {
+          "kanji_word": "豪華な",
+          "sentence": "豪華な衣装を身にまとう。",
+          "pronunciation": "ごうかな",
+          "meaning": "贅沢で華やかな様子。",
+          "english_synonyms": ["luxurious", "splendid"]
+        },
+        {
+          "kanji_word": "嫁ぐ",
+          "sentence": "友人の娘がイギリスに嫁ぐ。",
+          "pronunciation": "とつぐ",
+          "meaning": "結婚して他家の人となる。",
+          "english_synonyms": ["to marry into"]
+        },
+        {
+          "kanji_word": "甲乙",
+          "sentence": "甲乙つけがたい作品だ。",
+          "pronunciation": "こうおつ",
+          "meaning": "優劣、順序。二つのものの間の差。",
+          "english_synonyms": ["discrimination", "difference"]
+        },
+        {
+          "kanji_word": "佳境",
+          "sentence": "物語が佳境に入り目が離せない。",
+          "pronunciation": "かきょう",
+          "meaning": "物語や状況の、最も興味深い場面。",
+          "english_synonyms": ["climax", "best part"]
+        },
+        {
+          "kanji_word": "幾何学",
+          "sentence": "兄は幾何学が得意だ。",
+          "pronunciation": "きかがく",
+          "meaning": "図形や空間の性質を研究する数学の一分野。",
+          "english_synonyms": ["geometry"]
+        },
+        {
+          "kanji_word": "継承する",
+          "sentence": "伝統芸能を継承する。",
+          "pronunciation": "けいしょうする",
+          "meaning": "前の人の地位や仕事、財産などを受け継ぐこと。",
+          "english_synonyms": ["inherit", "succeed"]
+        },
+        {
+          "kanji_word": "承る",
+          "sentence": "ケーキの注文を承る。",
+          "pronunciation": "うけたまわる",
+          "meaning": "「受ける」「聞く」「引き受ける」の謙譲語。",
+          "english_synonyms": ["accept", "undertake"]
+        },
+        {
+          "kanji_word": "犬猿",
+          "sentence": "幼なじみとは今では犬猿の仲だ。",
+          "pronunciation": "けんえん",
+          "meaning": "非常に仲が悪いことのたとえ。",
+          "english_synonyms": ["be at loggerheads", "like cat and dog"]
+        },
+        {
+          "kanji_word": "猿知恵",
+          "sentence": "猿知恵を働かせても無駄だ。",
+          "pronunciation": "さるぢえ",
+          "meaning": "浅はかな知恵。その場しのぎの小細工。",
+          "english_synonyms": ["shallow cleverness"]
+        },
+        {
+          "kanji_word": "仰天する",
+          "sentence": "突然の出来事に仰天する。",
+          "pronunciation": "ぎょうてんする",
+          "meaning": "非常に驚くこと。",
+          "english_synonyms": ["be astonished", "be flabbergasted"]
+        },
+        {
+          "kanji_word": "仰いで",
+          "sentence": "天を仰いで悔しがった。",
+          "pronunciation": "あおいで",
+          "meaning": "上を見る。また、敬う。教えを請う。",
+          "english_synonyms": ["looking up"]
+        }
+      ]
+    },
+     "ステップ２": {
+      "type": "compound formation",
+      "problems": [
+        {
+          "kanji_word": "禍",
+          "sentence": "「禍福・戦禍・筆禍」の三つの禍に共通する漢字を一字入れて熟語を作れ。",
+          "pronunciation": "か",
+          "meaning": "災い、不幸せ。禍福（かふく）、戦禍（せんか）、筆禍（ひっか）。",
+          "english_synonyms": ["calamity", "disaster"]
+        },
+        {
+          "kanji_word": "寡",
+          "sentence": "「寡聞・寡衆・寡多」の三つの寡に共通する漢字を一字入れて熟語を作れ。",
+          "pronunciation": "か",
+          "meaning": "少ないこと。寡聞（かぶん）、寡衆（かしゅう）、寡多（かた）。",
+          "english_synonyms": ["few", "little"]
+        },
+        {
+          "kanji_word": "拠",
+          "sentence": "「根拠・証拠・拠点」の三つの拠に共通する漢字を一字入れて熟語を作れ。",
+          "pronunciation": "きょ",
+          "meaning": "よりどころ。根拠（こんきょ）、証拠（しょうこ）、拠点（きょてん）。",
+          "english_synonyms": ["base", "grounds"]
+        },
+        {
+          "kanji_word": "過",
+          "sentence": "「過敏・超過・過程」の三つの過に共通する漢字を一字入れて熟語を作れ。",
+          "pronunciation": "か",
+          "meaning": "すぎる、通り過ぎる。過敏（かびん）、超過（ちょうか）、過程（かてい）。",
+          "english_synonyms": ["excess", "passing"]
+        },
+        {
+          "kanji_word": "口",
+          "sentence": "「口論・口調・辛口」の三つの口に共通する漢字を一字入れて熟語を作れ。",
+          "pronunciation": "くち",
+          "meaning": "くち。言葉。口論（こうろん）、口調（くちょう）、辛口（からくち）。",
+          "english_synonyms": ["mouth", "speech"]
+        }
+      ]
+    },
+    "ステップ３": {
+      "type": "radical/components",
+      "problems": [
+        {
+          "kanji_word": "羽",
+          "pronunciation": "はね",
+          "sentence": "「翁」の部首を記せ。",
+          "meaning": "「翁」：年をとった男性。おじいさん。",
+          "english_synonyms": ["old man", "elder"]
+        },
+        {
+          "kanji_word": "虍",
+          "pronunciation": "とらかんむり",
+          "sentence": "「虞」の部首を記せ。",
+          "meaning": "「虞」：おそれ、心配。思いやる。",
+          "english_synonyms": ["fear", "risk"]
+        },
+        {
+          "kanji_word": "革",
+          "pronunciation": "かわへん",
+          "sentence": "「靴」の部首を記せ。",
+          "meaning": "「靴」：足にはく履物。くつ。",
+          "english_synonyms": ["shoes", "footwear"]
+        },
+        {
+          "kanji_word": "宀",
+          "pronunciation": "うかんむり",
+          "sentence": "「寡」の部首を記せ。",
+          "meaning": "「寡」：少ない。やもめ（夫を亡くした女性）。",
+          "english_synonyms": ["few", "widow"]
+        },
+        {
+          "kanji_word": "凵",
+          "pronunciation": "うけばこ",
+          "sentence": "「凹」の部首を記せ。",
+          "meaning": "「凹」：なかを低くくぼませること。くぼみ。",
+          "english_synonyms": ["concave", "hollow"]
+        },
+        {
+          "kanji_word": "斤",
+          "pronunciation": "おの",
+          "sentence": "「斤」の部首を記せ。",
+          "meaning": "「斤」：おの。重さの単位。",
+          "english_synonyms": ["axe", "kin (unit)"]
+        },
+        {
+          "kanji_word": "鳥",
+          "pronunciation": "とり",
+          "sentence": "「鶏」の部首を記せ。",
+          "meaning": "「鶏」：にわとり。",
+          "english_synonyms": ["chicken", "fowl"]
+        },
+        {
+          "kanji_word": "鬼",
+          "pronunciation": "おに",
+          "sentence": "「鬼」の部首を記せ。",
+          "meaning": "「鬼」：死者の霊。おに。超人的な人。",
+          "english_synonyms": ["demon", "ogre"]
+        },
+        {
+          "kanji_word": "辰",
+          "pronunciation": "しんのたつ",
+          "sentence": "「辱」の部首を記せ。",
+          "meaning": "「辱」：はずかしめる。恥。",
+          "english_synonyms": ["humiliate", "insult"]
+        },
+        {
+          "kanji_word": "口",
+          "pronunciation": "くち",
+          "sentence": "「吏」の部首を記せ。",
+          "meaning": "「吏」：役人。つかさ。",
+          "english_synonyms": ["official", "officer"]
+        }
+      ]
+    },
+    "ステップ４": {
+      "type": "writing",
+      "problems": [
+        {
+          "kanji_word": "稼いだ",
+          "sentence": "首尾よく大金を稼いだ。",
+          "pronunciation": "かせいだ",
+          "meaning": "働いて収入を得る。",
+          "english_synonyms": ["earned", "made money"]
+        },
+        {
+          "kanji_word": "凹版",
+          "sentence": "美術作品を凹版で印刷する。",
+          "pronunciation": "おうはん",
+          "meaning": "板面をくぼませた印刷用のはん。",
+          "english_synonyms": ["intaglio", "concave plate"]
+        },
+        {
+          "kanji_word": "虞れ",
+          "sentence": "公序良俗を害する虞れがある。",
+          "pronunciation": "おそれ",
+          "meaning": "悪いことが起こる心配。",
+          "english_synonyms": ["fear", "danger"]
+        },
+        {
+          "kanji_word": "渦",
+          "sentence": "争いの渦に巻き込まれる。",
+          "pronunciation": "うず",
+          "meaning": "渦を巻いた状態。また、混乱した状態の比喩。",
+          "english_synonyms": ["vortex", "whirlpool"]
+        },
+        {
+          "kanji_word": "惨禍",
+          "sentence": "台風の惨禍をこうむる。",
+          "pronunciation": "さんか",
+          "meaning": "むごたらしく悲惨な災い。",
+          "english_synonyms": ["disastrous calamity"]
+        },
+        {
+          "kanji_word": "雨靴",
+          "sentence": "雨靴を履いて出かける。",
+          "pronunciation": "あまぐつ",
+          "meaning": "雨の日に履く防水の靴。",
+          "english_synonyms": ["rain boots"]
+        },
+        {
+          "kanji_word": "老翁",
+          "sentence": "村の歴史を老翁に尋ねる。",
+          "pronunciation": "ろうおう",
+          "meaning": "年をとった男性。おじいさん。",
+          "english_synonyms": ["old man", "elderly person"]
+        },
+        {
+          "kanji_word": "寡黙",
+          "sentence": "寡黙だが誠実な人だ。",
+          "pronunciation": "かもく",
+          "meaning": "口数が少ないこと。",
+          "english_synonyms": ["reticent", "taciturn"]
+        },
+        {
+          "kanji_word": "猿芝居",
+          "sentence": "猿芝居には付き合えない。",
+          "pronunciation": "さるしばい",
+          "meaning": "下手な芝居。見え透いた小細工。",
+          "english_synonyms": ["farce", "cheap trick"]
+        },
+        {
+          "kanji_word": "寸暇",
+          "sentence": "寸暇を惜しんで練習する。",
+          "pronunciation": "すんか",
+          "meaning": "ほんのわずかなあき時間。",
+          "english_synonyms": ["spare moment", "leisure"]
+        },
+        {
+          "kanji_word": "反響",
+          "sentence": "大きな反響があった。",
+          "pronunciation": "はんきょう",
+          "meaning": "音のはね返り。また、世の中の反応。",
+          "english_synonyms": ["echo", "response"]
+        },
+        {
+          "kanji_word": "卓越",
+          "sentence": "卓越した才能を見せる。",
+          "pronunciation": "たくえつ",
+          "meaning": "他よりはるかに優れていること。",
+          "english_synonyms": ["excellence", "distinction"]
+        },
+        {
+          "kanji_word": "汚れ",
+          "sentence": "都市部の空気は汚れている。",
+          "pronunciation": "よごれ",
+          "meaning": "汚いこと。よごれること。",
+          "english_synonyms": ["pollution", "dirt"]
+        },
+        {
+          "kanji_word": "押す",
+          "sentence": "忘れ物をしないように念を押す。",
+          "pronunciation": "おす",
+          "meaning": "「念を押す」：間違いがないよう重ねて確認する。",
+          "english_synonyms": ["press", "confirm"]
+        },
+        {
+          "kanji_word": "奥底",
+          "sentence": "心の奥底を表現した詩だ。",
+          "pronunciation": "おくそこ",
+          "meaning": "最も深いところ。深部。",
+          "english_synonyms": ["depths", "bottom"]
+        },
+        {
+          "kanji_word": "穏便",
+          "sentence": "事件を穏便に解決する。",
+          "pronunciation": "おんびん",
+          "meaning": "事を荒立てず、円満に済ませる様子。",
+          "english_synonyms": ["peacefully", "quietly"]
+        },
+        {
+          "kanji_word": "鉛色",
+          "sentence": "鉛色の海が広がっている。",
+          "pronunciation": "なまりいろ",
+          "meaning": "鉛のような暗い灰色。",
+          "english_synonyms": ["lead color", "dark gray"]
+        },
+        {
+          "kanji_word": "お菓子",
+          "sentence": "北海道名産のお菓子を食べる。",
+          "pronunciation": "おかし",
+          "meaning": "主食以外の嗜好品としての食べ物。スイーツ。",
+          "english_synonyms": ["sweets", "snacks"]
+        },
+        {
+          "kanji_word": "手繰る",
+          "sentence": "高く揚がったたこの糸を手繰る。",
+          "pronunciation": "たぐる",
+          "meaning": "両手で交互に引き寄せる。",
+          "english_synonyms": ["reel in", "haul"]
+        },
+        {
+          "kanji_word": "眼",
+          "sentence": "弟が寝ぼけ眼で起きてきた。",
+          "pronunciation": "まなこ",
+          "meaning": "め。瞳。",
+          "english_synonyms": ["eye", "eyeball"]
+        },
+        {
+          "kanji_word": "紹介",
+          "sentence": "母に友人を紹介する。",
+          "pronunciation": "しょうかい",
+          "meaning": "人と人との間に入って引き合わせること。",
+          "english_synonyms": ["introduction"]
+        },
+        {
+          "kanji_word": "照会",
+          "sentence": "身元を勤め先に照会する。",
+          "pronunciation": "しょうかい",
+          "meaning": "問い合わせて確かめること。",
+          "english_synonyms": ["inquiry", "reference"]
+        },
+        {
+          "kanji_word": "移籍",
+          "sentence": "野球選手が他球団に移籍する。",
+          "pronunciation": "いせき",
+          "meaning": "所属する団体を移ること。",
+          "english_synonyms": ["transfer"]
+        },
+        {
+          "kanji_word": "遺跡",
+          "sentence": "遺跡で土偶が発見された。",
+          "pronunciation": "いせき",
+          "meaning": "過去の建物や生活の跡。",
+          "english_synonyms": ["ruins", "remains"]
+        }
+      ]
+    }
+  }
+]

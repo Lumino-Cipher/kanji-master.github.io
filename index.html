@@ -258,6 +258,362 @@
         /* FEEDBACK PANEL MODIFIERS */
         .feedback-panel.wrong { border-color: #e74c3c; }
         .feedback-panel.wrong h2 { color: #e74c3c; }
+
+        /* Center text in reading guess buttons */
+        .guess-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Make Review & Reference details visually clickable */
+        .test-review-group summary {
+            background: var(--card);
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: var(--primary);
+            list-style-position: inside;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 10px;
+        }
+        .test-review-group summary:hover {
+            background: #eef2f5;
+            border-color: var(--primary);
+        }
+        .test-review-group[open] summary {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-bottom: 2px solid var(--accent);
+            margin-bottom: 0;
+        }
+        .test-review-group > div {
+            background: #fafafa;
+            padding: 15px;
+            border: 2px solid var(--border);
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        /* Ensures ruby text (furigana) has enough space and aligns nicely */
+        rt {
+            user-select: none; /* Prevents selecting furigana when copying the kanji */
+            font-family: 'Noto Sans JP', sans-serif;
+            ruby-position: over;
+        }
+
+        #fb-kanji ruby {
+            ruby-align: center;
+        }
+
+        /* FORMAL TEST STYLES - VERTICAL SECTION STACKING */
+        /* Update Test View to respect Dark Mode/Themes */
+        #test-sheet-view { 
+            background: var(--bg); /* Changed from #000 */
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .test-sheet {
+            background: var(--card); /* Respects theme card color */
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+            min-height: 1000px;
+            width: 95%;
+            max-width: 1000px; 
+            margin: 0 auto;
+            font-family: "Yu Mincho", "MS Mincho", serif;
+            color: var(--text); /* Respects theme text color */
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            box-sizing: border-box;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        /* Update these specific classes in your <style> tag */
+        .answer-box {
+            min-width: 60px;
+            height: 150px;
+            border: 2px solid #333; /* Darker and thicker border */
+            margin-top: 10px;
+            cursor: pointer;
+            background: #fff; 
+            display: flex;
+            flex-direction: column;
+            padding: 2px;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.05); /* Added depth */
+        }
+
+        .section-header-vertical {
+            writing-mode: vertical-rl;
+            border: 2px solid #333; /* Darker border */
+            padding: 15px 8px;
+            background: #f0f0f0; /* Slightly darker background for contrast */
+            color: #000;
+            font-weight: bold;
+            height: fit-content;
+            text-align: center;
+            flex-shrink: 0;
+            margin-left: 20px;
+        }
+
+        .q-num {
+            font-size: 0.9em;
+            border: 2px solid #333; /* Thicker circle */
+            font-weight: bold;
+            color: #000;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .ans-row {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            padding: 2px;
+            box-sizing: border-box;
+        }
+
+        /* Ensure font scaling works correctly */
+        .ans-col {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            line-height: 1.1;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .test-header-box {
+            border: 2px solid #000;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            align-self: flex-end; /* Keeps it at the top right */
+            margin-bottom: 20px;
+        }
+
+        .question-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 60px;
+            flex-shrink: 0;
+        }
+
+        .question-sentence {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            font-size: 1.2em;
+            height: 350px; /* Fixed height for consistent rows */
+            line-height: 1.6;
+        }
+
+        .target-underlined {
+            text-decoration: underline;
+            text-underline-offset: 5px;
+            font-weight: bold;
+        }
+
+        .answer-box.graded-right { border: 2px solid #27ae60; background: #f0fff4; }
+        .answer-box.graded-wrong { border: 2px solid #e74c3c; background: #fff5f5; }
+
+        /* 1. Sections stack top-to-bottom */
+        #sheet-sections-flow { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 60px; 
+            width: 100%;
+        }
+
+        /* 2. Header stays on the right, questions grow to the left */
+        .test-section-container {
+            display: flex;
+            flex-direction: row-reverse; 
+            border-bottom: 3px solid #333;
+            padding-bottom: 40px;
+            width: 100%;
+            box-sizing: border-box;
+            background: transparent; /* Fixes "white overlay" effect */
+            position: relative;
+        }
+
+        /* 3. Questions flow Right-to-Left and wrap to a NEW ROW below if space runs out */
+        .questions-column-grid {
+            display: flex;
+            flex-direction: row-reverse; 
+            flex-wrap: wrap;
+            gap: 40px 30px;
+            flex-grow: 1;
+            justify-content: flex-start;
+            background: transparent; /* Fixes overlay */
+        }
+
+        :root[data-mode="dark"] .answer-box {
+            background: #0f172a !important; /* Dark navy/black background */
+            border-color: #334155 !important; /* Muted border color */
+        }
+
+        :root[data-mode="dark"] .section-header-vertical {
+            background: #1e293b !important;
+            color: #cbd5e1 !important;
+            border-color: #334155 !important;
+        }
+
+        :root[data-mode="dark"] .q-num {
+            border-color: #cbd5e1 !important;
+            color: #cbd5e1 !important;
+        }
+
+        /* Ensure correct answers on the test sheet are ALWAYS red, ignoring themes */
+        .ans-col.correction-text {
+            color: #e74c3c !important; /* Permanent Red */
+            font-weight: bold !important;
+            text-decoration: none !important;
+        }
+
+        /* Dark Mode Quiz Card Adjustments */
+        :root[data-mode="dark"] .quiz-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        :root[data-mode="dark"] .canvas-wrapper {
+            background: #0f172a; /* Darker background for drawing */
+            border-color: #475569;
+        }
+
+        :root[data-mode="dark"] .reading-input-display {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        :root[data-mode="dark"] .reading-char-box {
+            background: #334155;
+            color: #f8fafc;
+            border-color: #475569;
+        }
+
+        :root[data-mode="dark"] #quiz-canvas {
+            /* Ensure the grid lines in drawing area are visible in dark mode */
+            background: linear-gradient(#334155 1px, transparent 1px) 0 0 / 100% 300px;
+        }
+
+        /* Fix sentence readability in dark mode */
+        :root[data-mode="dark"] .sentence-display {
+            color: #e2e8f0; /* Light gray for high contrast */
+        }
+
+        /* Ensure handwriting in the mini-SVGs on the test sheet adapts to dark mode */
+        :root[data-mode="dark"] .ans-row svg path {
+            stroke: #cbd5e1 !important; /* Muted light gray for lines */
+        }
+
+        /* Dark mode theme for the user writing box inside the quiz card */
+        :root[data-mode="dark"] .canvas-wrapper {
+            background-color: #0f172a !important; /* Deep dark blue/black */
+            border-color: #334155 !important;
+        }
+
+        :root[data-mode="dark"] #quiz-canvas {
+            /* Adjust grid lines for dark mode */
+            background: linear-gradient(#1e293b 2px, transparent 2px) 0 0 / 100% 300px !important;
+        }
+
+        /* Feedback Panel Theme Adjustment */
+        :root[data-mode="dark"] .feedback-panel {
+            background-color: #1e293b; /* Muted dark blue */
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+
+        :root[data-mode="dark"] #manual-override {
+            border-top-color: #334155;
+        }
+
+        :root[data-mode="dark"] #manual-override p {
+            color: #94a3b8;
+        }
+
+        /* Redesigned Test Toolbar */
+        .test-sheet-toolbar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+            box-sizing: border-box;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .test-sheet-toolbar button {
+            font-size: 0.95em;
+            padding: 12px 25px;
+            font-weight: 600;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Light Mode Toolbar Button Colors */
+        .test-sheet-toolbar .btn-danger {
+            background-color: #94a3b8; /* Muted gray-blue for 'Quit' */
+        }
+        .test-sheet-toolbar .btn-danger:hover {
+            background-color: #64748b;
+        }
+
+        .test-sheet-toolbar .btn-success {
+            background-color: #334155; /* Dark slate for 'Submit' */
+        }
+        .test-sheet-toolbar .btn-success:hover {
+            background-color: #1e293b;
+        }
+
+        /* Dark Mode Toolbar Button Colors */
+        :root[data-mode="dark"] .test-sheet-toolbar .btn-danger {
+            background-color: #334155;
+            color: #cbd5e1;
+        }
+        :root[data-mode="dark"] .test-sheet-toolbar .btn-danger:hover {
+            background-color: #475569;
+        }
+
+        :root[data-mode="dark"] .test-sheet-toolbar .btn-success {
+            background-color: #64748b;
+            color: #f1f5f9;
+        }
+        :root[data-mode="dark"] .test-sheet-toolbar .btn-success:hover {
+            background-color: #94a3b8;
+        }
+
     </style>
 </head>
 <body>
@@ -314,22 +670,26 @@
         <div id="test-config-wrapper" style="display:none;">
             <div id="config-panel">
                 <h2 style="margin-top:0; color:var(--primary);">Test Configuration</h2>
-                <div class="config-row">
-                    <label>Mode:</label>
-                    <select id="config-mode">
-                        <option value="writing">Writing (Canvas)</option>
-                        <option value="reading">Reading (Hiragana Input)</option>
-                    </select>
-                </div>
-                <details id="config-details" ontoggle="toggleDetailsDisplay()">
-                    <summary style="font-weight:bold; cursor:pointer; color:var(--accent); margin-bottom:10px;">Advanced Options</summary>
+                
+                <div id="config-sections-container"></div> <details id="config-details" open style="margin-top: 15px;">
+                    <summary style="font-weight:bold; cursor:pointer; color:var(--accent); margin-bottom:10px;">Randomization</summary>
                     <div class="config-row">
-                        <label>Number of Questions:</label>
-                        <input type="number" id="config-count" min="1" max="100" value="20">
+                        <select id="config-random">
+                            <option value="none">None (Keep Original Order)</option>
+                            <option value="step">Randomize within each Step</option>
+                            <option value="all">Randomize All Questions</option>
+                        </select>
                     </div>
-                    <div class="config-row" style="flex-direction:row; align-items:center;">
-                        <input type="checkbox" id="config-random" checked style="width:auto; transform:scale(1.2); margin-right:10px;">
-                        <label for="config-random">Randomize Order</label>
+                </details>
+                <details id="config-advanced" open style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
+                    <summary style="font-weight:bold; cursor:pointer; color:var(--primary);">Test Options</summary>
+                    <div class="config-row" style="flex-direction: row; gap: 10px; align-items: center; margin-top:10px;">
+                        <input type="checkbox" id="config-full-view">
+                        <label for="config-full-view">Display all questions on one page (Test Sheet)</label>
+                    </div>
+                    <div class="config-row" style="flex-direction: row; gap: 10px; align-items: center;">
+                        <input type="checkbox" id="config-feedback" checked>
+                        <label for="config-feedback">Show feedback panel after each question</label>
                     </div>
                 </details>
                 <div style="display:flex; gap:10px; margin-top:20px;">
@@ -341,18 +701,24 @@
 
         <div id="quiz-area" style="display:none;">
             <div class="quiz-header" style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
-                <button onclick="exitQuiz()" class="btn-secondary">&larr; Quit</button>
+                <button id="quiz-back-btn" onclick="backToSheet()" class="btn-secondary">&larr; Back to Sheet</button>
                 <div id="quiz-progress" style="font-weight: bold;">Question 1/20</div>
-                <button onclick="skipQuestion()" class="btn-danger">Skip (Mark Wrong)</button>
+                <button onclick="skipQuestion()" class="btn-danger">Skip</button>
             </div>
             
             <div class="quiz-card">
                 <div id="quiz-sentence" class="sentence-display"></div>
                 
-                <div class="quiz-controls-bar">
+                <div class="quiz-controls-bar" id="quiz-writing-controls" style="display:none;">
                     <button onclick="undoStroke()" class="btn-secondary">Undo Last Stroke</button>
                     <button onclick="clearQuizCanvas()" class="btn-secondary">Clear All</button>
                     <button onclick="showAnswer()" class="btn-warning">Show Answer (Trace)</button>
+                </div>
+
+                <div class="quiz-controls-bar" id="quiz-reading-controls" style="display:none;">
+                    <button onclick="backspaceReading()" class="btn-secondary" title="Backspace">⌫ Backspace</button>
+                    <button onclick="clearReadingInput()" class="btn-secondary">Clear All</button>
+                    <button onclick="showAnswer()" class="btn-warning">Show Answer</button>
                 </div>
 
                 <div id="quiz-writing-container">
@@ -374,6 +740,20 @@
                 </div>
             </div>
         </div>
+
+        <div id="test-sheet-view" style="display:none;">
+            <div class="test-sheet-toolbar">
+                <button onclick="exitQuiz()" class="btn-danger">Quit Test</button>
+                <button onclick="gradeEntireTest()" class="btn-success">Submit & Grade Test</button>
+            </div>
+            <div class="test-sheet">
+                <div class="test-header-box">
+                    <div style="font-size: 0.8em; border-bottom: 1px solid #000; padding: 5px; text-align:center;">得点</div>
+                    <div id="final-score" style="font-size: 2.5em; text-align:center; flex:1; display:flex; align-items:center; justify-content:center; font-weight:bold;">/</div>
+                </div>
+                <div id="sheet-sections-flow"></div>
+            </div>
+        </div>
         
         <div id="quiz-feedback" class="feedback-panel" style="display:none;">
             <h2 id="feedback-result">Correct!</h2>
@@ -384,7 +764,20 @@
                     <p><strong>Synonyms:</strong> <span id="fb-synonyms"></span></p>
                 </div>
             </div>
-            <button onclick="nextQuestion()" class="next-btn">Next Question &rarr;</button>
+            
+            <!-- Manual Override Section -->
+            <div id="manual-override" style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd;">
+                <p style="font-size: 0.85em; color: #666;">Detection incorrect? Override result:</p>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button onclick="overrideFeedback(true)" class="btn-secondary" style="background:#27ae60; font-size: 0.8em;">I was correct</button>
+                    <button onclick="overrideFeedback(false)" class="btn-danger" style="font-size: 0.8em;">Mark as wrong</button>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 10px; justify-content: center; align-items: center;">
+                <button id="fb-back-to-sheet" onclick="backToSheet()" class="next-btn" style="background: #95a5a6;">&larr; Back to Sheet</button>
+                <button id="fb-next-btn" onclick="nextQuestion()" class="next-btn">Next Question &rarr;</button>
+            </div>
         </div>
         <div id="review-section" class="review-dropdown" style="display:none;">
             <h3>Review & Reference</h3>
@@ -416,10 +809,9 @@
                 <button onclick="clearQuizCanvas()" class="btn-secondary">Clear All</button>
                 <button onclick="showAnswer()" class="btn-warning">Show Answer (Trace)</button>
             </div>
-            <div class="quiz-controls-bar" id="reading-controls" style="display:none;">
-                <button onclick="backspaceReading()" class="btn-secondary" title="Backspace">⌫ Backspace</button>
-                <button onclick="clearReadingInput()" class="btn-secondary">Clear All</button>
-                <button onclick="showAnswer()" class="btn-warning">Show Answer</button>
+            <div class="quiz-controls-bar" id="writing-controls">
+                <button onclick="undoStroke()" class="btn-secondary">Undo Last Stroke</button>
+                <button onclick="clearPracticeCanvas()" class="btn-secondary">Clear</button>
             </div>
 
             <div class="status-msg" id="status"></div>
@@ -430,6 +822,10 @@
     </div>
 
     <script>
+        let hintUsedThisQuestion = false;
+        let testSubmitted = false;
+        let sheetAnswers = [];
+
         function toggleMode() {
             const root = document.documentElement;
             const current = root.getAttribute('data-mode') || 'light';
@@ -612,11 +1008,25 @@
                     fileGrid.appendChild(div);
 
                     // Auto-load review data for the "Review & Reference" section
+                    // Auto-load review data for the "Review & Reference" section
                     fetch(item.path)
                         .then(res => res.json())
                         .then(data => {
-                            const questions = Array.isArray(data) ? data : data[Object.keys(data)[0]];
-                            renderReviewSection(questions, item.name.replace('.json', ''));
+                            let allProblems = [];
+                            // Handle the nested Step structure [ { "ステップ１": { "problems": [...] } } ]
+                            if (Array.isArray(data) && data.length > 0 && typeof data[0] === 'object') {
+                                Object.values(data[0]).forEach(step => {
+                                    if (step.problems) allProblems = allProblems.concat(step.problems);
+                                });
+                            } 
+                            // Fallback for older flat array format
+                            else if (Array.isArray(data)) {
+                                allProblems = data;
+                            }
+                            
+                            if (allProblems.length > 0) {
+                                renderReviewSection(allProblems, item.name.replace('.json', ''));
+                            }
                         });
                 }
             });
@@ -646,20 +1056,70 @@
             try {
                 const res = await fetch(filePath);
                 const data = await res.json();
-                
-                const testArrayName = Object.keys(data)[0];
-                pendingQuizData = Array.isArray(data) ? data : data[testArrayName];
                 pendingTestName = filePath.split('/').pop();
-                
+                pendingSections = [];
+
+                // Detect Format
+                if (Array.isArray(data) && data.length > 0 && data[0]["ステップ１"]) {
+                    // New JSON Format
+                    for (const [stepName, stepData] of Object.entries(data[0])) {
+                        pendingSections.push({
+                            name: stepName,
+                            type: stepData.type,
+                            problems: stepData.problems
+                        });
+                    }
+                } else {
+                    // Old JSON Format Fallback
+                    const testArrayName = Object.keys(data)[0];
+                    const problems = Array.isArray(data) ? data : data[testArrayName];
+                    pendingSections.push({
+                        name: "General Practice",
+                        type: "mixed",
+                        problems: problems
+                    });
+                }
+
                 document.getElementById('test-list').style.display = 'none';
                 document.getElementById('test-config-wrapper').style.display = 'block';
                 
-                // Reset config defaults
-                document.getElementById('config-count').value = Math.min(20, pendingQuizData.length);
-                document.getElementById('config-count').max = pendingQuizData.length;
+                renderConfigSections(); // Build UI
             } catch (e) {
                 alert("Failed to load test file: " + filePath);
             }
+        }
+
+        function renderConfigSections() {
+            const container = document.getElementById('config-sections-container');
+            container.innerHTML = '';
+
+            pendingSections.forEach((sec, idx) => {
+                const defaultMode = sec.type === 'reading' ? 'reading' : 'writing';
+                
+                const secDiv = document.createElement('div');
+                secDiv.style.marginBottom = "15px";
+                secDiv.style.paddingBottom = "15px";
+                secDiv.style.borderBottom = "1px dashed #ccc";
+                
+                // Added the section type display next to the name
+                secDiv.innerHTML = `
+                    <div style="font-weight:bold; color:#2980b9; margin-bottom:5px;">
+                        ${sec.name} 
+                        <span style="color:var(--accent); font-size:0.9em; font-style:italic; margin-left:10px;">[${sec.type}]</span>
+                        <span style="font-size:0.8em; color:#888; margin-left:5px;">(${sec.problems.length} total)</span>
+                    </div>
+                    <div style="display:flex; gap:10px; align-items:center;">
+                        <label style="font-size:0.9em;">Mode:</label>
+                        <select id="config-mode-${idx}">
+                            <option value="reading" ${defaultMode === 'reading' ? 'selected' : ''}>Reading</option>
+                            <option value="writing" ${defaultMode === 'writing' ? 'selected' : ''}>Writing</option>
+                        </select>
+                        <label style="font-size:0.9em; margin-left:10px;">Questions:</label>
+                        <input type="number" id="config-count-${idx}" min="0" max="${sec.problems.length}" value="${Math.min(20, sec.problems.length)}" style="width:60px;">
+                    </div>
+                `;
+                container.appendChild(secDiv);
+            });
         }
 
         function cancelConfig() {
@@ -671,22 +1131,349 @@
             // Un-require explicit count hiding per prompt logic, keeping it clean via details tag natively
         }
 
+        
+
+        // Ensure flag is reset when starting a test
         function startConfiguredQuiz() {
-            currentQuizMode = document.getElementById('config-mode').value;
-            const count = parseInt(document.getElementById('config-count').value) || 20;
-            const randomize = document.getElementById('config-random').checked;
-            
+            testSubmitted = false; // Reset flag
+            const randomSetting = document.getElementById('config-random').value;
+            let questions = [];
+
+            pendingSections.forEach((sec, idx) => {
+                const count = parseInt(document.getElementById(`config-count-${idx}`).value) || 0;
+                const mode = document.getElementById(`config-mode-${idx}`).value;
+                
+                if (count > 0) {
+                    // CRITICAL FIX: Ensure stepName is passed into the question object here
+                    let secProblems = [...sec.problems].map(p => ({ 
+                        ...p, 
+                        quizMode: mode, 
+                        stepType: sec.type, 
+                        stepName: sec.name 
+                    }));
+                    
+                    if (randomSetting === 'step') secProblems.sort(() => Math.random() - 0.5);
+                    questions = questions.concat(secProblems.slice(0, count));
+                }
+            });
+
+            if (randomSetting === 'all') questions.sort(() => Math.random() - 0.5);
+            if (questions.length === 0) { alert("Please select questions."); return; }
+
             document.getElementById('test-config-wrapper').style.display = 'none';
             document.getElementById('quiz-area').style.display = 'block';
             
-            let questions = [...pendingQuizData];
-            if (randomize) questions.sort(() => Math.random() - 0.5);
-            questions = questions.slice(0, count);
-            
             currentQuiz = { questions, index: 0, wordCharIndex: 0, total: questions.length };
-            renderReviewSection(questions, pendingTestName);
+            currentQuiz.config = {
+                fullView: document.getElementById('config-full-view').checked,
+                showFeedback: document.getElementById('config-feedback').checked,
+                grading: 'instant' // Always use instant detection
+            };
             
+            sheetAnswers = questions.map(() => ({
+                status: 'unanswered',
+                readingInput: '',
+                usedHint: false
+            }));
+
+            if (currentQuiz.config.fullView) {
+                renderTestSheet();
+                document.getElementById('test-list').style.display = 'none';
+                document.getElementById('test-sheet-view').style.display = 'block';
+                document.getElementById('quiz-area').style.display = 'none';
+            } else {
+                showQuestion();
+            }
+        }
+
+        
+        function renderTestSheet() {
+            const container = document.getElementById('sheet-sections-flow');
+            container.innerHTML = '';
+
+            const grouped = {};
+            currentQuiz.questions.forEach((q, i) => {
+                const key = q.stepName || "General Practice";
+                if (!grouped[key]) {
+                    grouped[key] = { 
+                        problems: [], 
+                        type: q.stepType || "Mixed"
+                    };
+                }
+                grouped[key].problems.push({ q, i });
+            });
+
+            for (const title in grouped) {
+                const secData = grouped[title];
+                const secWrap = document.createElement('div');
+                secWrap.className = 'test-section-container';
+                
+                // Vertical section header on the right
+                const header = document.createElement('div');
+                header.className = 'section-header-vertical';
+                header.innerHTML = `${title}<br><span style="font-size:0.65em; font-weight:normal;">[${secData.type.toUpperCase()}]</span>`;
+                secWrap.appendChild(header);
+
+                const grid = document.createElement('div');
+                grid.className = 'questions-column-grid';
+
+                secData.problems.forEach((item, localIdx) => {
+                    const ans = sheetAnswers[item.i];
+                    const qDiv = document.createElement('div');
+                    qDiv.className = 'question-item';
+                    qDiv.id = `question-anchor-${item.i}`; // Add this line
+                    qDiv.className = 'question-item';
+                    
+                    let sentenceHtml = item.q.sentence || "";
+                    const target = item.q.kanji_word;
+                    const displayHint = item.q.quizMode === 'writing' ? item.q.pronunciation : item.q.kanji_word;
+
+                    // Issue Fix: Do not replace pronunciation for radical types
+                    if (item.q.stepType === 'radical/components') {
+                        // Keep sentence as is, just underline the target word
+                        sentenceHtml = sentenceHtml.replaceAll(target, `<span class="target-underlined">${target}</span>`);
+                    } else {
+                        // Issue Fix: Replace EVERY instance of the word with pronunciation for Writing Mode
+                        sentenceHtml = sentenceHtml.replaceAll(target, `<span class="target-underlined">${displayHint}</span>`);
+                    }
+
+                    let boxClass = "";
+                    if (ans.status === 'correct') boxClass = "graded-right";
+                    if (ans.status === 'wrong') boxClass = "graded-wrong";
+
+                    qDiv.innerHTML = `
+                        <div class="q-num">${localIdx + 1}</div>
+                        <div class="question-sentence">${sentenceHtml}</div>
+                        <div class="answer-box ${boxClass}" onclick="openSheetQuestion(${item.i})">
+                            ${renderAnswerContent(item.i)}
+                        </div>
+                    `;
+                    grid.appendChild(qDiv);
+                });
+
+                secWrap.appendChild(grid);
+                container.appendChild(secWrap); // Stacks vertically in .test-sheet
+            }
+        }
+
+        function openSheetQuestion(idx) {
+            const ans = sheetAnswers[idx];
+            // If not already locked by a hint/answer shown, clear and edit
+            if (!ans.usedHint) {
+                sheetAnswers[idx] = { ...sheetAnswers[idx], status: 'unanswered', userStrokes: [], readingInput: '' };
+            }
+            currentQuiz.index = idx;
+            document.getElementById('test-sheet-view').style.display = 'none';
             showQuestion();
+        }
+
+        // Intercept the existing submitAnswer/submitReadingAnswer logic
+        function saveSheetAnswer(isCorrect, hintUsed = false) {
+            const idx = currentQuiz.index;
+            const q = currentQuiz.questions[idx];
+            
+            // Forced "wrong" if hint was used OR wasMarkedWrong is true
+            let status = 'answered';
+            // Logic: It is only correct if the detector said so AND they didn't peek at the answer
+            if (isCorrect && !hintUsedThisQuestion && !wasMarkedWrong) {
+                status = 'correct';
+            } else {
+                status = 'wrong';
+                wasMarkedWrong = true; // Sync flag
+            }
+
+            wasMarkedWrong = (status === 'wrong' || hintUsedThisQuestion);
+
+            sheetAnswers[idx] = {
+                ...sheetAnswers[idx],
+                status: status,
+                readingInput: currentReadingInput.map(i => i.char).join(''),
+                userStrokes: q.quizMode === 'writing' ? JSON.parse(JSON.stringify(quizStrokes)) : [],
+                usedHint: hintUsedThisQuestion // Store that a hint was used
+            };
+
+            if (!currentQuiz.config.showFeedback) {
+                backToSheet();
+            } else {
+                showFeedback();
+            }
+        }
+
+        function backToSheet() {
+            document.getElementById('quiz-area').style.display = 'none';
+            document.getElementById('quiz-feedback').style.display = 'none'; // Ensure feedback closes
+            
+            if (currentQuiz.config.fullView) {
+                document.getElementById('test-sheet-view').style.display = 'block';
+                renderTestSheet();
+                
+                // Auto-scroll to the question just answered
+                const targetId = `question-anchor-${currentQuiz.index}`;
+                const el = document.getElementById(targetId);
+                if (el) {
+                    el.scrollIntoView({ behavior: 'instant', block: 'center' });
+                }
+            } else {
+                exitQuiz();
+            }
+        }
+
+        function showFeedback() {
+            document.getElementById('quiz-area').style.display = 'none';
+            
+            const fbPanel = document.getElementById('quiz-feedback');
+            const fbResult = document.getElementById('feedback-result');
+            const nextBtn = document.getElementById('fb-next-btn');
+            const backBtn = document.getElementById('fb-back-to-sheet');
+            const manualSection = document.getElementById('manual-override');
+
+            // Navigation logic
+            nextBtn.style.display = (currentQuiz.index >= currentQuiz.total - 1) ? 'none' : 'inline-block';
+            backBtn.style.display = 'inline-block';
+
+            // DISABLE OVERRIDE IF HINT WAS USED
+            // If user saw the answer, they cannot claim they were "correct"
+            if (sheetAnswers[currentQuiz.index].usedHint) {
+                manualSection.style.display = 'none';
+            } else {
+                manualSection.style.display = 'block';
+            }
+
+            // Set Visuals
+            if (wasMarkedWrong) {
+                fbPanel.classList.add('wrong');
+                fbResult.innerText = "Needs Review";
+            } else {
+                fbPanel.classList.remove('wrong');
+                fbResult.innerText = "Correct!";
+            }
+            
+            fbPanel.style.display = 'block';
+            
+            const q = currentQuiz.questions[currentQuiz.index];
+            const feedbackKanji = document.getElementById('fb-kanji');
+            feedbackKanji.innerHTML = `<ruby>${q.kanji_word}<rt style="font-size: 0.4em; color: var(--primary);">${q.pronunciation}</rt></ruby>`;
+            document.getElementById('fb-meaning').innerText = q.meaning || "N/A";
+            document.getElementById('fb-synonyms').innerText = q.english_synonyms ? q.english_synonyms.join(', ') : "None";
+        }
+
+        function overrideFeedback(becomeCorrect) {
+            const idx = currentQuiz.index;
+            wasMarkedWrong = !becomeCorrect;
+            
+            // Update the stored data
+            sheetAnswers[idx].status = becomeCorrect ? 'correct' : 'wrong';
+            sheetAnswers[idx].usedHint = !becomeCorrect; 
+            
+            // Refresh the panel visuals
+            showFeedback();
+        }
+
+        function nextQuestion() {
+            // Hide feedback panel immediately
+            document.getElementById('quiz-feedback').style.display = 'none';
+
+            currentQuiz.index++;
+            if (currentQuiz.index < currentQuiz.questions.length) {
+                // Show the individual quiz card for the next index
+                document.getElementById('quiz-area').style.display = 'block';
+                showQuestion();
+            } else {
+                // Fallback if index somehow exceeds total
+                backToSheet();
+            }
+        }
+
+        function markManual(idx, isCorrect) {
+            sheetAnswers[idx].status = isCorrect ? 'correct' : 'wrong';
+            renderTestSheet();
+        }
+
+        // Helper to turn stored strokes into a mini SVG
+        function generateStrokeSvg(strokes, totalWidth, totalHeight, targetBoxHeight = 130) {
+            if (!strokes || strokes.length === 0) return "";
+            
+            const widthScale = 50 / 300; 
+            const heightScale = targetBoxHeight / totalHeight;
+            const finalScale = Math.min(widthScale, heightScale);
+            
+            // Dynamically adjust stroke width: 2.5 for large boxes, 1.5 for small boxes
+            const dynamicStrokeWidth = targetBoxHeight < 100 ? 1.5 : 2.5;
+            
+            let paths = strokes.map(s => {
+                if (!s.points || s.points.length < 2) return "";
+                const d = s.points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x * finalScale} ${p.y * finalScale}`).join(' ');
+                
+                return `<path d="${d}" fill="none" stroke="currentColor" stroke-width="${dynamicStrokeWidth}" stroke-linecap="round" stroke-linejoin="round" />`;
+            }).join('');
+
+            const vbHeight = totalHeight * finalScale;
+            const vbWidth = 300 * finalScale;
+
+            return `<svg width="${vbWidth}" height="${vbHeight}" viewBox="0 0 ${vbWidth} ${vbHeight}" style="display:block; color: inherit; overflow: visible;">${paths}</svg>`;
+        }
+
+        function renderAnswerContent(idx) {
+            const ans = sheetAnswers[idx];
+            const q = currentQuiz.questions[idx];
+            
+            if (!testSubmitted && ans.status === 'unanswered') return "";
+
+            const isReading = q.quizMode === 'reading';
+            const isCorrect = ans.status === 'correct';
+
+            const getFitSize = (str, isSplit) => {
+                const count = Math.max(str.length, 1);
+                const availHeight = isSplit ? 65 : 130;
+                const sizePx = Math.min(45, availHeight / count); 
+                return (sizePx / 16) + "rem";
+            };
+
+            if (isReading) {
+                const userVal = ans.readingInput || "";
+                const correctVal = toHiragana(q.pronunciation);
+
+                if (!testSubmitted || isCorrect) {
+                    const displayStr = isCorrect ? userVal : (userVal || "");
+                    return `<div class="ans-row"><div class="ans-col" style="font-size:${getFitSize(displayStr, false)}">${displayStr}</div></div>`;
+                } else {
+                    // If input is empty, show only correct answer in full box
+                    if (!userVal) {
+                        return `<div class="ans-row"><div class="ans-col correction-text" style="font-size:${getFitSize(correctVal, false)};">${correctVal}</div></div>`;
+                    }
+                    return `
+                        <div class="ans-row" style="height: 50%; border-bottom: 1px solid var(--border);">
+                            <div class="ans-col" style="color:var(--accent); text-decoration:line-through; font-size:${getFitSize(userVal, true)}; opacity:0.6;">${userVal || ""}</div>
+                        </div>
+                        <div class="ans-row" style="height: 50%;">
+                            <div class="ans-col correction-text" style="font-size:${getFitSize(correctVal, true)};">${correctVal}</div>
+                        </div>`;
+                }
+            }
+
+            // Writing Questions logic
+            const boxHeight = q.kanji_word.length * 300;
+            const correctVal = q.kanji_word;
+
+            if (!testSubmitted || isCorrect) {
+                // Standard full-box height is approx 130px
+                const userDrawingHtml = generateStrokeSvg(ans.userStrokes, 300, boxHeight, 130);
+                return `<div class="ans-row">${userDrawingHtml}</div>`;
+            } else {
+                // If user Strokes exist but answer is wrong, the box is split (height 50% = 75px, minus padding approx 65px)
+                if (ans.status === 'wrong' && (!ans.userStrokes || ans.userStrokes.length === 0)) {
+                    return `<div class="ans-row"><div class="ans-col correction-text" style="font-size:${getFitSize(correctVal, false)};">${correctVal}</div></div>`;
+                }
+                
+                const userDrawingHtml = generateStrokeSvg(ans.userStrokes, 300, boxHeight, 65); // Resize to 65px target
+                return `
+                    <div class="ans-row" style="height: 50%; border-bottom: 1px solid var(--border); overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                        ${userDrawingHtml}
+                    </div>
+                    <div class="ans-row" style="height: 50%;">
+                        <div class="ans-col correction-text" style="font-size:${getFitSize(correctVal, true)};">${correctVal}</div>
+                    </div>`;
+            }
         }
 
         function startQuiz(partKey) {
@@ -881,6 +1668,8 @@
             const q = currentQuiz.questions[currentQuiz.index];
             const word = q.kanji_word;
             const pronunciation = q.pronunciation; 
+
+            hintUsedThisQuestion = false;
             
             wasMarkedWrong = false;
             isTracing = false;
@@ -892,13 +1681,21 @@
             document.getElementById('quiz-feedback').style.display = 'none';
             document.getElementById('quiz-area').style.display = 'block';
 
-            if (currentQuizMode === 'writing') {
+            const qMode = q.quizMode; 
+
+            if (qMode === 'writing') {
                 document.getElementById('quiz-writing-container').style.display = 'flex';
-                document.getElementById('writing-controls').style.display = 'flex';
+                document.getElementById('quiz-writing-controls').style.display = 'flex';
                 document.getElementById('quiz-reading-container').style.display = 'none';
-                document.getElementById('reading-controls').style.display = 'none';
+                document.getElementById('quiz-reading-controls').style.display = 'none';
                 
-                document.getElementById('quiz-sentence').innerHTML = q.sentence.replace(word, `<span class="target-kana">${toKatakana(pronunciation)}</span>`);
+                if (q.stepType === 'radical/components') {
+                    document.getElementById('quiz-sentence').innerHTML = q.sentence || "";
+                } else {
+                    // Guard for undefined and use replaceAll
+                    const text = q.sentence || "";
+                    document.getElementById('quiz-sentence').innerHTML = text.replaceAll(word, `<span class="target-kana">${toKatakana(pronunciation)}</span>`);
+                }
 
                 const hasOkurigana = /[\u3040-\u309f]/.test(word);
                 const boxCount = hasOkurigana ? word.length + 1 : word.length;
@@ -920,12 +1717,17 @@
             } else {
                 // READING MODE
                 document.getElementById('quiz-writing-container').style.display = 'none';
-                document.getElementById('writing-controls').style.display = 'none';
+                document.getElementById('quiz-writing-controls').style.display = 'none';
                 document.getElementById('quiz-reading-container').style.display = 'flex';
-                document.getElementById('reading-controls').style.display = 'flex';
+                document.getElementById('quiz-reading-controls').style.display = 'flex';
                 
-                // Display sentence exactly as is, but underline/color the kanji word
-                document.getElementById('quiz-sentence').innerHTML = q.sentence.replace(word, `<span class="target-kana">${word}</span>`);
+                if (q.stepType === 'radical/components') {
+                    document.getElementById('quiz-sentence').innerHTML = q.sentence || "";
+                } else {
+                    // Guard for undefined and use replaceAll
+                    const text = q.sentence || "";
+                    document.getElementById('quiz-sentence').innerHTML = text.replaceAll(word, `<span class="target-kana">${word}</span>`);
+                }
                 
                 setupReadingMode(q);
             }
@@ -1028,7 +1830,7 @@
             const userInput = currentReadingInput.map(item => item.char).join('');
             
             if (userInput === targetHiragana) {
-                showFeedback();
+                saveSheetAnswer(true);
             } else {
                 document.getElementById('reading-msg').innerHTML = `<span class="wrong-mark">❌ Incorrect. Try editing your input.</span>`;
             }
@@ -1063,37 +1865,53 @@
 
         function renderReviewSection(questions, testName) {
             const list = document.getElementById('review-list');
-            
-            // Create a dropdown (details) for this specific test
             const testDropdown = document.createElement('details');
             testDropdown.className = 'test-review-group';
-            
             const summary = document.createElement('summary');
-            summary.innerText = `Test: ${testName}`;
+            
+            summary.innerText = `Test: ${testName || "General Reference"}`;
             testDropdown.appendChild(summary);
 
             const contentWrapper = document.createElement('div');
+            
+            // Safety check: ensure questions is an array
+            if (!Array.isArray(questions)) return;
 
             questions.forEach(q => {
                 const item = document.createElement('div');
                 item.className = 'review-item';
-                const highlightedSentence = q.sentence.replace(q.kanji_word, `<b style="color:var(--primary)">${q.kanji_word}</b>`);
                 
+                // Comprehensive fallback list for varying JSON keys
+                const word = q.kanji_word || q.kanji || q.word || "???";
+                const read = q.pronunciation || q.reading || q.kana || "";
+                const mean = q.meaning || q.english || q.gloss || "No meaning provided";
+                const rawSentence = q.sentence || "";
+                
+                // Handle synonyms which might be an array or a string
+                let syns = "";
+                const synData = q.english_synonyms || q.synonyms;
+                if (Array.isArray(synData)) syns = synData.join(', ');
+                else if (typeof synData === 'string') syns = synData;
+
+                const highlightedSentence = (word !== "???" && rawSentence) 
+                    ? rawSentence.replaceAll(word, `<b style="color:var(--primary)">${word}</b>`)
+                    : rawSentence;
+
                 item.innerHTML = `
                     <div class="review-kanji-side">
-                        <ruby>${q.kanji_word}<rt>${q.pronunciation}</rt></ruby>
+                        <ruby>${word}<rt>${read}</rt></ruby>
                     </div>
                     <div class="review-details-side">
                         <p class="review-sentence">${highlightedSentence}</p>
                         <div class="review-meta">
-                            <span style="color:var(--primary); font-weight:bold;">${q.pronunciation}</span> | <span>${q.meaning}</span>
-                            <span class="review-syns">${q.english_synonyms.join(', ')}</span>
+                            <span style="color:var(--primary); font-weight:bold;">${read}</span> | <span>${mean}</span>
+                            ${syns ? `<span class="review-syns">${syns}</span>` : ''}
                         </div>
                     </div>
                 `;
                 contentWrapper.appendChild(item);
             });
-
+            
             testDropdown.appendChild(contentWrapper);
             list.appendChild(testDropdown);
         }
@@ -1122,7 +1940,9 @@
                 
                 ctx.lineWidth = 5;
                 ctx.lineCap = "round";
-                ctx.strokeStyle = "#2c3e50";
+                // Inside move function:
+                const isDarkMode = document.documentElement.getAttribute('data-mode') === 'dark';
+                ctx.strokeStyle = isDarkMode ? "#e2e8f0" : "#2c3e50"; // Use light color in dark mode
                 ctx.beginPath();
                 ctx.moveTo(currentPoints[currentPoints.length-2].x, currentPoints[currentPoints.length-2].y);
                 ctx.lineTo(pos.x, pos.y);
@@ -1169,13 +1989,14 @@
         function redrawQuiz() {
             const cvs = document.getElementById('quiz-canvas');
             const ctx = cvs.getContext('2d');
+            const isDarkMode = document.documentElement.getAttribute('data-mode') === 'dark';
             ctx.clearRect(0, 0, cvs.width, cvs.height);
             ctx.lineWidth = 5;
             ctx.lineCap = "round";
-            ctx.strokeStyle = "#2c3e50";
 
             quizStrokes.forEach(stroke => {
-                ctx.strokeStyle = stroke.color || "#2c3e50"; // Use the stroke's color
+                // Use light color if in dark mode, otherwise use the stored color (usually dark)
+                ctx.strokeStyle = isDarkMode ? "#e2e8f0" : (stroke.color || "#2c3e50");
                 ctx.beginPath();
                 ctx.moveTo(stroke.points[0].x, stroke.points[0].y);
                 stroke.points.forEach(p => ctx.lineTo(p.x, p.y));
@@ -1207,9 +2028,11 @@
         }
 
         function showAnswer() {
-            wasMarkedWrong = true;
-            if (currentQuizMode === 'writing') {
-                // Existing tracing logic
+            wasMarkedWrong = true; 
+            hintUsedThisQuestion = true; // Lock hint tracking for this question
+            const q = currentQuiz.questions[currentQuiz.index];
+            
+            if (q.quizMode === 'writing') {
                 const tCtx = document.getElementById('trace-canvas').getContext('2d');
                 tCtx.clearRect(0, 0, CANV_W, document.getElementById('trace-canvas').height);
                 currentWordData.forEach(data => {
@@ -1233,34 +2056,58 @@
                     tCtx.restore();
                 });
             } else {
-                // Reading mode answer display
-                const q = currentQuiz.questions[currentQuiz.index];
-                const box = document.getElementById('reading-input-box');
-                box.innerHTML = `<span class="reading-answer-text">${toHiragana(q.pronunciation)}</span>`;
+                // Reading Mode: Functionally replace the input so submit works
+                const targetHiragana = toHiragana(q.pronunciation);
+                currentReadingInput = targetHiragana.split('').map((char, i) => ({ id: Date.now() + i, char }));
+                renderReadingInput();
                 document.getElementById('reading-msg').innerText = "Answer Revealed";
             }
         }
 
-        function showFeedback() {
-            document.getElementById('quiz-area').style.display = 'none';
+        function renderUserAnswerInBox(idx) {
+            const ans = currentQuiz.answers[idx];
+            if (!ans) return "";
             
-            const fbPanel = document.getElementById('quiz-feedback');
-            const fbResult = document.getElementById('feedback-result');
-            
-            if (wasMarkedWrong) {
-                fbPanel.classList.add('wrong');
-                fbResult.innerText = "Needs Review";
+            let html = "";
+            // If manual grading + not graded yet, show mini buttons
+            if (currentQuiz.config.grading === 'manual' && ans.status === 'pending' && currentQuiz.questions[idx].quizMode === 'writing') {
+                html += `<div class="manual-grade-btns">
+                    <button class="mini-btn ok" onclick="manualGrade(${idx}, 'correct'); event.stopPropagation();">◯</button>
+                    <button class="mini-btn ng" onclick="manualGrade(${idx}, 'wrong'); event.stopPropagation();">×</button>
+                </div>`;
+            }
+
+            if (currentQuiz.questions[idx].quizMode === 'writing') {
+                // Simple text representation or static SVG can go here. 
+                // For now, let's show the Kanji character. 
+                // If they used a hint, color it red.
+                const color = ans.usedHint ? 'color:red;' : '';
+                html += `<div style="font-size:2em; ${color}">${currentQuiz.questions[idx].kanji_word}</div>`;
+                if (ans.status === 'wrong') {
+                    html += `<div class="red-answer">${currentQuiz.questions[idx].kanji_word}</div>`;
+                }
             } else {
-                fbPanel.classList.remove('wrong');
-                fbResult.innerText = "Correct!";
+                const color = ans.usedHint ? 'color:red;' : '';
+                html += `<div style="font-size:1.2em; writing-mode:vertical-rl; ${color}">${ans.reading || ""}</div>`;
+                if (ans.status === 'wrong') {
+                    html += `<div class="red-answer">${currentQuiz.questions[idx].pronunciation}</div>`;
+                }
+            }
+            return html;
+        }
+
+        function openQuestionFromSheet(idx) {
+            const ans = currentQuiz.answers[idx];
+            // If already graded/submitted and is red (hint used or wrong), allow viewing but maybe not editing
+            // Otherwise, reset and open.
+            if (ans && (ans.status === 'wrong' || ans.usedHint)) {
+                // View only or logic to reset
             }
             
-            fbPanel.style.display = 'block';
-            
-            const q = currentQuiz.questions[currentQuiz.index];
-            document.getElementById('fb-kanji').innerText = q.kanji_word;
-            document.getElementById('fb-meaning').innerText = q.meaning;
-            document.getElementById('fb-synonyms').innerText = q.english_synonyms.join(', ');
+            currentQuiz.index = idx;
+            currentQuiz.answers[idx] = null; // Clear to edit
+            document.getElementById('test-sheet-view').style.display = 'none';
+            showQuestion();
         }
 
         function skipQuestion() {
@@ -1303,21 +2150,15 @@
                         if (result.valid) {
                             charResampledStrokes.push(result.resampled);
                             return true;
-                        } else {
-                            s.color = "#e74c3c"; // Turn the wrong stroke red
-                            return false;
                         }
+                        return false;
                     });
                     if (!isCharOk) allCorrect = false;
                 }
             });
 
-            if (allCorrect) {
-                showFeedback();
-            } else {
-                redrawQuiz(); // Redraw immediately to show the red lines
-                document.getElementById('quiz-message').innerText = "Not quite right yet. Check stroke order and box placement!";
-            }
+            // Finalize answer immediately on first submission
+            saveSheetAnswer(allCorrect);
         }
 
         // --- NEW STROKE MATH ENGINE ---
@@ -1447,8 +2288,7 @@
             openPractice(filename, char);
         }
 
-        // MODIFY YOUR EXISTING closeModal() or Success logic:
-        // Inside your finishStroke logic, when a character is completed:
+
         function onKanjiDrawingComplete() {
             currentQuiz.wordCharIndex++;
             if (currentQuiz.wordCharIndex < currentQuiz.targetWord.length) {
@@ -1459,22 +2299,42 @@
             }
         }
 
-        function nextQuestion() {
-            currentQuiz.index++;
-            if (currentQuiz.index < currentQuiz.questions.length) {
-                // Show the quiz area again for the next question
-                document.getElementById('quiz-area').style.display = 'block';
-                showQuestion();
-            } else {
-                alert("Quiz Complete!");
-                exitQuiz();
-            }
-        }
-
         function exitQuiz() {
-            document.getElementById('test-list').style.display = 'grid';
+            document.getElementById('test-list').style.display = 'block';
             document.getElementById('quiz-area').style.display = 'none';
             document.getElementById('quiz-feedback').style.display = 'none';
+            document.getElementById('test-sheet-view').style.display = 'none'; // Hides toolbar + sheet
+            document.getElementById('test-config-wrapper').style.display = 'none';
+            
+            document.getElementById('sheet-sections-flow').innerHTML = '';
+            document.getElementById('final-score').innerText = '/';
+            testSubmitted = false;
+            
+            // Ensure gallery is reset if user switches tabs
+            window.scrollTo(0,0);
+        }
+
+        function gradeEntireTest() {
+            testSubmitted = true; // Mark test as finished
+            let score = 0;
+            currentQuiz.questions.forEach((q, i) => {
+                const ans = sheetAnswers[i];
+                if (ans.status === 'unanswered') {
+                    ans.status = 'wrong';
+                } else if (ans.status === 'answered') {
+                    // Logic for 'end' grading mode would go here
+                    ans.status = 'correct'; 
+                }
+                if (ans.status === 'correct') score++;
+            });
+
+            document.getElementById('final-score').innerText = `${score}/${currentQuiz.total}`;
+            renderTestSheet(); 
+        }
+
+        function manualGrade(idx, status) {
+            currentQuiz.answers[idx].status = status;
+            renderTestSheet();
         }
 
         async function loadDictionary() {
