@@ -738,29 +738,29 @@
 
     <header>
         <div class="theme-controls">
-            <button class="theme-btn" onclick="toggleMode()">🌙 Toggle Dark</button>
+            <button class="theme-btn" onclick="toggleMode()">🌙 ダークモード切替</button>
             <select onchange="setTheme(this.value)" class="theme-btn">
-                <option value="classic">Classic</option>
-                <option value="sakura">Sakura</option>
-                <option value="cobalt">Cobalt</option>
-                <option value="forest">Forest</option>
+                <option value="classic">クラシック</option>
+                <option value="sakura">サクラ</option>
+                <option value="cobalt">コバルト</option>
+                <option value="forest">フォレスト</option>
             </select>
         </div>
-        <h1>Kanji Master</h1>
+        <h1>漢字マスター</h1>
         <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('gallery')">Kanji Gallery</button>
-            <button class="tab-btn" onclick="switchTab('practice')">Practice Tests</button>
+            <button class="tab-btn active" onclick="switchTab('gallery')">漢字一覧</button>
+            <button class="tab-btn" onclick="switchTab('practice')">練習テスト</button>
         </div>
 
         <div class="toolbar" id="gallery-toolbar">
-            <input type="text" id="searchInput" placeholder="Search (Eng, Kana, Kanji)..." oninput="filterGallery()">
+            <input type="text" id="searchInput" placeholder="検索 (意味、読み、漢字)..." oninput="filterGallery()">
             <select id="sortSelect" onchange="sortGallery()">
-                <option value="freq-asc">Frequency (Common First)</option>
-                <option value="freq-desc">Frequency (Rare First)</option>
-                <option value="grade">Grade Level</option>
-                <option value="strokes">Stroke Count</option>
+                <option value="freq-asc">頻度順 (一般的順)</option>
+                <option value="freq-desc">頻度順 (珍しい順)</option>
+                <option value="grade">学年順</option>
+                <option value="strokes">画数順</option>
             </select>
-            <span style="font-size:0.8em; color:#888; align-self:center;" id="count-display">0 loaded</span>
+            <span style="font-size:0.8em; color:#888; align-self:center;" id="count-display">0 件読み込み済み</span>
         </div>
     </header>
 
@@ -775,68 +775,69 @@
             <div class="directory-nav" id="dir-nav"></div>
             
             <div class="folder-section" id="folder-section">
-                <h3>Test Groups</h3>
+                <h3>テストグループ</h3>
                 <div class="folder-grid" id="folder-grid"></div>
             </div>
             
             <div class="file-section" id="file-section">
-                <h3>Available Tests</h3>
+                <h3>利用可能なテスト</h3>
                 <div class="file-grid" id="file-grid"></div>
             </div>
         </div>
 
         <div id="test-config-wrapper" style="display:none;">
             <div id="config-panel" style="max-width: 600px; margin: 0 auto; background: var(--card); padding: 20px; border-radius: 8px;">
-                <h2 style="margin-top:0; color:var(--primary);">Test Configuration</h2>
+                <h2 style="margin-top:0; color:var(--primary);">テスト設定</h2>
                 
-                <div id="config-sections-container"></div> <details id="config-details" open style="margin-top: 15px;">
-                    <summary style="font-weight:bold; cursor:pointer; color:var(--accent); margin-bottom:10px;">Randomization</summary>
+                <div id="config-sections-container"></div> 
+                <details id="config-details" open style="margin-top: 15px;">
+                    <summary style="font-weight:bold; cursor:pointer; color:var(--accent); margin-bottom:10px;">出題順の設定</summary>
                     <div class="config-row">
                         <select id="config-random">
-                            <option value="none">None (Keep Original Order)</option>
-                            <option value="step">Randomize within each Step</option>
-                            <option value="all">Randomize All Questions</option>
+                            <option value="none">なし (元の順番通り)</option>
+                            <option value="step">ステップ内をランダムにする</option>
+                            <option value="all">全問題をランダムにする</option>
                         </select>
                     </div>
                 </details>
                 <details id="config-advanced" open style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
-                    <summary style="font-weight:bold; cursor:pointer; color:var(--primary);">Test Options</summary>
+                    <summary style="font-weight:bold; cursor:pointer; color:var(--primary);">オプション</summary>
                     <div class="config-row" style="flex-direction: row; gap: 10px; align-items: center; margin-top:10px;">
                         <input type="checkbox" id="config-full-view">
-                        <label for="config-full-view">Display all questions on one page (Test Sheet)</label>
+                        <label for="config-full-view">全問題を一つのページに表示 (テスト用紙形式)</label>
                     </div>
                     <div class="config-row" style="flex-direction: row; gap: 10px; align-items: center;">
                         <input type="checkbox" id="config-feedback" checked>
-                        <label for="config-feedback">Show feedback panel after each question</label>
+                        <label for="config-feedback">解答後にフィードバックパネルを表示する</label>
                     </div>
                 </details>
                 <div style="display:flex; gap:10px; margin-top:20px;">
-                    <button onclick="startConfiguredQuiz()" class="btn-success" style="flex:1;">Start Test</button>
-                    <button onclick="cancelConfig()" class="btn-secondary">Cancel</button>
+                    <button onclick="startConfiguredQuiz()" class="btn-success" style="flex:1;">テスト開始</button>
+                    <button onclick="cancelConfig()" class="btn-secondary">キャンセル</button>
                 </div>
             </div>
         </div>
 
         <div id="quiz-area" style="display:none;">
             <div class="quiz-header" style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
-                <button id="quiz-back-btn" onclick="backToSheet()" class="btn-secondary">&larr; Back to Sheet</button>
-                <div id="quiz-progress" style="font-weight: bold;">Question 1/20</div>
-                <button onclick="skipQuestion()" class="btn-danger">Skip</button>
+                <button id="quiz-back-btn" onclick="backToSheet()" class="btn-secondary">&larr; 用紙に戻る</button>
+                <div id="quiz-progress" style="font-weight: bold;">問題 1/20</div>
+                <button onclick="skipQuestion()" class="btn-danger">スキップ</button>
             </div>
             
             <div class="quiz-card">
                 <div id="quiz-sentence" class="sentence-display"></div>
                 
                 <div class="quiz-controls-bar" id="quiz-writing-controls" style="display:none;">
-                    <button onclick="undoStroke()" class="btn-secondary">Undo Last Stroke</button>
-                    <button onclick="clearQuizCanvas()" class="btn-secondary">Clear All</button>
-                    <button onclick="showAnswer()" class="btn-warning">Show Answer (Trace)</button>
+                    <button onclick="undoStroke()" class="btn-secondary">一画戻る</button>
+                    <button onclick="clearQuizCanvas()" class="btn-secondary">すべて消去</button>
+                    <button onclick="showAnswer()" class="btn-warning">正解を表示 (なぞり書き)</button>
                 </div>
 
                 <div class="quiz-controls-bar" id="quiz-reading-controls" style="display:none;">
-                    <button onclick="backspaceReading()" class="btn-secondary" title="Backspace">⌫ Backspace</button>
-                    <button onclick="clearReadingInput()" class="btn-secondary">Clear All</button>
-                    <button onclick="showAnswer()" class="btn-warning">Show Answer</button>
+                    <button onclick="backspaceReading()" class="btn-secondary">⌫ 1文字消す</button>
+                    <button onclick="clearReadingInput()" class="btn-secondary">すべて消去</button>
+                    <button onclick="showAnswer()" class="btn-warning">正解を表示</button>
                 </div>
 
                 <div id="quiz-writing-container">
@@ -845,24 +846,22 @@
                         <canvas id="quiz-canvas"></canvas>
                     </div>
                     <div id="quiz-message" style="margin-top: 10px; font-weight: bold; color: #e74c3c;"></div>
-                    <button onclick="submitAnswer()" class="btn-success" style="margin-top: 20px;">Check Whole Word</button>
+                    <button onclick="submitAnswer()" class="btn-success" style="margin-top: 20px;">判定する</button>
                 </div>
 
                 <div id="quiz-reading-container" style="display:none;">
-                    <div class="reading-input-display" id="reading-input-box">
-                        </div>
+                    <div class="reading-input-display" id="reading-input-box"></div>
                     <div class="reading-validation" id="reading-msg"></div>
-                    <div class="guess-grid" id="reading-guess-grid">
-                        </div>
-                    <button onclick="submitReadingAnswer()" class="btn-success">Submit Answer</button>
+                    <div class="guess-grid" id="reading-guess-grid"></div>
+                    <button onclick="submitReadingAnswer()" class="btn-success">解答を送信</button>
                 </div>
             </div>
         </div>
 
         <div id="test-sheet-view" style="display:none;">
             <div class="test-sheet-toolbar">
-                <button onclick="exitQuiz()" class="btn-danger">Quit Test</button>
-                <button onclick="gradeEntireTest()" class="btn-success">Submit & Grade Test</button>
+                <button onclick="exitQuiz()" class="btn-danger">テストを終了する</button>
+                <button onclick="gradeEntireTest()" class="btn-success">提出して採点する</button>
             </div>
             <div class="test-sheet">
                 <div class="test-header-box">
@@ -874,31 +873,30 @@
         </div>
         
         <div id="quiz-feedback" class="feedback-panel" style="display:none;">
-            <h2 id="feedback-result">Correct!</h2>
+            <h2 id="feedback-result">正解！</h2>
             <div class="feedback-content">
                 <div class="feedback-kanji" id="fb-kanji"></div>
                 <div class="feedback-info">
-                    <p><strong>Meaning:</strong> <span id="fb-meaning"></span></p>
-                    <p><strong>Synonyms:</strong> <span id="fb-synonyms"></span></p>
+                    <p><strong>意味:</strong> <span id="fb-meaning"></span></p>
+                    <p><strong>類義語:</strong> <span id="fb-synonyms"></span></p>
                 </div>
             </div>
             
-            <!-- Manual Override Section -->
             <div id="manual-override" style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd;">
-                <p style="font-size: 0.85em; color: #666;">Detection incorrect? Override result:</p>
+                <p style="font-size: 0.85em; color: #666;">判定が違いますか？ 手動で変更：</p>
                 <div style="display: flex; gap: 10px; justify-content: center;">
-                    <button onclick="overrideFeedback(true)" class="btn-secondary" style="background:#27ae60; font-size: 0.8em;">I was correct</button>
-                    <button onclick="overrideFeedback(false)" class="btn-danger" style="font-size: 0.8em;">Mark as wrong</button>
+                    <button onclick="overrideFeedback(true)" class="btn-secondary" style="background:#27ae60; font-size: 0.8em;">正解にする</button>
+                    <button onclick="overrideFeedback(false)" class="btn-danger" style="font-size: 0.8em;">不正解にする</button>
                 </div>
             </div>
 
             <div style="display: flex; gap: 10px; justify-content: center; align-items: center;">
-                <button id="fb-back-to-sheet" onclick="backToSheet()" class="next-btn" style="background: #95a5a6;">&larr; Back to Sheet</button>
-                <button id="fb-next-btn" onclick="nextQuestion()" class="next-btn">Next Question &rarr;</button>
+                <button id="fb-back-to-sheet" onclick="backToSheet()" class="next-btn" style="background: #95a5a6;">&larr; 用紙に戻る</button>
+                <button id="fb-next-btn" onclick="nextQuestion()" class="next-btn">次の問題へ &rarr;</button>
             </div>
         </div>
         <div id="review-section" class="review-dropdown" style="display:none;">
-            <h3>Review & Reference</h3>
+            <h3>復習と参照</h3>
             <div id="review-list"></div>
         </div>
     </div>
@@ -906,15 +904,15 @@
     <div id="modal">
         <div class="practice-area">
             <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2>Practice</h2>
+            <h2>漢字の練習</h2>
             
             <div class="mode-toggle">
-                <span>Guide Mode</span>
+                <span>ガイドモード</span>
                 <label class="switch">
                     <input type="checkbox" id="blindModeToggle" onchange="toggleBlindMode()">
                     <span class="slider"></span>
                 </label>
-                <span style="font-weight:bold; color:var(--accent)">Blind Mode</span>
+                <span style="font-weight:bold; color:var(--accent)">ブラインドモード</span>
             </div>
 
             <div class="canvas-wrapper">
@@ -923,18 +921,13 @@
             </div>
 
             <div class="quiz-controls-bar" id="writing-controls">
-                <button onclick="undoStroke()" class="btn-secondary">Undo Last Stroke</button>
-                <button onclick="clearQuizCanvas()" class="btn-secondary">Clear All</button>
-                <button onclick="showAnswer()" class="btn-warning">Show Answer (Trace)</button>
-            </div>
-            <div class="quiz-controls-bar" id="writing-controls">
-                <button onclick="undoStroke()" class="btn-secondary">Undo Last Stroke</button>
-                <button onclick="clearPracticeCanvas()" class="btn-secondary">Clear</button>
+                <button onclick="undoStroke()" class="btn-secondary">一画戻る</button>
+                <button onclick="clearPracticeCanvas()" class="btn-secondary">消去</button>
             </div>
 
             <div class="status-msg" id="status"></div>
             <p style="color:#aaa; font-size:0.8em; margin:5px 0 0 0;">
-                <span id="hint-text">Trace the gray lines.</span>
+                <span id="hint-text">灰色の線をなぞってください。</span>
             </p>
         </div>
     </div>
