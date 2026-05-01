@@ -7,7 +7,25 @@
     <title>Kanji Master</title>
     <style>
         :root { --bg: #f4f4f9; --card: #fff; --primary: #2c3e50; --accent: #e74c3c; --text: #333; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); padding: 20px; margin: 0; }
+        /* Ensure everything calculates width correctly */
+        * { box-sizing: border-box; }
+
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            padding: 20px; /* Desktop padding */
+            margin: 0; 
+            overflow-x: hidden; 
+            width: 100%;
+        }
+
+        /* Ensure containers never overflow */
+        #gallery-view, #practice-view, #test-sheet-view, #quiz-area {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+        }
         
         /* HEADER & TOOLBAR */
         header { text-align: center; margin-bottom: 30px; }
@@ -219,7 +237,14 @@
         :root[data-mode="dark"][data-theme="forest"] { --text: #a8e063; --sub-text: #2d5a27; --user-stroke: #a8e063; }
 
         /* REVIEW SECTION STYLES (Slightly Larger) */
-        .review-dropdown { margin-top: 30px; border-top: 2px solid var(--border); padding-top: 20px; }
+        .review-dropdown { 
+            margin-top: 30px; 
+            border-top: 2px solid var(--border); 
+            padding-top: 20px; 
+            width: 100%; 
+            padding-left: 10px; 
+            padding-right: 10px; 
+        }
         .review-item { 
             display: flex; align-items: center; background: var(--card); 
             padding: 20px; margin-bottom: 12px; border-radius: 8px; border-left: 6px solid var(--primary);
@@ -614,6 +639,99 @@
             background-color: #94a3b8;
         }
 
+
+        /* --- MOBILE RESPONSIVENESS OVERRIDES --- */
+        @media (max-width: 600px) {
+            body { padding: 0 !important; }
+            header { padding: 20px 10px; margin-bottom: 10px; }
+            
+            /* Edge-to-edge content */
+            #gallery-view, #practice-view, #test-sheet-view { width: 100%; }
+            .toolbar { width: 95%; padding: 10px; }
+            input[type="text"], select { width: 100% !important; box-sizing: border-box; }
+
+            /* Review & Reference Stacked Redesign */
+            .review-item { 
+                flex-direction: column; 
+                align-items: center; 
+                text-align: center; 
+                padding: 15px; 
+                border-left: none; 
+                border-top: 6px solid var(--primary); 
+                width: 100%;
+            }
+            .review-kanji-side { 
+                width: 100%; 
+                flex: none; 
+                margin-bottom: 10px; 
+                padding-bottom: 10px; 
+                border-bottom: 1px solid var(--border); 
+            }
+            .review-details-side { padding-left: 0; width: 100%; }
+            .test-review-group { margin: 0; width: 100%; }
+
+            /* Test Sheet Mobile: Horizontal Headers & Longer Boxes */
+            #test-sheet-view { padding: 0 !important; }
+            .test-sheet { 
+                padding: 20px 5px; 
+                gap: 30px; 
+                border: none; 
+                box-shadow: none; 
+                width: 100%;
+            }
+            .test-section-container { 
+                flex-direction: column; 
+                padding-bottom: 20px; 
+                width: 100%;
+            }
+            .section-header-vertical { 
+                writing-mode: horizontal-tb; 
+                width: 100%; 
+                margin: 0 0 15px 0; 
+                padding: 10px; 
+                text-align: left; 
+            }
+            .questions-column-grid { 
+                justify-content: center; 
+                gap: 20px 8px; 
+                width: 100%;
+            }
+            
+            /* Fix: Taller boxes so split view (User vs Correct) never cuts off */
+            .answer-box { 
+                height: 180px; /* Increased from 150px */
+                width: 68px; /* Slightly wider */
+                min-width: 65px; 
+            } 
+            .ans-row { height: auto; min-height: 50%; padding: 5px 0; }
+            .ans-col { width: 100%; display: flex; align-items: center; justify-content: center; }
+
+            /* Buttons Spacing and Size */
+            .quiz-header { 
+                padding: 15px 10px; 
+                gap: 15px; 
+                flex-wrap: wrap; 
+                justify-content: space-between !important; 
+            }
+            #quiz-progress { width: 100%; text-align: center; order: -1; margin-bottom: 5px; }
+            
+            .quiz-card { padding: 20px 10px; border-radius: 0; border-left: none; border-right: none; }
+            .quiz-controls-bar { 
+                gap: 10px; 
+                padding: 0 10px; 
+                margin-bottom: 15px;
+                flex-wrap: wrap;
+            }
+            .quiz-controls-bar button { 
+                flex: 1 1 40%; /* Two buttons per row on tiny screens */
+                font-size: 0.85em; 
+                padding: 12px 5px; 
+            }
+
+            /* Configuration Panel */
+            #config-panel { width: 100% !important; border-radius: 0; padding: 20px 15px; }
+        }
+
     </style>
 </head>
 <body>
@@ -668,7 +786,7 @@
         </div>
 
         <div id="test-config-wrapper" style="display:none;">
-            <div id="config-panel">
+            <div id="config-panel" style="max-width: 600px; margin: 0 auto; background: var(--card); padding: 20px; border-radius: 8px;">
                 <h2 style="margin-top:0; color:var(--primary);">Test Configuration</h2>
                 
                 <div id="config-sections-container"></div> <details id="config-details" open style="margin-top: 15px;">
